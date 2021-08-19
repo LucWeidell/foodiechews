@@ -16,12 +16,32 @@
         </p>
       </div>
     </div>
+    <div class="d-flex justify-content-center mt-3">
+      <button
+        class="btn btn-secondary text-uppercase"
+        @click="login"
+        v-if="!user.isAuthenticated"
+      >
+        Login
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
+import { AppState } from '../AppState'
+import { AuthService } from '../services/AuthService'
 export default {
-  name: 'Home'
+  name: 'Home',
+  setup() {
+    return {
+      user: computed(() => AppState.user),
+      async login() {
+        AuthService.loginWithPopup()
+      }
+    }
+  }
 }
 </script>
 
