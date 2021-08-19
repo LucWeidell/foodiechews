@@ -1,9 +1,21 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo">
-    <h1 class="my-5 bg-dark text-light p-3 rounded d-flex align-items-center">
-      <span class="mx-2 text-white">Vue 3 Starter</span>
-    </h1>
+  <div class="container-fluid" id="bg-img">
+    <div class="row justify-content-center mt-5">
+      <div class="col-10 col-md-6 card-transparent-white text-dark text-shadow-light">
+        <h2 class="text-center">
+          Among Us
+        </h2>
+        <p class="pt-3">
+          You sussy? You need crewmates but don't know what's in skield? Use Among Us to find all the crewmates you ever could want!
+        </p>
+        <h2 class="text-center pt-3">
+          How To Sus
+        </h2>
+        <p class="pt-3">
+          Be In electric. That's it. Or be red. Both work!
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,5 +33,16 @@ export default {
     height: 200px;
     width: 200px;
   }
+}
+.card-transparent-white{
+  background-color: rgba(255, 255, 255, 0.85);
+}
+#bg-img{
+  background-image: url('../assets/img/eatsSign.png');
+  background-position: center;
+  background-size: cover;
+}
+.text-shadow-light{
+  text-shadow: 0px 1px white;
 }
 </style>
