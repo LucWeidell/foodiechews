@@ -1,16 +1,13 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
-      </div>
-    </router-link>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+    <div class="text-center col-2">
+      🔵
+    </div>
+    <div class="text-center col-8">
+      City
+    </div>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler col-2"
       type="button"
       data-toggle="collapse"
       data-target="#navbarText"
