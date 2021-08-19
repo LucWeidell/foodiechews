@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-row bg-primary text-light text-center p-4">
+  <div class="d-flex flex-row bg-dark text-light text-center p-4">
     <div class="col-3">
       🔍
     </div>
