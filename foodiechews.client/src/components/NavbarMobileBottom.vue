@@ -16,7 +16,6 @@
       >
     </div>
     <div class="col-4 py-1">
-      <!-- eslint-disable-next-line vue/attribute-hyphenation -->
       <router-link :to="{name: 'MyRestaurants', params: {id: state.account.id}}">
         <img src="../assets/img/tempHome.png"
              class="p-0"
