@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" id="bg-img">
     <div class="row justify-content-center mt-5">
-      <div class="col-10 col-md-6 card-transparent-white text-dark text-shadow-light">
+      <div class="col-9 col-md-6 card-transparent-white text-dark text-shadow-light">
         <h2 class="text-center">
           Among Us
         </h2>
