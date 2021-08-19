@@ -1,9 +1,9 @@
 import BaseController from '../utils/BaseController'
 import { logger } from '../utils/Logger'
 import { Auth0Provider } from '@bcwdev/auth0provider'
-import { profilesService } from '../services/ProfileService'
+import { profilesService } from '../services/ProfilesService'
 
-export class ProfileController extends BaseController {
+export class ProfilesController extends BaseController {
   constructor() {
     super('api/profiles')
     this.router
