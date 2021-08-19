@@ -2,6 +2,7 @@ import { initialize } from '@bcwdev/auth0provider-client'
 import { AppState } from '../AppState'
 import { audience, clientId, domain } from '../env'
 import { router } from '../router'
+import { logger } from '../utils/Logger'
 import { accountService } from './AccountService'
 import { api } from './AxiosService'
 import { socketService } from './SocketService'
@@ -27,6 +28,10 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await accountService.getAccount()
   socketService.authenticate(AuthService.bearer)
   // NOTE if there is something you want to do once the user is authenticated, place that here
+  if (router.currentRoute.value.name === 'Home') {
+    logger.log(AppState.account.id)
+    router.push({ name: 'MyRestaurants', params: { id: AppState.account.id } })
+  }
 })
 
 async function refreshAuthToken(config) {
