@@ -12,6 +12,16 @@ const routes = [
     component: loadPage('HomePage')
   },
   {
+    path: '/profile/:id/myRestaurants',
+    name: 'MyRestaurants',
+    component: loadPage('MyRestaurantsPage')
+  },
+  {
+    path: '/profile/:id/restaurantDetails/:yelpId',
+    name: 'RestaurantsDetails',
+    component: loadPage('RestaruantDetailsPage')
+  },
+  {
     path: '/about',
     name: 'About',
     component: loadPage('AboutPage')

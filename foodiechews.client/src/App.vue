@@ -1,13 +1,12 @@
 <template>
   <header>
-    <Navbar />
+    <NavbarMobileTop />
   </header>
   <main>
     <router-view />
   </main>
   <footer>
-    <div class="bg-primary text-light text-center p-4">
-    </div>
+    <NavbarMobileBottom />
   </footer>
 </template>
 

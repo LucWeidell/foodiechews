@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
     <div class="text-center col-2">
       🔵
     </div>
@@ -19,11 +19,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
-            Home
-          </router-link>
-        </li>
         <li class="nav-item">
           <router-link :to="{ name: 'About' }" class="nav-link">
             About
