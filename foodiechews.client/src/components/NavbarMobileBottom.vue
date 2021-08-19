@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="d-flex flex-row bg-primary text-light text-center align-items-center m-0">
     <div class="col-4 py-1">
       <img src="../assets/img/tempsearch.png"
@@ -7,11 +6,6 @@
            alt="Random Button"
            width="50"
       >
-=======
-  <div class="d-flex flex-row bg-dark text-light text-center p-4">
-    <div class="col-3">
-      🔍
->>>>>>> 2cf410e42175ca3671105d283d78e26ff77204f4
     </div>
     <div class="col-4 py-1 border-right border-left border-dark">
       <img src="../assets/img/random.png"
