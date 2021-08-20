@@ -2,6 +2,7 @@ import BaseController from '../utils/BaseController'
 import { logger } from '../utils/Logger'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { profilesService } from '../services/ProfilesService'
+import { visitsService } from '../services/VisitsService'
 
 export class ProfilesController extends BaseController {
   constructor() {
@@ -11,13 +12,14 @@ export class ProfilesController extends BaseController {
       .get('', this.getAll)
       .get('/:id', this.getById)
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .get('/:id/visits', this.getAllVisitsByProfileId)
       .post('', this.create)
       .put('/:id', this.edit)
   }
 
   /**
-       * Sends all profiles to a client by request
-       * @param {import('express').Request} req
+   * Sends all profiles to a client by request
+   * @param {import('express').Request} req
        * @param {import('express').Response} res
        * @param {import('express').NextFunction} next
        */
@@ -31,15 +33,24 @@ export class ProfilesController extends BaseController {
   }
 
   /**
-       * Sends all profile with Id to a client by request
-       * @param {import('express').Request} req
-       * @param {import('express').Response} res
+   * Sends all profile with Id to a client by request
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
        * @param {import('express').NextFunction} next
-       */
+   */
   async getById(req, res, next) {
     try {
       const profile = await profilesService.getById(req.params.id)
       res.send(profile)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getAllVisitsByProfileId(req, res, next) {
+    try {
+      const visits = await visitsService.getAll({ profileId: req.params.id })
+      res.send(visits)
     } catch (error) {
       next(error)
     }
