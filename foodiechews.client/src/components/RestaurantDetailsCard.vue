@@ -21,6 +21,9 @@
     <span v-if="yelpId === 'random' ">
       <BRGbuttons />
     </span>
+    <span v-else>
+      <MyInfoCard />
+    </span>
   </div>
 </template>
 
