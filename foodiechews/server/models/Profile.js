@@ -6,7 +6,7 @@ const Profile = new Schema(
   {
     // Location is an array of strings
     location: { type: Array, required: true },
-    // myEats is an array of MyRestaurants objects
+    // myEats is an array of MyRestaurants objects (should be empty when profile is created)
     myEats: { type: Array, required: true },
     pendingRestraunt: { type: Object },
     accountId: { type: ObjectId, ref: 'Account', required: true },
