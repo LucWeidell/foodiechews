@@ -9,18 +9,11 @@ const Profile = new Schema(
     // myEats is an array of MyRestaurants objects (should be empty when profile is created)
     myEats: { type: Array, required: true },
     pendingRestraunt: { type: Object },
-    accountId: { type: ObjectId, ref: 'Account', required: true },
+    creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
     activeLocation: { type: String, required: true },
     noDupes: { type: Boolean, default: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
-
-Profile.virtual('account', {
-  localField: 'accountId',
-  ref: 'Account',
-  foreignField: '_id',
-  justOne: true
-})
 
 export default Profile
