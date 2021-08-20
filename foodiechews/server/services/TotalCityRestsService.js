@@ -20,6 +20,7 @@ class TotalCityRestsService {
     return totalCityRest
   }
 
+  // NOTE Yelp API server-side request example
   async test(body) {
     const city = body.city
     const token = process.env.YELP_API_KEY

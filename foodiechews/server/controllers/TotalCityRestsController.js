@@ -41,6 +41,7 @@ export class TotalCityRestsController extends BaseController {
     }
   }
 
+  // NOTE Yelp API server-side request example
   async test(req, res, next) {
     try {
       const totalCityRest = await totalCityRestsService.test(req.body)
