@@ -1,9 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
     <div class="text-center col-2">
-      <router-link :to="{ name: 'Profile', params:{id: state.account.id} }">
-        <img :src="user.picture" alt="Profile Pic">
-      </router-link>
+      🔵
     </div>
     <div class="text-center col-8">
       City
@@ -52,11 +50,6 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Account
-              </div>
-            </router-link>
             <div
               class="list-group-item list-group-item-action hoverable"
               @click="logout"

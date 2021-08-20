@@ -1,15 +1,24 @@
 <template>
   <div class="container-fluid">
     <div class="row" id="cover-img">
+      <img :src="account.picture" alt="Profile Pic">
     </div>
   </div>
 </template>
 
 <script>
+import { computed, reactive } from '@vue/runtime-core'
+import { AppState } from '../AppState'
+
 export default {
   name: 'Profile',
   setup() {
-
+    const state = reactive({
+      account: computed(() => AppState.account)
+    })
+    return {
+      state
+    }
   }
 }
 </script>
