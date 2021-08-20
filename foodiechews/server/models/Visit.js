@@ -8,20 +8,13 @@ const Visit = new Schema(
     foodEaten: { type: Array },
     review: { type: String },
     myRestaurantId: { type: ObjectId, ref: 'MyRestaurant', required: true },
-    profileId: { type: ObjectId, ref: 'Profile', required: true }
+    creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
 Visit.virtual('restaurant', {
   localField: 'myRestaurantId',
   ref: 'MyRestaurant',
-  foreignField: '_id',
-  justOne: true
-})
-
-Visit.virtual('profile', {
-  localField: 'profileId',
-  ref: 'Profile',
   foreignField: '_id',
   justOne: true
 })

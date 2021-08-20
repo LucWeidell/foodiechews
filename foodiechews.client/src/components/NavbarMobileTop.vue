@@ -24,6 +24,11 @@
             About
           </router-link>
         </li>
+        <!-- <li class="nav-item">
+          <router-link :to="{ name: 'Profile' }" class="nav-link">
+            My Profile
+          </router-link>
+        </li> -->
       </ul>
       <span class="navbar-text">
         <button
@@ -42,8 +47,6 @@
             <img
               :src="user.picture"
               alt="user photo"
-              height="40"
-              class="rounded"
             />
             <span class="mx-3">{{ user.name }}</span>
           </div>
@@ -77,7 +80,8 @@ import { computed, reactive } from 'vue'
 export default {
   setup() {
     const state = reactive({
-      dropOpen: false
+      dropOpen: false,
+      account: computed(() => AppState.account)
     })
     return {
       state,
@@ -114,5 +118,11 @@ a:hover {
 }
 .nav-item .nav-link.router-link-exact-active{
   color: var(--light);
+}
+
+img{
+  border-radius: 50%;
+  max-height: 35px;
+  max-width:35px;
 }
 </style>
