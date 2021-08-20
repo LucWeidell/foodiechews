@@ -42,8 +42,6 @@
             <img
               :src="user.picture"
               alt="user photo"
-              height="40"
-              class="rounded"
             />
             <span class="mx-3">{{ user.name }}</span>
           </div>
@@ -52,11 +50,6 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Account
-              </div>
-            </router-link>
             <div
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
@@ -77,7 +70,8 @@ import { computed, reactive } from 'vue'
 export default {
   setup() {
     const state = reactive({
-      dropOpen: false
+      dropOpen: false,
+      account: computed(() => AppState.account)
     })
     return {
       state,
@@ -114,5 +108,11 @@ a:hover {
 }
 .nav-item .nav-link.router-link-exact-active{
   color: var(--light);
+}
+
+img{
+  border-radius: 50%;
+  max-height: 35px;
+  max-width:35px;
 }
 </style>
