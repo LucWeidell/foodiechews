@@ -18,6 +18,7 @@
     <div class="col-md-10 col-9 mt-3 d-flex justify-content-center">
       <p>5am - 12am</p>
     </div>
+    <BRGbuttons />
   </div>
 </template>
 
