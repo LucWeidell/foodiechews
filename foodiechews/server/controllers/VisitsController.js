@@ -1,4 +1,5 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
+import { visitsService } from '../services/VisitsService'
 import BaseController from '../utils/BaseController'
 
 export class VisitsController extends BaseController {
@@ -11,7 +12,10 @@ export class VisitsController extends BaseController {
 
   async create(req, res, next) {
     try {
-      req.body.
+      req.body.creatorId = req.userInfo.id
+      // NOTE: MyRestaurant id needs to be passed via client(?)
+      const visit = await visitsService.create(req.body)
+      res.send(visit)
     } catch (error) {
       next(error)
     }
