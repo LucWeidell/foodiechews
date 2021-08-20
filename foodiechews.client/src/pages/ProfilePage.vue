@@ -1,7 +1,15 @@
 <template>
   <div class="container-fluid">
     <div class="row" id="cover-img">
-      <img :src="account.picture" alt="Profile Pic">
+      <img :src="state.account.picture" alt="Profile Pic" class="rounded-circle profile-img ml-3">
+    </div>
+    <div class="row mt-5 ml-2 justify-content-center">
+      <div class="col-12">
+        <h4>No More Than 25 letters:!</h4>
+      </div>
+      <div class="col-11">
+        <p>This should never be over 200 Characters. This is so we can wrap the text really nice like!</p>
+      </div>
     </div>
   </div>
 </template>
@@ -31,5 +39,11 @@ export default {
   background-size: cover;
   min-height: 15vh;
   min-width: 100vw;
+}
+.profile-img{
+  max-height: 100px;
+  min-height: 100px;
+  position: relative;
+  bottom: -50px;
 }
 </style>

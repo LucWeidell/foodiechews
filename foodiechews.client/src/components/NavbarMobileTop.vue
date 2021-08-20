@@ -24,11 +24,11 @@
             About
           </router-link>
         </li>
-        <!-- <li class="nav-item">
-          <router-link :to="{ name: 'Profile' }" class="nav-link">
+        <li class="nav-item">
+          <router-link :to="{ name: 'Profile', params: {id: user.id} }" class="nav-link">
             My Profile
           </router-link>
-        </li> -->
+        </li>
       </ul>
       <span class="navbar-text">
         <button
@@ -58,6 +58,11 @@
             <router-link :to="{ name: 'Account' }">
               <div class="list-group-item list-group-item-action hoverable">
                 Account
+              </div>
+            </router-link>
+            <router-link :to="{ name: 'Settings' }">
+              <div class="list-group-item list-group-item-action hoverable">
+                Settings
               </div>
             </router-link>
             <div
