@@ -24,6 +24,11 @@
             About
           </router-link>
         </li>
+        <!-- <li class="nav-item">
+          <router-link :to="{ name: 'Profile' }" class="nav-link">
+            My Profile
+          </router-link>
+        </li> -->
       </ul>
       <span class="navbar-text">
         <button
@@ -50,6 +55,11 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
+            <router-link :to="{ name: 'Account' }">
+              <div class="list-group-item list-group-item-action hoverable">
+                Account
+              </div>
+            </router-link>
             <div
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
