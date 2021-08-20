@@ -25,7 +25,7 @@ class TotalCityRestsService {
     const token = process.env.YELP_API_KEY
     yelpApi.defaults.headers.authorization = `Bearer ${token}`
     const totalRests = await yelpApi.get('search?location=' + city)
-    return totalRests
+    return totalRests.data
   }
 }
 
