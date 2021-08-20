@@ -18,14 +18,22 @@
     <div class="col-md-10 col-9 mt-3 d-flex justify-content-center">
       <p>5am - 12am</p>
     </div>
+    <span v-if="yelpId === 'random' ">
+      <BRGbuttons />
+    </span>
   </div>
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
+import { useRoute } from 'vue-router'
 export default {
   name: 'RestaurantDetailsCard',
   setup() {
-
+    const route = useRoute()
+    return {
+      yelpId: computed(() => route.params.yelpId)
+    }
   }
 }
 </script>
