@@ -7,7 +7,7 @@ const MyRestaurant = new Schema(
     /** This is the yelpId associated with this restaurant */
     yelpID: { type: String, required: true },
     /** This is the Array holding all Visit Models for a Restaurant */
-    visits: { type: Array, required: true },
+    visits: { type: Array, default: [] },
     /** This is the String name for a Restaurant */
     name: { type: String, required: true },
     /** This is the String city for a Restaurant */
