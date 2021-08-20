@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
     <div class="text-center col-2">
       🔵
     </div>
