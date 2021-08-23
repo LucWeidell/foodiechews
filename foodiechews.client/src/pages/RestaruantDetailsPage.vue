@@ -17,6 +17,7 @@ export default {
         await yelpRestaurantsService.getByYelpId(route.params.yelpId)
       }
     })
+    // REVIEW TODO: Use watchEffect instead of onMounted
     return {
       restaurant: computed(() => AppState.activeRestaurant)
     }
