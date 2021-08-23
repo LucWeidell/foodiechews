@@ -25,7 +25,7 @@ export const AccountSchema = new Schema(
     // myEats is an array of MyRestaurants objects (should be empty when profile is created)
     myEats: [MyRestaurant],
     // TODO: Also use a subdoc to define the object props
-    pendingRestraunt: pendingRestaurantSchema,
+    pendingRestaurant: pendingRestaurantSchema,
     activeLocation: { type: String, default: '' },
     noDupes: { type: Boolean, default: true }
     // NOTE If you wish to add additional public properties for Accounts do so here
