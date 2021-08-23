@@ -19,4 +19,11 @@ Visit.virtual('restaurant', {
   justOne: true
 })
 
+Visit.virtual('account', {
+  localField: 'accountId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
+
 export default Visit
