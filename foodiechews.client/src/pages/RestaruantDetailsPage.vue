@@ -1,7 +1,6 @@
 <template>
   <div class="container-fluid" id="bg-img">
-    <RestaurantDetailsCard />
-    <h1>{{ restaurant.name }}</h1>
+    <RestaurantDetailsCard :restaurant="restaurant" />
   </div>
 </template>
 
