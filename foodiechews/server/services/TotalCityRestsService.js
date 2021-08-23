@@ -7,39 +7,30 @@ class TotalCityRestsService {
   async getAll(query = {}) {
     let totalCityRest = await dbContext.TotalCityRests.find(query)
     if (totalCityRest.length === 0) {
-      totalCityRest = this.create(query.city)
+      totalCityRest = this.create(query.city, query.state)
       // TODO Need to Api request and pull total query for city
     }
     return totalCityRest
   }
 
-  async getByCity(cityName) {
-    let totalCityRest = await dbContext.TotalCityRests.find({ city: cityName })
-    if (totalCityRest.length === 0) {
-      totalCityRest = this.create(cityName)
-      // TODO Need to Api request and pull total query for city
-    }
+  async create(cityName, stateName) {
+    const token = process.env.YELP_API_KEY
+    yelpApi.defaults.headers.authorization = `Bearer ${token}`
+    let totalCityRest = await yelpApi.get('search?location=' + cityName + stateName)
+    const rawTotCityRest = { city: cityName, state: stateName, totalNum: (totalCityRest.data.total) }
+    logger.log('TotCityRest to make:', rawTotCityRest)
+    totalCityRest = await dbContext.TotalCityRests.create(rawTotCityRest)
     return totalCityRest
   }
 
-  async create(cityName) {
-    const token = process.env.YELP_API_KEY
-    yelpApi.defaults.headers.authorization = `Bearer ${token}`
-    let totalCityRest = await yelpApi.get('search?location=' + cityName)
-    const rawCity = { city: cityName, totalNum: (totalCityRest.data.total) }
-    logger.log('City to make:', rawCity)
-    totalCityRest = await dbContext.TotalCityRests.create(rawCity)
-    return totalCityRest
-  }
-
-  // NOTE Yelp API server-side request example
-  async test(body) {
-    const city = body.city
-    const token = process.env.YELP_API_KEY
-    yelpApi.defaults.headers.authorization = `Bearer ${token}`
-    const totalRests = await yelpApi.get('search?location=' + city)
-    return totalRests.data
-  }
+  // // NOTE Yelp API server-side request example
+  // async test(body) {
+  //   const city = body.city
+  //   const token = process.env.YELP_API_KEY
+  //   yelpApi.defaults.headers.authorization = `Bearer ${token}`
+  //   const totalRests = await yelpApi.get('search?location=' + city)
+  //   return totalRests.data
+  // }
 }
 
 export const totalCityRestsService = new TotalCityRestsService()

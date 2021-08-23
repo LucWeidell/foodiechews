@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import MyRestaurant from './MyRestaurant'
 const Schema = mongoose.Schema
 
 // NOTE: This is how subdocuments work! Reference this!
@@ -7,6 +8,11 @@ const locationSchema = new Schema({
   state: { type: String, required: true }
 },
 { timestamps: true, toJSON: { virtuals: true } })
+
+const pendingRestaurantSchema = new Schema({
+  yelpIp: { type: String },
+  exists: { type: Boolean }
+})
 
 export const AccountSchema = new Schema(
   {
@@ -17,9 +23,9 @@ export const AccountSchema = new Schema(
     location: [locationSchema],
     // TODO: Use subdocument instead of array
     // myEats is an array of MyRestaurants objects (should be empty when profile is created)
-    myEats: { type: Array, default: [] },
+    myEats: [MyRestaurant],
     // TODO: Also use a subdoc to define the object props
-    pendingRestraunt: { type: Object, default: {} },
+    pendingRestaurant: pendingRestaurantSchema,
     activeLocation: { type: String, default: '' },
     noDupes: { type: Boolean, default: true }
     // NOTE If you wish to add additional public properties for Accounts do so here
