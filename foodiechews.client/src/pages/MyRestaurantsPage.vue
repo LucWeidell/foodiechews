@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid" id="bg-img">
+    <TopSixCard />
   </div>
 </template>
 
