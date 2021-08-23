@@ -8,7 +8,7 @@ const Visit = new Schema(
     foodEaten: { type: Array },
     review: { type: String },
     myRestaurantId: { type: ObjectId, ref: 'MyRestaurant', required: true },
-    creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true }
+    accountId: { type: ObjectId, ref: 'Account', required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )

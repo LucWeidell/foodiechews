@@ -13,7 +13,7 @@ const MyRestaurant = new Schema(
     /** This is the String city for a Restaurant */
     restCity: { type: String, required: true },
     tag: { type: String, enum: ['favorite', 'none'], default: 'none' },
-    creatorId: { type: ObjectId, ref: 'Account', required: true }
+    AccountId: { type: ObjectId, ref: 'Account', required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
