@@ -29,14 +29,32 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { AuthService } from '../services/AuthService'
+import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 export default {
   name: 'Home',
   setup() {
+    function getLocation() {
+      if (Object.keys(AppState.activeLocation).length === 0) {
+        console.log('I got triggered')
+        navigator.geolocation.getCurrentPosition((loc) => {
+          const coords = {
+            lat: loc.coords.latitude,
+            long: loc.coords.longitude
+          }
+          yelpRestaurantsService.getByCoordinates(coords)
+          AppState.activeLocation = coords
+        })
+      }
+    }
+    onMounted(() => {
+      getLocation()
+    })
     return {
       user: computed(() => AppState.user),
+      location: computed(() => AppState.activeLocation),
       async login() {
         AuthService.loginWithPopup()
       }

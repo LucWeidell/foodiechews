@@ -1,12 +1,20 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 import { logger } from '../utils/Logger'
+import { convertToQuery } from '../utils/Query'
 import { yelpApi } from './AxiosService'
 
 class YelpRestaurantsService {
   async getAll(query = {}) {
+    // TODO: Turns into cache
     const yelpRestaurants = await dbContext.YelpRestaurants.find(query)
-    return yelpRestaurants
+    if (yelpRestaurants.length === 0) {
+      const token = process.env.YELP_API_KEY
+      yelpApi.defaults.headers.authorization = `Bearer ${token}`
+      logger.log(query)
+      const yelpResults = await yelpApi.get('search' + convertToQuery(query))
+      return yelpResults.data
+    }
   }
 
   async getById(idYelp) {
