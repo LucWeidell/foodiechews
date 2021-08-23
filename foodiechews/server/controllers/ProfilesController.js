@@ -3,18 +3,17 @@ import { logger } from '../utils/Logger'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { profilesService } from '../services/ProfilesService'
 import { visitsService } from '../services/VisitsService'
+import { accountService } from '../services/AccountService'
 
 export class ProfilesController extends BaseController {
   constructor() {
     super('api/profiles')
     this.router
-
-      .get('', this.getAll)
+      // FIXME look at get All for Accounts
+      // .get('', this.getAll)
       .get('/:id', this.getById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id/visits', this.getAllVisitsByProfileId)
-      .post('', this.create)
-      .put('/:id', this.edit)
   }
 
   /**
@@ -23,14 +22,15 @@ export class ProfilesController extends BaseController {
        * @param {import('express').Response} res
        * @param {import('express').NextFunction} next
        */
-  async getAll(req, res, next) {
-    try {
-      const profile = await profilesService.getAll(req.query)
-      res.send(profile)
-    } catch (error) {
-      next(error)
-    }
-  }
+  //  FIXME we could need this just quick discussion on security
+  // async getAll(req, res, next) {
+  //   try {
+  //     const profile = await profilesService.getAll(req.query)
+  //     res.send(profile)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   /**
    * Sends all profile with Id to a client by request
@@ -40,7 +40,7 @@ export class ProfilesController extends BaseController {
    */
   async getById(req, res, next) {
     try {
-      const profile = await profilesService.getById(req.params.id)
+      const profile = await accountService.getById(req.params.id)
       res.send(profile)
     } catch (error) {
       next(error)
@@ -49,34 +49,8 @@ export class ProfilesController extends BaseController {
 
   async getAllVisitsByProfileId(req, res, next) {
     try {
-      const visits = await visitsService.getAll({ profileId: req.params.id })
+      const visits = await visitsService.getAll({ accountId: req.params.id })
       res.send(visits)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  /**
-       * Adds a data to a client by request
-       * @param {import('express').Request} req
-       * @param {import('express').Response} res
-       * @param {import('express').NextFunction} next
-       */
-  async create(req, res, next) {
-    try {
-      const profile = await profilesService.create(req.body)
-      res.send(profile)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async edit(req, res, next) {
-    try {
-      req.body.authorizeId = req.userInfo.id
-      req.body.id = req.params.id
-      const profile = await profilesService.edit(req.body)
-      res.send(profile)
     } catch (error) {
       next(error)
     }
