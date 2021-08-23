@@ -8,7 +8,6 @@ export class YelpRestaurantsController extends BaseController {
     this.router
       .get('', this.getAll)
       .get('/:id', this.getById)
-      .post('', this.create)
       .delete('/:id', this.remove)
   }
 
@@ -42,20 +41,22 @@ export class YelpRestaurantsController extends BaseController {
     }
   }
 
+  // NOTE create has no purpose:
+  // The service has a create if getById fails to find: should never call from client
   /**
        * Adds a data to a client by request
        * @param {import('express').Request} req
        * @param {import('express').Response} res
        * @param {import('express').NextFunction} next
        */
-  async create(req, res, next) {
-    try {
-      const yelpRestaurant = await yelpRestaurantsService.create(req.body)
-      res.send(yelpRestaurant)
-    } catch (error) {
-      next(error)
-    }
-  }
+  // async create(req, res, next) {
+  //   try {
+  //     const yelpRestaurant = await yelpRestaurantsService.create(req.body)
+  //     res.send(yelpRestaurant)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   /**
        * Removes data by id from a client by request
@@ -72,23 +73,16 @@ export class YelpRestaurantsController extends BaseController {
     }
   }
 
-  async removeAll() {
+  async forceDelete(req, res, next) {
     try {
-      const rests = await yelpRestaurantsService.getAll()
-      for (let i = 0; i < rests.length; i++) {
-        await yelpRestaurantsService.remove(rests[i].id)
-      }
+      const deleteSequence = setInterval(async() => {
+        const compareDate = new Date()
+        if (compareDate.getHours() === 2) {
+          await yelpRestaurantsService.removeAll()
+        }
+      }, 3600000)
     } catch (error) {
-      logger.log('The server delete failed:', error)
+      next(error)
     }
-  }
-
-  async forceDelete() {
-    const deleteSequence = setInterval(async() => {
-      const compareDate = new Date()
-      if (compareDate.getHours() === 2) {
-        this.removeAll()
-      }
-    }, 3600000)
   }
 }
