@@ -1,5 +1,5 @@
 import BaseController from '../utils/BaseController'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 
 export class YelpRestaurantsController extends BaseController {
@@ -80,6 +80,7 @@ export class YelpRestaurantsController extends BaseController {
         if (compareDate.getHours() === 2) {
           await yelpRestaurantsService.removeAll()
         }
+        // deleteSequence() TODO : need to figure out how to trigger the interval
       }, 3600000)
     } catch (error) {
       next(error)

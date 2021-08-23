@@ -1,5 +1,5 @@
 import BaseController from '../utils/BaseController'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 import { totalCityRestsService } from '../services/TotalCityRestsService'
 
 export class TotalCityRestsController extends BaseController {
