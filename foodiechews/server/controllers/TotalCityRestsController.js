@@ -8,18 +8,23 @@ export class TotalCityRestsController extends BaseController {
     this.router
       .get('', this.getAll)
       .get('/test', this.test)
-      .post('', this.create)
+      .get('/:id', this.getByCity)
   }
 
-  /**
-       * Sends all totalCityRests to a client by request
-       * @param {import('express').Request} req
-       * @param {import('express').Response} res
-       * @param {import('express').NextFunction} next
-       */
+  // REVIEW may want to look at going back to queries but id works for now
+
   async getAll(req, res, next) {
     try {
       const totalCityRest = await totalCityRestsService.getAll(req.query)
+      res.send(totalCityRest)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getByCity(req, res, next) {
+    try {
+      const totalCityRest = await totalCityRestsService.getByCity(req.params.id)
       res.send(totalCityRest)
     } catch (error) {
       next(error)
