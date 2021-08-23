@@ -13,9 +13,16 @@ const MyRestaurant = new Schema(
     /** This is the String city for a Restaurant */
     restCity: { type: String, required: true },
     tag: { type: String, enum: ['favorite', 'none'], default: 'none' },
-    AccountId: { type: ObjectId, ref: 'Account', required: true }
+    accountId: { type: ObjectId, ref: 'Account', required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
+
+MyRestaurant.virtual('account', {
+  localField: 'accountId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
 
 export default MyRestaurant
