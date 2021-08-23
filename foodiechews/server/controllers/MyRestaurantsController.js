@@ -1,6 +1,6 @@
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
-export class MyRestaurantController extends BaseController {
+export class MyRestaurantsController extends BaseController {
   constructor() {
     super('api/myRestaurants')
     this.router
