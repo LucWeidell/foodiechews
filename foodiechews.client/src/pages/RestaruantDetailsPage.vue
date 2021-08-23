@@ -1,16 +1,25 @@
 <template>
   <div class="container-fluid" id="bg-img">
     <RestaurantDetailsCard />
+    <h1>{{ restaurant.name }}</h1>
   </div>
 </template>
 
 <script>
+import { computed, onMounted } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
+import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
+import { AppState } from '../AppState'
 export default {
   setup() {
     const route = useRoute()
+    onMounted(async() => {
+      if (route.params.yelpId !== 'random') {
+        await yelpRestaurantsService.getByYelpId(route.params.yelpId)
+      }
+    })
     return {
-      route
+      restaurant: computed(() => AppState.activeRestaurant)
     }
   }
 }
