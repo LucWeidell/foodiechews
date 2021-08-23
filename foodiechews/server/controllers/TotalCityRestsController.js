@@ -7,8 +7,7 @@ export class TotalCityRestsController extends BaseController {
     super('api/totalCityRests')
     this.router
       .get('', this.getAll)
-      .get('/test', this.test)
-      .get('/:id', this.getByCity)
+      // .get('/test', this.test)
   }
 
   // REVIEW may want to look at going back to queries but id works for now
@@ -16,15 +15,6 @@ export class TotalCityRestsController extends BaseController {
   async getAll(req, res, next) {
     try {
       const totalCityRest = await totalCityRestsService.getAll(req.query)
-      res.send(totalCityRest)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async getByCity(req, res, next) {
-    try {
-      const totalCityRest = await totalCityRestsService.getByCity(req.params.id)
       res.send(totalCityRest)
     } catch (error) {
       next(error)
@@ -47,12 +37,12 @@ export class TotalCityRestsController extends BaseController {
   }
 
   // NOTE Yelp API server-side request example
-  async test(req, res, next) {
-    try {
-      const totalCityRest = await totalCityRestsService.test(req.body)
-      res.send(totalCityRest)
-    } catch (error) {
-      next(error)
-    }
-  }
+  // async test(req, res, next) {
+  //   try {
+  //     const totalCityRest = await totalCityRestsService.test(req.body)
+  //     res.send(totalCityRest)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 }

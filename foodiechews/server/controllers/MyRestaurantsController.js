@@ -11,7 +11,6 @@ export class MyRestaurantsController extends BaseController {
       .get('/:id', this.getById)
       .put('/:id', this.edit)
       .get('/:id/visits', this.getAllVisitsInRest)
-
       .post('', this.create)
   }
 
