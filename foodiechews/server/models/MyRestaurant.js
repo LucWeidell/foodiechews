@@ -5,7 +5,7 @@ const ObjectId = Schema.Types.ObjectId
 const MyRestaurant = new Schema(
   {
     /** This is the yelpId associated with this restaurant */
-    yelpID: { type: String, required: true },
+    yelpId: { type: String, required: true },
     /** This is the Array holding all Visit Models for a Restaurant */
     visits: { type: Array, default: [] },
     /** This is the String name for a Restaurant */

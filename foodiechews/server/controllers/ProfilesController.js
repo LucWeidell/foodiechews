@@ -4,6 +4,7 @@ import { Auth0Provider } from '@bcwdev/auth0provider'
 import { profilesService } from '../services/ProfilesService'
 import { visitsService } from '../services/VisitsService'
 import { accountService } from '../services/AccountService'
+import { myRestaurantsService } from '../services/MyRestaurantsService'
 
 export class ProfilesController extends BaseController {
   constructor() {
@@ -14,6 +15,7 @@ export class ProfilesController extends BaseController {
       .get('/:id', this.getById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id/visits', this.getAllVisitsByProfileId)
+      .get('/:id/myRestaurants', this.getAllRestsByProfileId)
   }
 
   /**
@@ -51,6 +53,15 @@ export class ProfilesController extends BaseController {
     try {
       const visits = await visitsService.getAll({ accountId: req.params.id })
       res.send(visits)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getAllRestsByProfileId(req, res, next) {
+    try {
+      const rests = await myRestaurantsService.getAll({ accountId: req.params.id })
+      res.send(rests)
     } catch (error) {
       next(error)
     }
