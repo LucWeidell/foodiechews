@@ -37,7 +37,7 @@ export class YelpRestaurantsController extends BaseController {
       const account = await accountService.getById(req.userInfo.id)
       const activeLocation = account._doc.activeLocation
       const query = { term: 'restaurants', location: activeLocation.city + activeLocation.state, limit: 50 }
-      logger.log(query)
+      // logger.log(query)
       const yelpRestaurant = await yelpRestaurantsService.getRandom(query)
       res.send(yelpRestaurant)
     } catch (error) {
