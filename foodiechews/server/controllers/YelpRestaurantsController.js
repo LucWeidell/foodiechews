@@ -38,9 +38,9 @@ export class YelpRestaurantsController extends BaseController {
       const account = await accountService.getById(req.userInfo.id)
       const activeLocation = account._doc.activeLocation
       let query = { term: 'restaurants', location: activeLocation.city + activeLocation.state }
-      const restaurant = await yelpRestaurantsService.getAll(query)
+      const restaurants = await yelpRestaurantsService.getAll(query)
       // logger.log('From the Controller', restaurant)
-      const randomPage = Math.floor(Math.random() * restaurant.total)
+      const randomPage = Math.floor(Math.random() * restaurants.total)
       // logger.log('I\'m the random number : ', randomPage)
       query = { term: 'restaurants', location: activeLocation.city + activeLocation.state, limit: 1, offset: randomPage - 1 }
       logger.log(query)
@@ -57,7 +57,11 @@ export class YelpRestaurantsController extends BaseController {
       const activeLocation = account._doc.activeLocation
       req.query.location = activeLocation.city + activeLocation.state
       req.query.term = 'restaurants'
+      req.query.limit = 1
       // logger.log(req.query.location)
+      const restaurants = await yelpRestaurantsService.getAll(req.query)
+      const randomPage = Math.floor(Math.random() * restaurants.total)
+      req.query.offset = randomPage
       const yelpRestaurant = await yelpRestaurantsService.getAll(req.query)
       res.send(yelpRestaurant)
     } catch (error) {
