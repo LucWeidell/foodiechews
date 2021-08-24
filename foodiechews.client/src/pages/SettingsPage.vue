@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row justify-content-around py-3">
       <div class="col-6">
-        <form action="">
+        <form @submit.prevent="editAccount">
           <div class="form-group form-check">
             <input type="checkbox" name="nodupes" id="nodupes" class="form-check-input" v-model="account.noDupes">
             <label for="nodupes" class="form-check-label">No Duplicate Restaurants</label>
@@ -14,13 +14,16 @@
           </div>
           <div class="form-group">
             <label for="activeLocationCity">City:</label>
-            <input class="form-control" id="activeLocation" type="text" placeholder="New York City">
-            <select name="" id="">
+            <input class="form-control" id="activeLocation" type="text" placeholder="New York City" v-model="account.activeLocation.city">
+            <select name="activeLocationState" id="activeLocationState" v-model="account.activeLocation.state">
               <option :value="state" v-for="(state, index) in states" :key="index">
                 {{ state }}
               </option>
             </select>
           </div>
+          <button type="submit">
+            SAVE
+          </button>
         </form>
       </div>
     </div>
@@ -28,15 +31,21 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import StatesList from '../utils/StatesList'
 export default {
   name: 'Settings',
   setup() {
+    const state = reactive({
+    })
     return {
+      state,
       account: computed(() => AppState.account),
-      states: StatesList
+      states: StatesList,
+      editAccount() {
+        console.log('test wow')
+      }
     }
   }
 }
