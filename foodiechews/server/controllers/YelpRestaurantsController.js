@@ -11,10 +11,10 @@ export class YelpRestaurantsController extends BaseController {
     super('api/yelpRestaurants')
     this.router
       .get('', this.getAll)
-      .get('/:id', this.getById)
       .get('/random', this.getRandom)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/search', this.getSearch)
+      .get('/:id', this.getById)
       .delete('/:id', this.remove)
   }
 
@@ -41,6 +41,7 @@ export class YelpRestaurantsController extends BaseController {
        */
   async getById(req, res, next) {
     try {
+      logger.log('why')
       const yelpRestaurant = await yelpRestaurantsService.getById(req.params.id)
       res.send(yelpRestaurant)
     } catch (error) {
@@ -49,22 +50,26 @@ export class YelpRestaurantsController extends BaseController {
   }
 
   async getRandom(req, res, next) {
+    logger.log('touched')
     try {
-      let query = { term: 'restaurants', location: req.query.city + req.query.state }
-      const restaurants = await yelpRestaurantsService.getAll(query)
+      logger.log(req.query)
+      let searchTerms = { term: 'restaurants', location: req.query.city + req.query.state }
+      const restaurants = await yelpRestaurantsService.getAll(searchTerms)
       // logger.log('From the Controller', restaurant)
       const randomPage = Math.floor(Math.random() * restaurants.total)
       // logger.log('I\'m the random number : ', randomPage)
-      query = { term: 'restaurants', location: req.query.city + req.query.state, limit: 1, offset: randomPage - 1 }
-      logger.log(query)
-      const yelpRestaurant = await yelpRestaurantsService.getRandom(query)
+      searchTerms = { term: 'restaurants', location: req.query.city + req.query.state, limit: 1, offset: randomPage - 1 }
+      logger.log(searchTerms)
+      const yelpRestaurant = await yelpRestaurantsService.getRandom(searchTerms)
       res.send(yelpRestaurant)
     } catch (error) {
+      logger.log('fail')
       next(error)
     }
   }
 
   async getSearch(req, res, next) {
+    logger.log('search touched')
     try {
       const account = await accountService.getById(req.userInfo.id)
       const activeLocation = account._doc.activeLocation

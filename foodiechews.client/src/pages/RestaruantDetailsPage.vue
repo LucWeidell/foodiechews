@@ -14,7 +14,7 @@ export default {
     const route = useRoute()
     watchEffect(() => {
       if (AppState.account.id) {
-        yelpRestaurantsService.getByYelpId(route.params.yelpId)
+        yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
       }
     })
     // REVIEW TODO: Use watchEffect instead of onMounted
