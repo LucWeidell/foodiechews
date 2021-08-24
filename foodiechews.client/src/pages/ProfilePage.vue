@@ -1,14 +1,23 @@
 <template>
   <div class="container-fluid">
     <div class="row" id="cover-img">
-      <img :src="state.account.picture" alt="Profile Pic" class="rounded-circle profile-img ml-3">
+      <img :src="state.account.picture || 'https://via.placeholder.com/150'" alt="Profile Pic" class="ml-3 rounded-circle profile-img">
     </div>
-    <div class="row mt-5 ml-2 justify-content-center">
-      <div class="col-12">
-        <h4>No More Than 25 letters:!</h4>
-      </div>
-      <div class="col-11">
-        <p>This should never be over 200 Characters. This is so we can wrap the text really nice like!</p>
+    <div class="row mt-5">
+      <div class="card col-12 shadow">
+        <div class="card-body">
+          <h5 class="card-title">
+            Card title
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Card subtitle
+          </h6>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the bulk of the card's content.
+          </p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
       </div>
     </div>
   </div>
@@ -43,7 +52,9 @@ export default {
 .profile-img{
   max-height: 100px;
   min-height: 100px;
+  max-width: 100px;
   position: relative;
-  bottom: -50px;
+  bottom: -7vh;
+  z-index: 1;
 }
 </style>
