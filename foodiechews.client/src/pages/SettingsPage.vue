@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row justify-content-around py-3">
       <div class="col-6">
-        <form @submit.prevent="editAccount">
+        <form @submit.prevent="editAccount(account)">
           <div class="form-group form-check">
             <input type="checkbox" name="nodupes" id="nodupes" class="form-check-input" v-model="account.noDupes">
             <label for="nodupes" class="form-check-label">No Duplicate Restaurants</label>
@@ -48,14 +48,21 @@ export default {
       state,
       account: computed(() => AppState.account),
       states: StatesList,
-      async editAccount() {
+      async editAccount(account) {
         try {
-          if (validateLocation(AppState.account.activeLocation)) {
-            await accountService.editAccount(AppState.account)
+          if (await validateLocation(AppState.account.activeLocation)) {
+            const foundLoc = AppState.account.location.find(loc => {
+              return (account.activeLocation.city === loc.city && account.activeLocation.state === loc.state)
+            })
+            if (!foundLoc) {
+              AppState.account.location.push(AppState.account.activeLocation)
+            }
+            logger.log('locArray:', AppState.account.location)
+            await accountService.editAccount(account)
             logger.log('test wow')
-          } else { Pop.error('Not a valid city', 'error') }
+          } else { Pop.toast('Not a valid city', 'error') }
         } catch (error) {
-          Pop.error(error, 'error')
+          Pop.toast(error, 'error')
         }
       }
 

@@ -14,7 +14,9 @@ class AccountService {
 
   async editAccount(rawAccount) {
     try {
-      const res = await api.put('/account', rawAccount)
+      logger.log(rawAccount)
+      const res = await api.put('/account/' + rawAccount.id, rawAccount)
+      logger.log('This is the account after edit:', res)
       AppState.account = res.data
     } catch (err) {
       logger.error('Failed Account Edit', err)
