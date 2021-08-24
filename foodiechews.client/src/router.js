@@ -13,8 +13,8 @@ const routes = [
   },
   {
     path: '/profile/:id/myRestaurants',
-    name: 'MyRestaurants',
-    component: loadPage('MyRestaurantsPage')
+    name: 'FeedPage',
+    component: loadPage('FeedPage')
   },
   {
     path: '/profile/:id/restaurantDetails/:yelpId',
@@ -25,7 +25,7 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: loadPage('AboutPage')
+    component: loadPage('HomePage')
   },
   {
     path: '/profile/:id',
