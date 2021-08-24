@@ -4,6 +4,7 @@ import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import { logger } from '../utils/Logger'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
+import { convertToQuery } from '../utils/Query'
 
 export class YelpRestaurantsController extends BaseController {
   constructor() {
@@ -34,8 +35,10 @@ export class YelpRestaurantsController extends BaseController {
   async getRandom(req, res, next) {
     try {
       const account = await accountService.getById(req.userInfo.id)
-      logger.log('This an account', account)
-      const yelpRestaurant = await yelpRestaurantsService.getRandom(req.query)
+      const activeLocation = account._doc.activeLocation
+      const query = { term: 'restaurants', location: activeLocation.city + activeLocation.state, limit: 50 }
+      logger.log(query)
+      const yelpRestaurant = await yelpRestaurantsService.getRandom(query)
       res.send(yelpRestaurant)
     } catch (error) {
       next(error)

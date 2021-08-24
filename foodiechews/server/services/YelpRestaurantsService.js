@@ -19,11 +19,10 @@ class YelpRestaurantsService {
   }
 
   async getRandom(query = {}) {
-    const account = await dbContext.Account.find()
     const yelpRestaurant = await this.getAll(query)
     const restaurant = yelpRestaurant.businesses // Naming convention for shorting code length
     const randomRestaurant = Math.floor(Math.random() * restaurant.length)
-    // logger.log(restaurant[randomRestaurant]) NOTE This is a random restaurant's Details.
+    logger.log(restaurant[randomRestaurant]) // NOTE This is a random restaurant's Details.
     return await this.getById(restaurant[randomRestaurant].id)
   }
 
@@ -31,6 +30,7 @@ class YelpRestaurantsService {
     // idYelp = idYelp.replace('_', 'XXX')
     let yelpRestaurant = await dbContext.YelpRestaurants.findOne({ id: idYelp })
     if (!yelpRestaurant) {
+      logger.log('I got hit')
       const token = process.env.YELP_API_KEY
       yelpApi.defaults.headers.authorization = `Bearer ${token}`
       yelpRestaurant = await yelpApi.get('' + idYelp)
@@ -42,6 +42,7 @@ class YelpRestaurantsService {
         return resultYelpRest
       }
     }
+    return yelpRestaurant
   }
 
   async create(body) {
