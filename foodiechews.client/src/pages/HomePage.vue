@@ -3,22 +3,25 @@
     <div class="row justify-content-center mt-5">
       <div class="col-9 col-md-6 card-transparent-white text-dark text-shadow-light">
         <h2 class="text-center">
-          Among Us
+          About Us
         </h2>
-        <p class="pt-3">
-          You sussy? You need crewmates but don't know what's in skield? Use Among Us to find all the crewmates you ever could want!
+        <p class="pt-3 text-center">
+          ♪ When you're craving something new but don't know what to do... FoodieChews! ♪
         </p>
         <h2 class="text-center pt-3">
-          How To Sus
+          How To Use
         </h2>
-        <p class="pt-3">
-          Be In electric. That's it. Or be red. Both work!
+        <p class="text-center pt-3">
+          Hit the random button below to find a restaurant in your area!
+          <br />
+          <br />
+          Create an account to save your foodie history and see other cravers favorite places!
         </p>
       </div>
     </div>
     <div class="d-flex justify-content-center mt-3">
       <button
-        class="btn btn-secondary text-uppercase"
+        class="btn btn-primary text-uppercase"
         @click="login"
         v-if="!user.isAuthenticated"
       >
@@ -83,4 +86,5 @@ export default {
 .text-shadow-light{
   text-shadow: 0px 1px white;
 }
+
 </style>

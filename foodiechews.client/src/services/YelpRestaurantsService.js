@@ -3,7 +3,7 @@ import { api } from './AxiosService'
 import Pop from '../utils/Notifier'
 
 class YelpRestaurantsService {
-/**
+  /**
  *
  * @param {String} id
  */

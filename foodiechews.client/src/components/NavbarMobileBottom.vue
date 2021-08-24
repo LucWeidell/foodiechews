@@ -16,7 +16,7 @@
       >
     </div>
     <div class="col-4 py-1">
-      <router-link :to="{name: 'MyRestaurants', params: {id: state.account.id}}">
+      <router-link :to="{name: 'FeedPage', params: {id: state.account.id}}">
         <img src="../assets/img/tempHome.png"
              class="p-0"
              alt="Home Button"
