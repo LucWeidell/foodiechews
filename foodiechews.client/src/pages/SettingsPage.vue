@@ -34,6 +34,11 @@
 import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import StatesList from '../utils/StatesList'
+import Pop from '../utils/Notifier'
+import { accountService } from '../services/AccountService'
+import { logger } from '../utils/Logger'
+import { validateLocation } from '../utils/Validator'
+
 export default {
   name: 'Settings',
   setup() {
@@ -43,9 +48,17 @@ export default {
       state,
       account: computed(() => AppState.account),
       states: StatesList,
-      editAccount() {
-        console.log('test wow')
+      async editAccount() {
+        try {
+          if (validateLocation(AppState.account.activeLocation)) {
+            await accountService.editAccount(AppState.account)
+            logger.log('test wow')
+          } else { Pop.error('Not a valid city', 'error') }
+        } catch (error) {
+          Pop.error(error, 'error')
+        }
       }
+
     }
   }
 }

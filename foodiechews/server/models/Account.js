@@ -19,7 +19,7 @@ export const AccountSchema = new Schema(
     subs: [{ type: String, unique: true }],
     email: { type: String, lowercase: true, unique: true },
     name: { type: String, required: true },
-    bio: { type: String, required: true },
+    bio: { type: String, default: '' },
     picture: { type: String },
     location: [locationSchema],
     // TODO: Use subdocument instead of array
