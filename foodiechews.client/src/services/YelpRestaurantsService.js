@@ -7,10 +7,14 @@ class YelpRestaurantsService {
  *
  * @param {String} id
  */
-  async getByYelpId(id) {
+  async getByYelpId(id, query) {
     try {
-      const res = await api.get('/api/yelpRestaurants/' + id)
-      AppState.activeRestaurant = res.data
+      if (id === 'random') {
+        console.log(id, query)
+        const res = await api.get(`/api/yelpRestaurants/random?city=${query.city}&state=${query.state}`)
+        console.log('the res:', res.data)
+        AppState.activeRestaurant = res.data
+      }
     } catch (error) {
       Pop.toast(error, 'error')
     }
