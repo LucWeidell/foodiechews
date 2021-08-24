@@ -13,7 +13,9 @@ export default {
   setup() {
     const route = useRoute()
     onMounted(async() => {
-      if (route.params.yelpId !== 'random') {
+      if (route.params.yelpId === 'random') {
+        await yelpRestaurantsService.getRandom()
+      } else {
         await yelpRestaurantsService.getByYelpId(route.params.yelpId)
       }
     })
