@@ -1,12 +1,17 @@
 import BaseController from '../utils/BaseController'
 // import { logger } from '../utils/Logger'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
+import { logger } from '../utils/Logger'
+import { Auth0Provider } from '@bcwdev/auth0provider'
+import { accountService } from '../services/AccountService'
 
 export class YelpRestaurantsController extends BaseController {
   constructor() {
     super('api/yelpRestaurants')
     this.router
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAll)
+      .get('/random', this.getRandom)
       .get('/:id', this.getById)
       .delete('/:id', this.remove)
   }
@@ -20,6 +25,17 @@ export class YelpRestaurantsController extends BaseController {
   async getAll(req, res, next) {
     try {
       const yelpRestaurant = await yelpRestaurantsService.getAll(req.query)
+      res.send(yelpRestaurant)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getRandom(req, res, next) {
+    try {
+      const account = await accountService.getById(req.userInfo.id)
+      logger.log('This an account', account)
+      const yelpRestaurant = await yelpRestaurantsService.getRandom(req.query)
       res.send(yelpRestaurant)
     } catch (error) {
       next(error)
