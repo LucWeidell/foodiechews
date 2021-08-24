@@ -13,6 +13,7 @@ export class YelpRestaurantsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAll)
       .get('/random', this.getRandom)
+      .get('/search', this.getSearch)
       .get('/:id', this.getById)
       .delete('/:id', this.remove)
   }
@@ -39,6 +40,20 @@ export class YelpRestaurantsController extends BaseController {
       const query = { term: 'restaurants', location: activeLocation.city + activeLocation.state, limit: 50 }
       // logger.log(query)
       const yelpRestaurant = await yelpRestaurantsService.getRandom(query)
+      res.send(yelpRestaurant)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getSearch(req, res, next) {
+    try {
+      const account = await accountService.getById(req.userInfo.id)
+      const activeLocation = account._doc.activeLocation
+      req.query.location = activeLocation.city + activeLocation.state
+      req.query.term = 'restaurants'
+      // logger.log(req.query.location)
+      const yelpRestaurant = await yelpRestaurantsService.getAll(req.query)
       res.send(yelpRestaurant)
     } catch (error) {
       next(error)
