@@ -51,6 +51,7 @@ export class YelpRestaurantsController extends BaseController {
       const account = await accountService.getById(req.userInfo.id)
       const activeLocation = account._doc.activeLocation
       req.query.location = activeLocation.city + activeLocation.state
+      req.query.term = 'restaurants'
       // logger.log(req.query.location)
       const yelpRestaurant = await yelpRestaurantsService.getAll(req.query)
       res.send(yelpRestaurant)
