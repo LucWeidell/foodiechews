@@ -5,8 +5,10 @@ import { api } from './AxiosService'
 
 class TotalCityRestsService {
   async getAll(activeLoc) {
-    const query = { location: activeLoc.city + activeLoc.state }
-    const res = api.getAll('/api/totalCityRests' + convertToQuery(query))
+    const locCity = activeLoc.city.replace(' ', '')
+    const locState = activeLoc.state.replace(' ', '')
+    const query = { city: locCity, state: locState }
+    const res = await api.get('/api/totalCityRests' + convertToQuery(query))
     return res.data
   }
 }
