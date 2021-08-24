@@ -10,11 +10,11 @@ export class YelpRestaurantsController extends BaseController {
   constructor() {
     super('api/yelpRestaurants')
     this.router
-      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAll)
-      .get('/random', this.getRandom)
-      .get('/search', this.getSearch)
       .get('/:id', this.getById)
+      .get('/random', this.getRandom)
+      .use(Auth0Provider.getAuthorizedUserInfo)
+      .get('/search', this.getSearch)
       .delete('/:id', this.remove)
   }
 
@@ -33,16 +33,29 @@ export class YelpRestaurantsController extends BaseController {
     }
   }
 
+  /**
+       * Sends all yelpRestaurant with Id to a client by request
+       * @param {import('express').Request} req
+       * @param {import('express').Response} res
+       * @param {import('express').NextFunction} next
+       */
+  async getById(req, res, next) {
+    try {
+      const yelpRestaurant = await yelpRestaurantsService.getById(req.params.id)
+      res.send(yelpRestaurant)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   async getRandom(req, res, next) {
     try {
-      const account = await accountService.getById(req.userInfo.id)
-      const activeLocation = account._doc.activeLocation
-      let query = { term: 'restaurants', location: activeLocation.city + activeLocation.state }
+      let query = { term: 'restaurants', location: req.query.city + req.query.state }
       const restaurants = await yelpRestaurantsService.getAll(query)
       // logger.log('From the Controller', restaurant)
       const randomPage = Math.floor(Math.random() * restaurants.total)
       // logger.log('I\'m the random number : ', randomPage)
-      query = { term: 'restaurants', location: activeLocation.city + activeLocation.state, limit: 1, offset: randomPage - 1 }
+      query = { term: 'restaurants', location: req.query.city + req.query.state, limit: 1, offset: randomPage - 1 }
       logger.log(query)
       const yelpRestaurant = await yelpRestaurantsService.getRandom(query)
       res.send(yelpRestaurant)
@@ -63,21 +76,6 @@ export class YelpRestaurantsController extends BaseController {
       const randomPage = Math.floor(Math.random() * restaurants.total)
       req.query.offset = randomPage
       const yelpRestaurant = await yelpRestaurantsService.getAll(req.query)
-      res.send(yelpRestaurant)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  /**
-       * Sends all yelpRestaurant with Id to a client by request
-       * @param {import('express').Request} req
-       * @param {import('express').Response} res
-       * @param {import('express').NextFunction} next
-       */
-  async getById(req, res, next) {
-    try {
-      const yelpRestaurant = await yelpRestaurantsService.getById(req.params.id)
       res.send(yelpRestaurant)
     } catch (error) {
       next(error)
