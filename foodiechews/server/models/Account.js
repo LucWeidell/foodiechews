@@ -27,7 +27,7 @@ export const AccountSchema = new Schema(
     myEats: [MyRestaurant],
     // TODO: Also use a subdoc to define the object props
     pendingRestaurant: pendingRestaurantSchema,
-    activeLocation: { type: String, default: '' },
+    activeLocation: { type: Object, default: {} },
     noDupes: { type: Boolean, default: true },
     showRestaurants: { type: Boolean, default: true }
     // NOTE If you wish to add additional public properties for Accounts do so here

@@ -10,7 +10,7 @@ const YelpRestaurant = new Schema(
     coverImgUrl: { type: String, required: true },
     categories: { type: Array, required: true },
     hours: { type: Array, required: true },
-    price: { type: String, required: true }, // These $$$
+    price: { type: String, default: '' }, // These $$$
     rating: { type: Number, required: true } // TODO check if you get decimals
   },
   { timestamps: true, toJSON: { virtuals: true } }
