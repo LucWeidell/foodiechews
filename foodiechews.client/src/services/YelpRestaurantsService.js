@@ -3,16 +3,6 @@ import { api } from './AxiosService'
 import Pop from '../utils/Notifier'
 
 class YelpRestaurantsService {
-  async getRandom() {
-    try {
-      const res = await api.get('/api/yelpRestaurants/random')
-      console.log(res.data)
-      AppState.activeRestaurant = res.data
-    } catch (error) {
-      Pop.toast(error, 'error')
-    }
-  }
-
   /**
  *
  * @param {String} id

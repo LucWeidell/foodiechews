@@ -5,23 +5,22 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import { AppState } from '../AppState'
 export default {
   setup() {
     const route = useRoute()
-    onMounted(async() => {
-      if (route.params.yelpId === 'random') {
-        await yelpRestaurantsService.getRandom()
-      } else {
-        await yelpRestaurantsService.getByYelpId(route.params.yelpId)
+    watchEffect(() => {
+      if (AppState.account.id) {
+        yelpRestaurantsService.getByYelpId(route.params.yelpId)
       }
     })
     // REVIEW TODO: Use watchEffect instead of onMounted
     return {
-      restaurant: computed(() => AppState.activeRestaurant)
+      restaurant: computed(() => AppState.activeRestaurant),
+      account: computed(() => AppState.account)
     }
   }
 }
