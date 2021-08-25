@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const TotalCityRest = new Schema(
   {
-    city: { type: String, unique: true, lowercase: true, required: true },
+    city: { type: String, lowercase: true, required: true },
     state: { type: String, uppercase: true, required: true },
     totalNum: { type: Number, required: true }
   },
