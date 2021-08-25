@@ -19,7 +19,6 @@ import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
 
 export default {
   setup() {

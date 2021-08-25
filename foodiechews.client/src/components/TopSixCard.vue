@@ -28,7 +28,7 @@ export default {
   setup() {
     const state = reactive({
       // TODO: Set to false on deploy
-      dropOpen: true,
+      dropOpen: false,
       closedClass: '',
       openClass: ''
     })

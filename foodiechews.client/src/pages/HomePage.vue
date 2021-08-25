@@ -41,7 +41,6 @@ export default {
   setup() {
     function getLocation() {
       if (Object.keys(AppState.activeLocation).length === 0) {
-        console.log('I got triggered')
         navigator.geolocation.getCurrentPosition((loc) => {
           const coords = {
             lat: loc.coords.latitude,
