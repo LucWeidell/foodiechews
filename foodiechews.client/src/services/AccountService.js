@@ -9,7 +9,12 @@ class AccountService {
       const res = await api.get('/account')
       AppState.account = res.data
       logger.log(res.data.activeLocation)
-      Object.assign(AppState.lastActive, res.data.activeLocation)
+      if (res.data.activeLocation) {
+        Object.assign(AppState.lastActive, res.data.activeLocation)
+      } else {
+        Object.assign(AppState.lastActive, { city: '', state: '' })
+        await this.addCity(AppState.activeLocation)
+      }
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
@@ -36,6 +41,7 @@ class AccountService {
           AppState.account.location.push(loc)
         }
         AppState.lastActive = loc
+        AppState.account.activeLocation = loc
         const res = await api.put('/account/' + AppState.account.id, AppState.account)
         AppState.account = res.data
         if (res.data) {
