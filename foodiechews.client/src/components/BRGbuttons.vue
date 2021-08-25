@@ -65,13 +65,6 @@ export default {
         } catch (error) {
           Pop.toast('BRG comp failed to get yelpRest: ' + error, 'error')
         }
-      },
-      async addToMyRestaurants() {
-        try {
-          await myRestaurantsService.addNew(AppState.activeRestaurant)
-        } catch (error) {
-          Pop.toast(error, 'I dunno what happened.')
-        }
       }
     }
   }
