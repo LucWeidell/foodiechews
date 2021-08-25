@@ -8,7 +8,7 @@
        aria-hidden="true"
   >
     <div class="modal-dialog">
-      <form @submit.prevent="submitVisit">
+      <form @submit.prevent="addToMyRestaurants">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">
@@ -54,6 +54,12 @@
 <script>
 import { reactive } from '@vue/reactivity'
 import $ from 'jquery'
+import { AppState } from '../AppState'
+import { myRestaurantsService } from '../services/MyRestaurantsService'
+import { visitsService } from '../services/VisitsService'
+
+import Pop from '../utils/Notifier'
+
 export default {
   setup() {
     const state = reactive({
@@ -73,6 +79,26 @@ export default {
         $('body').removeClass('modal-open')
         // eslint-disable-next-line no-undef
         $('.modal-backdrop').remove()
+      },
+      async addToMyRestaurants() {
+        try {
+          const tags = []
+          if (state.newVisit.favorite) {
+            tags.push('favorite')
+          }
+          console.log(tags)
+          await myRestaurantsService.addNew(AppState.activeRestaurant, tags)
+          await visitsService.addNew('tests')
+          console.log('modal logs', state.newVisit)
+          // eslint-disable-next-line no-undef
+          $('#staticBackdrop').modal('hide')
+          // eslint-disable-next-line no-undef
+          $('body').removeClass('modal-open')
+          // eslint-disable-next-line no-undef
+          $('.modal-backdrop').remove()
+        } catch (error) {
+          Pop.toast(error, 'I dunno what happened.')
+        }
       }
     }
   }
