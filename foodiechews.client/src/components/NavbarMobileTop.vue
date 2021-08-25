@@ -5,11 +5,20 @@
         <img src="../assets/img/foodieLogo.png" alt="foodie-logo">
       </router-link>
     </div>
-    <div v-if="state.account.activeLocation" class="text-center col-8">
-      {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
-    </div>
-    <div v-else class="text-center col-8">
-      {{ state.nonLoggedLoc.city }}, {{ state.nonLoggedLoc.state }}
+    <div class="text-center col-8 hoverable">
+      <div v-if="state.account.activeLocation">
+        <div class="btn-group">
+          <button type="button" class="btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
+          </button>
+          <div class="dropdown-menu">
+            <UserCities />
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        {{ state.nonLoggedLoc.city }}, {{ state.nonLoggedLoc.state }}
+      </div>
     </div>
     <button
       class="navbar-toggler col-2"
@@ -91,6 +100,7 @@ export default {
   setup() {
     const state = reactive({
       dropOpen: false,
+      cityOpen: false,
       account: computed(() => AppState.account),
       nonLoggedLoc: computed(() => AppState.activeLocation)
     })

@@ -9,17 +9,26 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: loadPage('HomePage')
+    component: loadPage('HomePage'),
+    beforeEnter: authSettled
+
   },
   {
     path: '/profile/:id/myRestaurants',
     name: 'FeedPage',
-    component: loadPage('FeedPage')
+    component: loadPage('FeedPage'),
+    beforeEnter: authGuard
   },
   {
     path: '/profile/:id/restaurantDetails/:yelpId',
     name: 'RestaurantsDetails',
     component: loadPage('RestaruantDetailsPage'),
+    beforeEnter: authSettled
+  },
+  {
+    path: '/profile/:id/search',
+    name: 'SearchPage',
+    component: loadPage('SearchPage'),
     beforeEnter: authSettled
   },
   {
@@ -30,7 +39,9 @@ const routes = [
   {
     path: '/profile/:id',
     name: 'Profile',
-    component: loadPage('ProfilePage')
+    component: loadPage('ProfilePage'),
+    beforeEnter: authGuard
+
   },
   {
     path: '/account',
