@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/profile/:id/restaurantDetails/:yelpId',
     name: 'RestaurantsDetails',
-    component: loadPage('RestaruantDetailsPage'),
+    component: loadPage('RestaurantDetailsPage'),
     beforeEnter: authSettled
   },
   {
