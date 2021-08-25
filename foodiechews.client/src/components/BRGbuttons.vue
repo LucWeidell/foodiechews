@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 d-flex justify-content-center mt-3">
-    <button type="button" class="btn-sm btn-secondary">
+    <button type="button" class="btn-sm btn-secondary" @click="addToMyRestaurants">
       <h5 class="pt-1">
         I've Been 👍
       </h5>
@@ -25,6 +25,7 @@
 <script>
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
+import { myRestaurantsService } from '../services/MyRestaurantsService'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import Pop from '../utils/Notifier'
 
@@ -45,6 +46,13 @@ export default {
           }
         } catch (error) {
           Pop.toast('BRG comp failed to get yelpRest: ' + error, 'error')
+        }
+      },
+      async addToMyRestaurants() {
+        try {
+          myRestaurantsService.addNew(AppState.activeRestaurant)
+        } catch (error) {
+          Pop.toast(error, 'I dunno what happened.')
         }
       }
     }
