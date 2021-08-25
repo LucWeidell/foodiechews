@@ -12,7 +12,7 @@
             {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
           </button>
           <div class="dropdown-menu">
-            <UserCities />
+            <UserCities v-for="l in state.account.location" :key="l" :loc="l" />
           </div>
         </div>
       </div>
@@ -100,7 +100,6 @@ export default {
   setup() {
     const state = reactive({
       dropOpen: false,
-      cityOpen: false,
       account: computed(() => AppState.account),
       nonLoggedLoc: computed(() => AppState.activeLocation)
     })
