@@ -35,11 +35,6 @@ export default {
                 logger.log('You are adding A Location')
                 responce = await accountService.addCity(location)
                 break
-              case 'remove':
-                if (await Pop.confirm()) {
-                  responce = await accountService.removeCity(location)
-                } else { return '' }
-                break
               default:
                 Pop.toast('Edit city recieved bad action', 'error')
                 return ''
