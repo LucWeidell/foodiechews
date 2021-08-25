@@ -1,5 +1,5 @@
 <template>
-  <a class="dropdown-item" href="#" @click="editAccount()" v-if="state.account.activeLocation.city !== loc.city">{{ loc.city }}, {{ loc.state }}</a>
+  <a class="dropdown-item" href="#" @click="editCity('add', state.account.activeLocation)" v-if="state.account.activeLocation.city !== loc.city">{{ loc.city }}, {{ loc.state }}</a>
 </template>
 
 <script>
@@ -22,31 +22,22 @@ export default {
     })
     return {
       state,
-      async editAccount() {
+      async editCity(action, location) {
         try {
-          state.account.activeLocation.city = props.loc.city
-          state.account.activeLocation.state = props.loc.state
-          logger.log(state.account.activeLocation)
-          await this.editCity('add', state.account.activeLocation)
-          await accountService.editAccount(state.account)
-          Pop.toast('Applied All Changes', 'success')
-        } catch (error) {
-          Pop.toast(error, 'error')
-        }
-      },
-      async editCity(action, loc) {
-        try {
+          location.city = props.loc.city
+          location.state = props.loc.state
           let responce = true
           if (state.account.location.length === 1 && action === 'remove') {
             Pop.toast('Cannot remove only city on record', 'error')
           } else {
             switch (action) {
               case 'add':
-                responce = await accountService.addCity(loc)
+                logger.log('You are adding A Location')
+                responce = await accountService.addCity(location)
                 break
               case 'remove':
                 if (await Pop.confirm()) {
-                  responce = await accountService.removeCity(loc)
+                  responce = await accountService.removeCity(location)
                 } else { return '' }
                 break
               default:

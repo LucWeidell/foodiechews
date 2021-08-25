@@ -22,7 +22,7 @@ class AccountService {
 
   async editAccount(rawAccount) {
     try {
-      logger.log(rawAccount)
+      logger.log('This is your RawAccount', rawAccount)
       const res = await api.put('/account/' + rawAccount.id, rawAccount)
       logger.log('This is the account after edit:', res)
       AppState.account = res.data
