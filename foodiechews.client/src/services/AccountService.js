@@ -75,6 +75,16 @@ class AccountService {
     }
     return false
   }
+
+  async getAllMyRestaurants() {
+    try {
+      const res = await api.get('api/profiles/' + AppState.account.id + '/myRestaurants')
+      console.log(res.data)
+      AppState.myRestaurants = res.data
+    } catch (error) {
+      logger.log(error)
+    }
+  }
 }
 
 export const accountService = new AccountService()

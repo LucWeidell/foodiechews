@@ -28,6 +28,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await accountService.getAccount()
   socketService.authenticate(AuthService.bearer)
   // NOTE if there is something you want to do once the user is authenticated, place that here
+  await accountService.getAllMyRestaurants()
   if (router.currentRoute.value.name === 'Home') {
     logger.log(AppState.account.id)
     router.push({ name: 'FeedPage', params: { id: AppState.account.id } })
