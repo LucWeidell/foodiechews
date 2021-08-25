@@ -5,14 +5,8 @@
         <img src="../assets/img/foodieLogo.png" alt="foodie-logo">
       </router-link>
     </div>
-    <div v-if="Object.keys(state.account).length > 0" class="text-center col-8">
-      <!-- TODO: Fix new account active location creation -->
-      <div v-if="state.account.activeLocation">
-        {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
-      </div>
-      <div v-else>
-        {{ state.nonLoggedLoc.city }}, {{ state.nonLoggedLoc.state }}
-      </div>
+    <div v-if="state.account.activeLocation" class="text-center col-8">
+      {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
     </div>
     <div v-else class="text-center col-8">
       {{ state.nonLoggedLoc.city }}, {{ state.nonLoggedLoc.state }}
@@ -35,7 +29,7 @@
             About
           </router-link>
         </li>
-        <li v-if="Object.keys(state.account).length > 0" class="nav-item">
+        <li class="nav-item">
           <router-link :to="{ name: 'Profile', params: {id: user.id} }" class="nav-link">
             My Profile
           </router-link>

@@ -16,7 +16,7 @@ export default {
   setup() {
     onMounted(async() => {
       try {
-        if (Object.keys(AppState.account.activeLocation).length === 0) {
+        if (!AppState.account.activeLocation) {
           await accountService.addCity(AppState.activeLocation)
           Pop.toast('You added you first city!', 'success')
         }
