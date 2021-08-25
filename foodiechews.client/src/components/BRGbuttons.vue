@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 d-flex justify-content-center mt-3">
-    <button type="button" class="btn-sm btn-secondary" @click="addToMyRestaurants">
+    <button type="button" class="btn-sm btn-secondary" :class="{disabled: matchedRestaurant}" @click="addToMyRestaurants" :disabled="matchedRestaurant">
       <h5 class="pt-1">
         I've Been 👍
       </h5>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { myRestaurantsService } from '../services/MyRestaurantsService'
@@ -33,6 +34,15 @@ export default {
   setup() {
     const route = useRoute()
     return {
+      matchedRestaurant: computed(() => {
+        const found = AppState.myRestaurants.find(rest =>
+          rest.yelpId === AppState.activeRestaurant.id
+        )
+        if (found) {
+          return true
+        }
+        return false
+      }),
       async getRandom() {
         try {
           let restaurant = {}
