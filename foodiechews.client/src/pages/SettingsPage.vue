@@ -8,6 +8,10 @@
       </div>
       <div class="col-8 card bg-bootSec text-dark shadow-sm mb-2">
         <div class="form-group form-check">
+          <input type="checkbox" name="showOnlyOpen" id="showOnlyOpen" class="form-check-input" v-model="state.account.showOnlyOpen">
+          <label for="showOnlyOpen" class="form-check-label">Only Find Open Restaurants</label>
+        </div>
+        <div class="form-group form-check">
           <input type="checkbox" name="nodupes" id="nodupes" class="form-check-input" v-model="state.account.noDupes">
           <label for="nodupes" class="form-check-label">No Duplicate Restaurants</label>
         </div>
@@ -75,7 +79,6 @@ import StatesList from '../utils/StatesList'
 import Pop from '../utils/Notifier'
 import { accountService } from '../services/AccountService'
 import { logger } from '../utils/Logger'
-import { validateLocation } from '../utils/Validator'
 
 export default {
   name: 'Settings',

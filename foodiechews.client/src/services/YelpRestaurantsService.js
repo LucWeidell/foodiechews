@@ -5,18 +5,42 @@ import Pop from '../utils/Notifier'
 class YelpRestaurantsService {
   /**
  *
- * @param {String} id
+ * @param {String} action - One of 'random', 'search', or a yelpID String
  */
-  async getByYelpId(id, query) {
+  async getByYelpId(action, query) {
     AppState.loading = true
+    let res = {}
     try {
-      if (id === 'random') {
-        console.log(id, query)
-        const res = await api.get(`/api/yelpRestaurants/random?city=${query.city}&state=${query.state}`)
-        console.log('the res:', res.data)
-        AppState.activeRestaurant = res.data
-        AppState.loading = false
+      const locCity = query.city.replace(' ', '')
+      const locState = query.state.replace(' ', '')
+      switch (action) {
+        case 'random':
+        // console.log(id, query)
+          if (!AppState.account) {
+            res = await api.get(`/api/yelpRestaurants/random?location=${locCity + locState}&open_now=true`)
+          } else {
+            res = await api.get(`/api/yelpRestaurants/random?location=${locCity + locState}&open_now=${AppState.account.showOnlyOpen}`)
+          }
+          // console.log('the res:', res.data)
+          AppState.activeRestaurant = res.data
+          AppState.loading = false
+          break
+        case 'search':
+        // console.log(id, query)
+          res = await api.get(`/api/yelpRestaurants/random?location=${locCity + locState}&open_now=${AppState.account.showOnlyOpen}`)
+          // console.log('the res:', res.data)
+          AppState.activeRestaurant = res.data
+          AppState.loading = false
+          break
+        // NOTE had default as false before but we can identify /:id as an id for a string compare
+        // REVIEW could check the length of the string: but switches may not support
+        default:
+          res = await api.get(`/api/yelpRestaurants/${query.id}`)
+          break
       }
+      AppState.activeRestaurant = res.data
+      AppState.loading = false
+      return res.data
     } catch (error) {
       Pop.toast(error, 'error')
     }
@@ -24,12 +48,12 @@ class YelpRestaurantsService {
 
   async getByCoordinates(coords) {
     try {
-      const res = await api.get(`/api/yelpRestaurants?latitude=${coords.lat}&longitude=${coords.long}`)
-      console.log('get by coords result:', res.data)
-      const city = res.data.businesses[0].location.city
-      const state = res.data.businesses[0].location.state
+      const res = await api.get(`/api/yelpRestaurants/random?latitude=${coords.lat}&longitude=${coords.long}`)
+      // console.log('get by coords result:', res.data)
+      const cityDev = res.data.location.city
+      const stateDev = res.data.location.state
       // TODO: Save location data as an object to the user's account and/or AppState.activeLocation
-      console.log('location:', city, state)
+      AppState.activeLocation = { city: cityDev, state: stateDev }
     } catch (error) {
       Pop.toast(error, 'error')
     }

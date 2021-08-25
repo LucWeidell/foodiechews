@@ -26,12 +26,21 @@
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
+import Pop from '../utils/Notifier'
+
 export default {
   setup() {
     const route = useRoute()
     return {
-      getRandom() {
-        yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
+      async getRandom() {
+        try {
+          const restaurant = await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
+          if (!restaurant) {
+            Pop.toast('BRG Comp failed to get restaurant:', 'error')
+          }
+        } catch (error) {
+          Pop.toast('BRG comp failed to get yelpRest: ' + error, 'error')
+        }
       }
     }
   }

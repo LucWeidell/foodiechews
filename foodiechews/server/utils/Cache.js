@@ -1,4 +1,5 @@
 import { yelpApi } from '../services/AxiosService'
+import { logger } from './Logger'
 
 /** This is the cache in replacement for MongoDb YelpRestaurants
  * @type {Object}
@@ -12,15 +13,20 @@ const cache = {}
 export async function searchCache(strQuery) {
   let randNum = 0
   strQuery += '&limit=1'
+  logger.log('Search string:', strQuery)
+  logger.log('the first condition', cache[strQuery])
   const now = new Date()
-  if (Object.keys(cache[strQuery]).length > 0) {
+  if (cache[strQuery]) {
     const foundSearch = cache[strQuery]
+    logger.log('Found search:', foundSearch)
+
     if (foundSearch.ttl - now.getTime() > 0) {
-      randNum = randomNumSelect(foundSearch.total)
+      randNum = randomNumSelect(foundSearch.totalRes)
     }
   } else {
-    const res = await this.getFromYelpApi(strQuery)
-    cache.strQuery = {
+    const res = await getFromYelpApi(strQuery)
+    logger.log('Res search before Off:', res)
+    cache[strQuery] = {
       results: res.businesses,
       ttl: (now.getTime() + 86400000),
       totalRes: res.total
@@ -28,20 +34,25 @@ export async function searchCache(strQuery) {
     randNum = randomNumSelect(res.total)
   }
   strQuery += ('&offset=' + randNum)
-  const resWithOffset = await this.getFromYelpApi(strQuery)
-  return await IdCheckCache('id/' + resWithOffset.id)
+  const resWithOffset = await getFromYelpApi(strQuery)
+  logger.log('Res search w/ Off:', resWithOffset)
+  return await IdCheckCache(resWithOffset.businesses[0].id)
 }
 
 export async function IdCheckCache(strQuery) {
   const now = new Date()
-  if (Object.keys(cache[strQuery]).length > 0) {
+  logger.log('id string:', strQuery)
+  if (cache[strQuery]) {
     const foundSearch = cache[strQuery]
+    logger.log('Found idSearch:', foundSearch)
     if (foundSearch.ttl - now.getTime() > 0) {
       return foundSearch.results[0]
     }
   }
   const res = await getFromYelpApi(strQuery)
-  cache.strQuery = {
+  logger.log('Res searchID return before Off:', res)
+
+  cache[strQuery] = {
     results: [res],
     ttl: (now.getTime() + 86400000),
     totalRes: 1
@@ -64,6 +75,10 @@ function randomNumSelect(outOf) {
 }
 
 async function getFromYelpApi(strQuery) {
+  const token = process.env.YELP_API_KEY
+  yelpApi.defaults.headers.authorization = `Bearer ${token}`
+  logger.log('str to call get yelpAPI:', strQuery)
   const res = await yelpApi.get(strQuery)
+  logger.log('res of yelpAPI call:', res.data)
   return res.data
 }

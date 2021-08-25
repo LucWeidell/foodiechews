@@ -4,7 +4,7 @@
       <h4>{{ restaurant.name }}</h4>
     </div>
     <div class="col-10 d-flex justify-content-center">
-      <img :src="restaurant.coverImgUrl" alt="restaurant-image" width="250" class="shadow">
+      <img :src="restaurant.image_url" alt="restaurant-image" width="250" class="shadow">
     </div>
     <div class="col-md-11 col-11 mt-3">
       <h5>Details:</h5>
@@ -23,7 +23,7 @@
           <h5>Address: {{ address }}</h5>
           <h5>Price: {{ restaurant.price }}</h5>
           <h5>Rating: {{ restaurant.rating }}</h5>
-          <div class="row py-1">
+          <div v-if="delivery.length > 0" class="row py-1">
             <div class="col-auto">
               <h5>Delivery Choice: </h5>
             </div>

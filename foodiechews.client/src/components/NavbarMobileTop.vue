@@ -1,9 +1,11 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
     <div class="text-center col-2">
-      <img src="../assets/img/foodieLogo.png" alt="foodie-logo">
+      <router-link :to="{ name: 'About' }" class="nav-link">
+        <img src="../assets/img/foodieLogo.png" alt="foodie-logo">
+      </router-link>
     </div>
-    <div v-if="Object.keys(state.account).length!=0" class="text-center col-8">
+    <div v-if="Object.keys(state.account).length > 0" class="text-center col-8">
       {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
     </div>
     <div v-else class="text-center col-8">

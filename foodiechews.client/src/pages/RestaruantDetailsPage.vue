@@ -19,13 +19,19 @@ import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
+
 export default {
   setup() {
     const route = useRoute()
     onMounted(() => { AppState.loading = true })
-    watchEffect(() => {
+    watchEffect(async() => {
       if (AppState.account.id) {
-        yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
+        // NOTE this watcher trigger even one more iteration when leavng the page.
+        // The solution below only solves when going to our account pages: feed, setting ext.
+        if (route.params.yelpId) {
+          await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
+        }
       }
     })
     // REVIEW TODO: Use watchEffect instead of onMounted
