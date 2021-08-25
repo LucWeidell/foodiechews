@@ -2,6 +2,12 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
+const locationSchema = new Schema({
+  city: { type: String, required: true },
+  state: { type: String, required: true }
+},
+{ timestamps: true, toJSON: { virtuals: true } })
+
 const MyRestaurant = new Schema(
   {
     /** This is the yelpId associated with this restaurant */
@@ -10,8 +16,7 @@ const MyRestaurant = new Schema(
     visits: { type: Array, default: [] },
     /** This is the String name for a Restaurant */
     name: { type: String, required: true },
-    /** This is the String city for a Restaurant */
-    restCity: { type: String, required: true },
+    location: locationSchema,
     tag: { type: String, enum: ['favorite', 'none'], default: 'none' },
     accountId: { type: ObjectId, ref: 'Account', required: true }
   },
