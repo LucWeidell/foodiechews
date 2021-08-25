@@ -1,9 +1,7 @@
 import BaseController from '../utils/BaseController'
 // import { logger } from '../utils/Logger'
-import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import { logger } from '../utils/Logger'
 import { Auth0Provider } from '@bcwdev/auth0provider'
-import { accountService } from '../services/AccountService'
 import { convertToQuery } from '../utils/Query'
 import { IdCheckCache, searchCache } from '../utils/Cache'
 
