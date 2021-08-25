@@ -49,7 +49,7 @@
       <h5>Hours:</h5>
     </div>
     <div class="col-md-10 col-9 mt-3 d-flex justify-content-center">
-      <p>5am - 12am</p>
+      <p>{{ fixLayout(restaurant).open }} - {{ fixLayout(restaurant).close }}</p>
     </div>
     <span v-if="yelpId === 'random' ">
       <BRGbuttons />
@@ -95,6 +95,32 @@ export default {
       fixUnderscores(strToFix) {
         const result = strToFix.replace('_', ' ')
         return result
+      },
+      getToday() {
+        const d = new Date()
+        const today = d.getDay()
+        return today
+      },
+      fixLayout(restaurant) {
+        let open = restaurant.hours[0].open[this.getToday()].start
+        if (open < 1200) {
+          open = open + 'AM'
+        } else {
+          open = open + 'PM'
+        }
+        let close = restaurant.hours[0].open[this.getToday()].end
+        if (close > 1200) {
+          close = close + 'PM'
+        } else {
+          let stringDate = close + ''
+          if (stringDate === '0000') {
+            stringDate = 'Midnight'
+            close = stringDate
+          } else {
+            close = close + 'AM'
+          }
+        }
+        return { open, close }
       }
     }
   }

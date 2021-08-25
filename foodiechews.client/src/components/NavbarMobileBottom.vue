@@ -1,15 +1,15 @@
 <template>
   <div class="d-flex flex-row bg-primary text-light text-center align-items-center m-0">
     <div class="col-4 py-1">
-      <img src="../assets/img/tempsearch.png"
-           class="p-0"
+      <img src="../assets/img/search.png"
+           class="p-0 action"
            alt="Random Button"
            width="50"
       >
     </div>
     <div class="col-4 py-1 border-right border-left border-dark">
       <img src="../assets/img/random.png"
-           class="p-0"
+           class="p-0 action"
            alt="Random Button"
            width="50"
            @click="random"
@@ -17,8 +17,8 @@
     </div>
     <div class="col-4 py-1">
       <router-link :to="{name: 'FeedPage', params: {id: state.account.id}}">
-        <img src="../assets/img/tempHome.png"
-             class="p-0"
+        <img src="../assets/img/Home.png"
+             class="pb-1"
              alt="Home Button"
              width="50"
         >
@@ -49,4 +49,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.action{
+  cursor: pointer;
+}
 </style>
