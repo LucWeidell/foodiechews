@@ -30,7 +30,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   // NOTE if there is something you want to do once the user is authenticated, place that here
   if (router.currentRoute.value.name === 'Home') {
     logger.log(AppState.account.id)
-    router.push({ name: 'MyRestaurants', params: { id: AppState.account.id } })
+    router.push({ name: 'FeedPage', params: { id: AppState.account.id } })
   }
 })
 
