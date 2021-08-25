@@ -6,5 +6,6 @@ export const AppState = reactive({
   account: {},
   activeRestaurant: {},
   activeLocation: {},
+  lastActive: {},
   loading: false
 })
