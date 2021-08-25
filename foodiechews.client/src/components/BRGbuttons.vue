@@ -60,7 +60,8 @@ export default {
       },
       async addToMyRestaurants() {
         try {
-          myRestaurantsService.addNew(AppState.activeRestaurant)
+          await myRestaurantsService.addNew(AppState.activeRestaurant)
+          this.getRandom()
         } catch (error) {
           Pop.toast(error, 'I dunno what happened.')
         }
