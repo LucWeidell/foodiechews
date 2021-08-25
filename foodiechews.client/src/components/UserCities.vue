@@ -1,5 +1,5 @@
 <template>
-  <a class="dropdown-item" href="#" @click="editCity('add', state.account.activeLocation)" v-if="state.account.activeLocation.city !== loc.city">{{ loc.city }}, {{ loc.state }}</a>
+  <a class="dropdown-item" @click="editCity('add', state.account.activeLocation)" v-if="state.account.activeLocation.city !== loc.city">{{ loc.city }}, {{ loc.state }}</a>
 </template>
 
 <script>
