@@ -6,7 +6,13 @@
       </router-link>
     </div>
     <div v-if="Object.keys(state.account).length > 0" class="text-center col-8">
-      {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
+      <!-- TODO: Fix new account active location creation -->
+      <div v-if="state.account.activeLocation">
+        {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
+      </div>
+      <div v-else>
+        {{ state.nonLoggedLoc.city }}, {{ state.nonLoggedLoc.state }}
+      </div>
     </div>
     <div v-else class="text-center col-8">
       {{ state.nonLoggedLoc.city }}, {{ state.nonLoggedLoc.state }}
