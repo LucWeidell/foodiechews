@@ -9,7 +9,7 @@
       {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
     </div>
     <div v-else class="text-center col-8">
-      City
+      {{ state.nonLoggedLoc.city }}, {{ state.nonLoggedLoc.state }}
     </div>
     <button
       class="navbar-toggler col-2"
@@ -29,7 +29,7 @@
             About
           </router-link>
         </li>
-        <li class="nav-item">
+        <li v-if="Object.keys(state.account).length > 0" class="nav-item">
           <router-link :to="{ name: 'Profile', params: {id: user.id} }" class="nav-link">
             My Profile
           </router-link>
@@ -91,7 +91,8 @@ export default {
   setup() {
     const state = reactive({
       dropOpen: false,
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      nonLoggedLoc: computed(() => AppState.activeLocation)
     })
     return {
       state,

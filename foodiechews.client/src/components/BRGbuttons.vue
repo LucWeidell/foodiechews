@@ -34,7 +34,12 @@ export default {
     return {
       async getRandom() {
         try {
-          const restaurant = await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
+          let restaurant = {}
+          if (!AppState.account.id) {
+            restaurant = await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
+          } else {
+            restaurant = await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
+          }
           if (!restaurant) {
             Pop.toast('BRG Comp failed to get restaurant:', 'error')
           }

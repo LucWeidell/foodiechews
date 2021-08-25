@@ -5,9 +5,29 @@
 </template>
 
 <script>
+import { reactive } from '@vue/reactivity'
+import { AppState } from '../AppState'
+import { computed, onMounted } from '@vue/runtime-core'
+import { accountService } from '../services/AccountService'
+import Pop from '../utils/Notifier'
+
 export default {
   name: 'MyRestaurants',
   setup() {
+    onMounted(async() => {
+      try {
+        if (Object.keys(AppState.account.activeLocation).length === 0) {
+          await accountService.addCity(AppState.activeLocation)
+          Pop.toast('You added you first city!', 'success')
+        }
+      } catch (error) {
+        Pop.toast('Profile failed to push active city: ' + error, 'error')
+      }
+    })
+    const state = reactive({
+      account: computed(() => AppState.account)
+    })
+    return { state }
   }
 }
 </script>

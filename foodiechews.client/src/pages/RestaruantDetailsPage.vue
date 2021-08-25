@@ -27,13 +27,12 @@ export default {
     onMounted(() => { AppState.loading = true })
     watchEffect(async() => {
       if (AppState.account.id) {
-        // NOTE this watcher trigger even one more iteration when leavng the page.
-        // The solution below only solves when going to our account pages: feed, setting ext.
-        if (route.params.yelpId) {
-          await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
-        }
+        await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
+      } else {
+        await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
       }
-    })
+    }
+    )
     // REVIEW TODO: Use watchEffect instead of onMounted
     return {
       restaurant: computed(() => AppState.activeRestaurant),
