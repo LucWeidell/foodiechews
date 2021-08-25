@@ -1,6 +1,14 @@
 <template>
+  <VisitModal />
   <div class="col-12 d-flex justify-content-center mt-3">
-    <button type="button" class="btn-sm btn-secondary" :class="{disabled: matchedRestaurant}" @click="addToMyRestaurants" :disabled="matchedRestaurant">
+    <button type="button"
+            class="btn-sm btn-secondary"
+            :class="{disabled: matchedRestaurant}"
+            @click="addToMyRestaurants"
+            :disabled="matchedRestaurant"
+            data-toggle="modal"
+            data-target="#staticBackdrop"
+    >
       <h5 class="pt-1">
         I've Been 👍
       </h5>
@@ -61,7 +69,6 @@ export default {
       async addToMyRestaurants() {
         try {
           await myRestaurantsService.addNew(AppState.activeRestaurant)
-          this.getRandom()
         } catch (error) {
           Pop.toast(error, 'I dunno what happened.')
         }
