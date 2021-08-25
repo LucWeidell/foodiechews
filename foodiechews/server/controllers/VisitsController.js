@@ -23,7 +23,7 @@ export class VisitsController extends BaseController {
 
   async create(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id
+      req.body.accountId = req.userInfo.id
       // NOTE: MyRestaurant id needs to be passed via client(?)
       const visit = await visitsService.create(req.body)
       res.send(visit)

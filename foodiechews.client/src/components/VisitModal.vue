@@ -87,8 +87,12 @@ export default {
             tags.push('favorite')
           }
           console.log(tags)
-          await myRestaurantsService.addNew(AppState.activeRestaurant, tags)
-          await visitsService.addNew('tests')
+          const myRestId = await myRestaurantsService.addNew(AppState.activeRestaurant, tags)
+          const rawVisit = {
+            myRestaurantId: myRestId,
+            review: state.newVisit.review
+          }
+          await visitsService.addNew(rawVisit)
           console.log('modal logs', state.newVisit)
           // eslint-disable-next-line no-undef
           $('#staticBackdrop').modal('hide')

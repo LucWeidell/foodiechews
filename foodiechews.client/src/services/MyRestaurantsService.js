@@ -14,6 +14,7 @@ class MyRestaurantsService {
       const res = await api.post('api/myRestaurants', myRestaurant)
       AppState.myRestaurants.push(res.data)
       console.log('test success', res.data)
+      return res.data.id
     } catch (error) {
       Pop.toast(error, 'error')
     }
