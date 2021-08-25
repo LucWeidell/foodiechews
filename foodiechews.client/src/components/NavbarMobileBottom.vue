@@ -10,12 +10,13 @@
       </router-link>
     </div>
     <div class="col-4 py-1 border-right border-left border-dark">
-      <img src="../assets/img/random.png"
-           class="p-0 action"
-           alt="Random Button"
-           width="50"
-           @click="random"
-      >
+      <router-link :to="{name: 'RestaurantsDetails', params: {id: state.account.id, yelpId: 'random'}}">
+        <img src="../assets/img/random.png"
+             class="p-0 action"
+             alt="Random Button"
+             width="50"
+        >
+      </router-link>
     </div>
     <div class="col-4 py-1">
       <router-link :to="{name: 'FeedPage', params: {id: state.account.id}}">
@@ -31,21 +32,15 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { useRoute, useRouter } from 'vue-router'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 export default {
   setup() {
-    const route = useRoute()
-    const router = useRouter()
     const state = reactive({
       account: computed(() => AppState.account)
     })
     return {
-      state,
-      random() {
-        router.push({ name: 'RestaurantsDetails', params: { id: route.params.id, yelpId: 'random' } })
-      }
+      state
     }
   }
 }
