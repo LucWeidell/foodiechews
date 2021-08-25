@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
     <div class="text-center col-2">
-      🔵
+      <img src="../assets/img/foodieLogo.png" alt="foodie-logo">
     </div>
     <div class="text-center col-8">
       City

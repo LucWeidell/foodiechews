@@ -25,23 +25,23 @@ export class AccountController extends BaseController {
   async edit(req, res, next) {
     try {
       req.body.id = req.params.id
-      const profile = await accountService.edit(req.userInfo, req.body)
-      res.send(profile)
+      const account = await accountService.edit(req.userInfo, req.body)
+      res.send(account)
     } catch (error) {
       next(error)
     }
   }
 
   /**
-   * Sends all profile with Id to a client by request
+   * Sends all account with Id to a client by request
    * @param {import('express').Request} req
    * @param {import('express').Response} res
        * @param {import('express').NextFunction} next
    */
   async getById(req, res, next) {
     try {
-      const profile = await accountService.getById(req.params.id)
-      res.send(profile)
+      const account = await accountService.getById(req.params.id)
+      res.send(account)
     } catch (error) {
       next(error)
     }
@@ -55,8 +55,8 @@ export class AccountController extends BaseController {
   //      */
   // async create(req, res, next) {
   //   try {
-  //     const profile = await accountsDbService.create(req.body)
-  //     res.send(profile)
+  //     const account = await accountsDbService.create(req.body)
+  //     res.send(account)
   //   } catch (error) {
   //     next(error)
   //   }
@@ -66,23 +66,23 @@ export class AccountController extends BaseController {
   //   try {
   //     req.body.authorizeId = req.userInfo.id
   //     req.body.id = req.params.id
-  //     const profile = await accountsDbService.edit(req.body)
-  //     res.send(profile)
+  //     const account = await accountsDbService.edit(req.body)
+  //     res.send(account)
   //   } catch (error) {
   //     next(error)
   //   }
   // }
 
   // /**
-  //  * Sends all profile with Id to a client by request
+  //  * Sends all account with Id to a client by request
   //  * @param {import('express').Request} req
   //  * @param {import('express').Response} res
   //      * @param {import('express').NextFunction} next
   //  */
   // async getById(req, res, next) {
   //   try {
-  //     const profile = await accountsDbService.getById(req.params.id)
-  //     res.send(profile)
+  //     const account = await accountsDbService.getById(req.params.id)
+  //     res.send(account)
   //   } catch (error) {
   //     next(error)
   //   }
