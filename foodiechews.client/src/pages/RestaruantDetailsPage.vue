@@ -5,7 +5,7 @@
         <div class="lds-ring">
           <div></div><div></div><div></div><div></div>
         </div>
-        <h2>Loading fast food...</h2>
+        <h2>Loading new food...</h2>
       </div>
     </div>
   </div>
