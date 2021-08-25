@@ -15,7 +15,6 @@ export class YelpRestaurantsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/search', this.getSearch)
       .get('/:id', this.getById)
-      .delete('/:id', this.remove)
   }
 
   /**
@@ -103,33 +102,4 @@ export class YelpRestaurantsController extends BaseController {
   //     next(error)
   //   }
   // }
-
-  /**
-       * Removes data by id from a client by request
-       * @param {import('express').Request} req
-       * @param {import('express').Response} res
-       * @param {import('express').NextFunction} next
-       */
-  async remove(req, res, next) {
-    try {
-      await yelpRestaurantsService.remove(req.params.id)
-      res.send({ message: 'Successfully Deleted yelpRestaurant' })
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async forceDelete(req, res, next) {
-    try {
-      const deleteSequence = setInterval(async() => {
-        const compareDate = new Date()
-        if (compareDate.getHours() === 2) {
-          await yelpRestaurantsService.removeAll()
-        }
-        // deleteSequence() TODO : need to figure out how to trigger the interval
-      }, 3600000)
-    } catch (error) {
-      next(error)
-    }
-  }
 }

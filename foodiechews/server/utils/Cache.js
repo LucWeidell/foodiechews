@@ -16,7 +16,7 @@ export async function searchCache(strQuery) {
   if (Object.keys(cache[strQuery]).length > 0) {
     const foundSearch = cache[strQuery]
     if (foundSearch.ttl - now.getTime() > 0) {
-      randNum = randoNumSelect(foundSearch.total)
+      randNum = randomNumSelect(foundSearch.total)
     }
   } else {
     const res = await this.getFromYelpApi(strQuery)
@@ -25,7 +25,7 @@ export async function searchCache(strQuery) {
       ttl: (now.getTime() + 86400000),
       totalRes: res.total
     }
-    randNum = randoNumSelect(res.total)
+    randNum = randomNumSelect(res.total)
   }
   strQuery += ('&offset=' + randNum)
   const resWithOffset = await this.getFromYelpApi(strQuery)
@@ -54,7 +54,7 @@ export async function IdCheckCache(strQuery) {
  * @param {Number} outOf - The total the rand is looking between
  * @returns The random number made
  */
-function randoNumSelect(outOf) {
+function randomNumSelect(outOf) {
   const result = Math.floor(Math.random() * outOf)
   // This conditional cover IndexOutOfRange edge case
   if (result === outOf) {

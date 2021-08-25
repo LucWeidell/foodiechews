@@ -35,10 +35,10 @@
           </div>
           <div v-if="restaurant.url" class="row py-1">
             <div class="col-auto">
-              <h5>More Info: </h5>
+              <h5>Website: </h5>
             </div>
             <div class="col-auto">
-              <a class="text-blue" :href="restaurant.url">{{ restaurant.name }}</a>
+              <a class="text-blue" :href="restaurant.url">{{ restaurant.name }} Site</a>
             </div>
           </div>
         </div>
@@ -63,8 +63,6 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
-import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
-import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 
 export default {

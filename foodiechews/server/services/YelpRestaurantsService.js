@@ -49,21 +49,6 @@ class YelpRestaurantsService {
     const yelpRestaurants = await dbContext.YelpRestaurants.create(body)
     return yelpRestaurants
   }
-
-  async removeAll() {
-    const rests = await this.getAll()
-    for (let i = 0; i < rests.length; i++) {
-      await this.remove(rests[i].id)
-    }
-  }
-
-  async remove(idYelp) {
-    const yelpRestaurants = await dbContext.YelpRestaurants.findOneAndDelete({ id: idYelp })
-    if (!yelpRestaurants) {
-      throw new BadRequest('Invalid Yelp ID To Remove')
-    }
-    return yelpRestaurants
-  }
 }
 
 export const yelpRestaurantsService = new YelpRestaurantsService()
