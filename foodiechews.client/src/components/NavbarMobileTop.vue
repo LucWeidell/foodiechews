@@ -8,7 +8,12 @@
     <div class="text-center col-8 hoverable">
       <div v-if="state.account.activeLocation">
         <div class="btn-group">
-          <button type="button" class="btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button type="button"
+                  class="btn-secondary dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+          >
             {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
           </button>
           <div class="dropdown-menu">
