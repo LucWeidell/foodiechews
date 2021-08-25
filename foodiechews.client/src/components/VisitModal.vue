@@ -53,6 +53,7 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
+import $ from 'jquery'
 export default {
   setup() {
     const state = reactive({
@@ -66,6 +67,12 @@ export default {
       state,
       submitVisit() {
         console.log('modal logs', state.newVisit)
+        // eslint-disable-next-line no-undef
+        $('#staticBackdrop').modal('hide')
+        // eslint-disable-next-line no-undef
+        $('body').removeClass('modal-open')
+        // eslint-disable-next-line no-undef
+        $('.modal-backdrop').remove()
       }
     }
   }
