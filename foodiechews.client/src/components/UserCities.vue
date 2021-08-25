@@ -26,21 +26,21 @@ export default {
         try {
           location.city = props.loc.city
           location.state = props.loc.state
-          let responce = true
+          let response = true
           if (state.account.location.length === 1 && action === 'remove') {
             Pop.toast('Cannot remove only city on record', 'error')
           } else {
             switch (action) {
               case 'add':
                 logger.log('You are adding A Location')
-                responce = await accountService.addCity(location)
+                response = await accountService.addCity(location)
                 break
               default:
                 Pop.toast('Edit city recieved bad action', 'error')
                 return ''
             }
-            logger.log('responce value:', responce)
-            if (responce) {
+            logger.log('response value:', response)
+            if (response) {
               Pop.toast('Updated City', 'success')
             } else { Pop.toast('Not a valid city', 'error') }
           }
