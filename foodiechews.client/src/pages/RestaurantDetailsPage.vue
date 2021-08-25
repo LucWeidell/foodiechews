@@ -27,9 +27,13 @@ export default {
     onMounted(() => { AppState.loading = true })
     watchEffect(async() => {
       if (AppState.account.id) {
-        await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
+        if (route.params.yelpId) {
+          await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
+        }
       } else {
-        await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
+        if (route.params.yelpId) {
+          await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
+        }
       }
     }
     )
