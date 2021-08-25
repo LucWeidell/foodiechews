@@ -3,7 +3,10 @@
     <div class="text-center col-2">
       <img src="../assets/img/foodieLogo.png" alt="foodie-logo">
     </div>
-    <div class="text-center col-8">
+    <div v-if="Object.keys(state.account).length!=0" class="text-center col-8">
+      {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
+    </div>
+    <div v-else class="text-center col-8">
       City
     </div>
     <button
