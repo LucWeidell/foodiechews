@@ -7,16 +7,79 @@
       <div class="card col-12 shadow">
         <div class="card-body">
           <h5 class="card-title">
-            Card title
+            {{ state.account.name }}
           </h5>
           <h6 class="card-subtitle mb-2 text-muted">
             Card subtitle
           </h6>
           <p class="card-text">
-            Some quick example text to build on the card title and make up the bulk of the card's content.
+            This is your about me
           </p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <a class="card-link">Card link</a>
+          <a class="card-link">Another link</a>
+        </div>
+        <div class="pb-2">
+          <button type="button" class="btn-sm btn-secondary" data-toggle="modal" data-target="#exampleModal">
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade"
+       id="exampleModal"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="exampleModalLabel"
+       aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Your New Account Info
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="post-form from-row">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="name">Username</label>
+                  <input type="text" v-model="state.account.name" class="form-control" id="name" placeholder="Username...">
+                </div>
+                <div class="form-group col-md-5">
+                  <label for="email">Email</label>
+                  <input type="email" v-model="state.account.email" class="form-control" id="email" placeholder="Your Email...">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="bio">Bio</label>
+                <input type="text" v-model="state.account.bio" class="form-control" id="bio" placeholder="Tell us About you...">
+              </div>
+              <div class="form-group">
+                <label for="profileImg">Profile Picture</label>
+                <input type="text" v-model="state.account.picture" class="form-control" id="profileImg" placeholder="Your new look...">
+              </div>
+              <div class="form-group">
+                <label for="coverImg">Cover Picture</label>
+                <input type="text" v-model="state.account.coverImg" class="form-control" id="coverImg" placeholder="Your new background image...">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" @click="editAccount()">
+            Save changes
+          </button>
         </div>
       </div>
     </div>
@@ -34,7 +97,9 @@ export default {
       account: computed(() => AppState.account)
     })
     return {
-      state
+      state,
+      editAccount() {
+      }
     }
   }
 }

@@ -44,7 +44,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'Profile', params: {id: user.id} }" class="nav-link">
+          <router-link :to="{ name: 'Profile', params: {id: accounts.id} }" class="nav-link">
             My Profile
           </router-link>
         </li>
@@ -111,6 +111,7 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
+      accounts: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },
