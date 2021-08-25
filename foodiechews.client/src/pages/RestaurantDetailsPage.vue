@@ -36,7 +36,6 @@ export default {
       }
     }
     )
-    // REVIEW TODO: Use watchEffect instead of onMounted
     return {
       restaurant: computed(() => AppState.activeRestaurant),
       account: computed(() => AppState.account),
