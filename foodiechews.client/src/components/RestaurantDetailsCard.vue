@@ -22,7 +22,8 @@
           </div>
           <h5>Address: {{ address }}</h5>
           <h5>Price: {{ restaurant.price }}</h5>
-          <h5>Rating: {{ restaurant.rating }}</h5>
+          <h5>Rating: <span><img :src="rating" alt="Unable to retrieve rating." :title="restaurant.rating + ' Stars'"></span></h5>
+          <!-- <h5>Rating: {{ restaurant.rating }}</h5> -->
           <div v-if="delivery.length > 0" class="row py-1">
             <div class="col-auto">
               <h5>Delivery Choice: </h5>
@@ -38,7 +39,7 @@
               <h5> 🌐Website: </h5>
             </div>
             <div class="col-auto">
-              <a class="text-blue" :href="restaurant.url"><b><i>{{ restaurant.name }} Site</i></b></a>
+              <a class="text-blue" :href="restaurant.url" target="_blank"><b><i>{{ restaurant.name }} Site</i></b></a>
             </div>
           </div>
         </div>
@@ -66,6 +67,7 @@
 import { computed } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { logger } from '../utils/Logger'
+import { ratingsUtil } from '../utils/RatingsUtil'
 
 export default {
   name: 'RestaurantDetailsCard',
@@ -87,6 +89,9 @@ export default {
         logger.log('I got to TRANS this:', props.restaurant.transactions)
 
         return props.restaurant.transactions
+      }),
+      rating: computed(() => {
+        return ratingsUtil.getStars(props.restaurant.rating)
       }),
       fixUnderscores(strToFix) {
         const result = strToFix.replace('_', ' ')
