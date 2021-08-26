@@ -15,7 +15,7 @@ class YelpRestaurantsService {
       const locState = query.state.replace(' ', '')
       switch (action) {
         case 'random':
-        // console.log(id, query)
+          // console.log(locCity + locState)
           if (!AppState.account.id) {
             res = await api.get(`/api/yelpRestaurants/random?location=${locCity + locState}&open_now=true`)
           } else {
