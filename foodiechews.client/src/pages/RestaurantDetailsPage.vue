@@ -9,7 +9,7 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid" id="bg-img" v-else>
+  <div class="container-fluid mt-3" id="bg-img" v-else>
     <RestaurantDetailsCard :restaurant="restaurant" />
   </div>
 </template>
