@@ -9,14 +9,9 @@
           <h5 class="card-title">
             {{ state.account.name }}
           </h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            Card subtitle
-          </h6>
           <p class="card-text">
-            This is your about me
+            {{ state.account.bio }}
           </p>
-          <a class="card-link">Card link</a>
-          <a class="card-link">Another link</a>
         </div>
         <div class="pb-2">
           <button type="button" class="btn-sm btn-secondary" data-toggle="modal" data-target="#exampleModal">
@@ -49,11 +44,11 @@
           <div class="post-form from-row">
             <form>
               <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="name">Username</label>
                   <input type="text" v-model="state.account.name" class="form-control" id="name" placeholder="Username...">
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-6">
                   <label for="email">Email</label>
                   <input type="email" v-model="state.account.email" class="form-control" id="email" placeholder="Your Email...">
                 </div>
@@ -66,10 +61,10 @@
                 <label for="profileImg">Profile Picture</label>
                 <input type="text" v-model="state.account.picture" class="form-control" id="profileImg" placeholder="Your new look...">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="coverImg">Cover Picture</label>
                 <input type="text" v-model="state.account.coverImg" class="form-control" id="coverImg" placeholder="Your new background image...">
-              </div>
+              </div> -->
             </form>
           </div>
         </div>
@@ -77,7 +72,7 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Close
           </button>
-          <button type="button" class="btn btn-primary" @click="editAccount()">
+          <button type="button" class="btn btn-primary" @click="editAccount(state.account)">
             Save changes
           </button>
         </div>
@@ -89,6 +84,7 @@
 <script>
 import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { accountService } from '../services/AccountService'
 
 export default {
   name: 'Profile',
@@ -98,7 +94,8 @@ export default {
     })
     return {
       state,
-      editAccount() {
+      async editAccount(rawAccount) {
+        await accountService.editAccount(rawAccount)
       }
     }
   }
