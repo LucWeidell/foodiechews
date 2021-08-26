@@ -2,12 +2,9 @@
   <div class="row justify-content-center my-3">
     <div class="card bg-secondary col-md-6 col-10">
       <div class="card-header">
-        <div class="row justify-content-between">
-          <div class="col-md-6 col-6">
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-6 text-center">
             <h5>{{ location.city }}</h5>
-          </div>
-          <div class="col-md-5 col-5 text-right">
-            <h5>Total</h5>
           </div>
         </div>
       </div>
