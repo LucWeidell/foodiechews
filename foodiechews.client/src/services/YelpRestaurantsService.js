@@ -41,7 +41,7 @@ class YelpRestaurantsService {
         // NOTE had default as false before but we can identify /:id as an id for a string compare
         // REVIEW could check the length of the string: but switches may not support
         default:
-          res = await api.get(`/api/yelpRestaurants/${query.id}`)
+          res = await api.get(`/api/yelpRestaurants/${action}`)
           break
       }
       AppState.activeRestaurant = res.data

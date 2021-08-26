@@ -6,6 +6,7 @@ export const AppState = reactive({
   account: {},
   activeRestaurant: {},
   myRestaurants: [],
+  visits: [],
 
   // NOTE This activeLocation is for non-logged in users:
   // For logged in: refer to the activeLocation on the account

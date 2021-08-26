@@ -79,12 +79,6 @@ export default {
     const route = useRoute()
     return {
       yelpId: computed(() => route.params.yelpId),
-      hours: computed(() => {
-        // TODO
-        // Get today's day of the week as a num
-        // Get info from Yelp's array
-        // return an object w/ an "open" and "close" property
-      }),
       address: computed(() => props.restaurant.location.display_address[0] + ' ' + props.restaurant.location.display_address[1]),
       categories: computed(() => props.restaurant.categories),
       delivery: computed(() => {
