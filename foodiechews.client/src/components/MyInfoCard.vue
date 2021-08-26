@@ -1,7 +1,8 @@
 <template>
   <div class="card">
     <h1>
-      <span :class="state.myRestaurant.tag === 'none' ? '' : 'mdi mdi-star' "></span>
+      <!-- TODO: onclick to mark restaurant as favorite -->
+      <span class="action" :class="state.myRestaurant.tag === 'none' ? 'mdi mdi-star-outline' : 'mdi mdi-star' " title="Favorite"></span>
       <div class="div" v-if="visits.length === 0">
         <em>No Review Yet</em>
       </div>
