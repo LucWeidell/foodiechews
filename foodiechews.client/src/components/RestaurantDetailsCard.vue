@@ -36,10 +36,9 @@
           </div>
           <div v-if="restaurant.url" class="row py-1">
             <div class="col-auto">
-              <h5> 🌐Website: </h5>
-            </div>
-            <div class="col-auto">
-              <a class="text-blue" :href="restaurant.url" target="_blank"><b><i>{{ restaurant.name }} Site</i></b></a>
+              <h5>
+                <a class=" text-blue" :href="restaurant.url" target="_blank" :title="restaurant.name + ' Yelp Page'"><span class="d-flex align-items-end"><b><i>{{ '  ' + restaurant.name }}</i></b><img src="src/assets/yelp/yelp_logos/Logo/Light bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"></span></a>
+              </h5>
             </div>
           </div>
         </div>
@@ -137,5 +136,9 @@ export default {
     max-width: 50vh;
     max-height: 50vh;
     border: 5px white solid;
+  }
+  .yelp{
+    max-height: 5vh;
+    max-width: 5vh;
   }
 </style>
