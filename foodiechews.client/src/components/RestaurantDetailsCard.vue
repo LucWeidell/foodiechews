@@ -52,7 +52,7 @@
     <div class="col-md-10 col-9 mt-3 d-flex justify-content-center">
       <p>{{ fixLayout(restaurant).open }} - {{ fixLayout(restaurant).close }}</p>
     </div>
-    <div class="col-md-12 py-2">
+    <div class="col-md-6 py-2">
       <div v-if="yelpId === 'random' " class="row">
         <BRGbuttons />
       </div>
@@ -105,20 +105,21 @@ export default {
       fixLayout(restaurant) {
         let open = restaurant.hours[0].open[this.getToday()].start
         if (open < 1200) {
-          open = open + 'AM'
+          open = open + ' AM'
         } else {
-          open = open + 'PM'
+          open = open - 1200 + ' PM'
+          // TODO: Fix time formatting
         }
         let close = restaurant.hours[0].open[this.getToday()].end
         if (close > 1200) {
-          close = close + 'PM'
+          close = close - 1200 + ' PM'
         } else {
           let stringDate = close + ''
           if (stringDate === '0000') {
             stringDate = 'Midnight'
             close = stringDate
           } else {
-            close = close + 'AM'
+            close = close + ' AM'
           }
         }
         return { open, close }
