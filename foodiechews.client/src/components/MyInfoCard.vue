@@ -2,13 +2,13 @@
   <div class="card">
     <h1>
       <!-- TODO: onclick to mark restaurant as favorite -->
-      <span class="action" :class="state.myRestaurant.tag === 'none' ? 'mdi mdi-star-outline' : 'mdi mdi-star' " title="Favorite"></span>
+      <span class="action" :class="state.myRestaurant.tag === 'none' ? 'mdi mdi-star-outline' : 'mdi mdi-star' " title="Favorited"></span>
       <div class="div" v-if="visits.length === 0">
         <em>No Review Yet</em>
       </div>
       <div v-else>
         <p v-for="v in visits" :key="v.id">
-          {{ v.review }}
+          {{ v.review.length === 0 ? 'Leave a review' : v.review }}
         </p>
       </div>
     </h1>

@@ -4,7 +4,7 @@
       <h4>{{ restaurant.name }}</h4>
     </div>
     <div class="col-10 d-flex justify-content-center">
-      <img :src="restaurant.image_url" alt="restaurant-image" width="250" class="shadow">
+      <img :src="restaurant.image_url || 'src/assets/img/empty-plate.jpg' " alt="restaurant-image" class="shadow img-main rounded">
     </div>
     <div class="col-md-11 col-11 mt-3">
       <h5>Details:</h5>
@@ -127,5 +127,9 @@ export default {
   .bg-bootSec {
     background-color: rgb(146, 145, 143)
   }
-
+  .img-main{
+    max-width: 50vh;
+    max-height: 50vh;
+    border: 5px white solid;
+  }
 </style>
