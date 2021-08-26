@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-center my-3">
-    <div class="card bg-secondary col-md-8 col-10">
+    <div class="card bg-secondary col-md-6 col-10">
       <div class="card-header">
         <div class="row justify-content-between">
           <div class="col-md-6 col-6">
@@ -36,12 +36,12 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const state = reactive({
     })
     return {
       state,
-      restaurants: computed(() => AppState.myRestaurants)
+      restaurants: computed(() => AppState.myRestaurants.filter(r => r.location.city === props.location.city && r.location.state === props.location.state))
     }
   }
 }
