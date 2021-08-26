@@ -5,8 +5,8 @@
     </div>
     <div class="row mt-5">
       <div class="card col-12 shadow">
-        <div class="card-body">
-          <h5 class="card-title">
+        <div class="card-body py-2 px-1">
+          <h5 class="card-title my-2">
             {{ state.account.name }}
           </h5>
           <p class="card-text">

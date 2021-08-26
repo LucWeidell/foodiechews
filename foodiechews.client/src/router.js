@@ -29,7 +29,7 @@ const routes = [
     path: '/profile/:id/search',
     name: 'SearchPage',
     component: loadPage('SearchPage'),
-    beforeEnter: authSettled
+    beforeEnter: authGuard
   },
   {
     path: '/about',
