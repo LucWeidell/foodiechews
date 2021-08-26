@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary justify-content-between">
     <div class="text-center col-2">
       <router-link :to="{ name: 'About' }" class="nav-link">
         <img src="../assets/img/foodieLogo.png" alt="foodie-logo">

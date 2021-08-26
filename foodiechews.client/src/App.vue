@@ -2,7 +2,7 @@
   <header>
     <NavbarMobileTop />
   </header>
-  <main>
+  <main class="my-5 py-2">
     <router-view />
   </main>
   <footer>

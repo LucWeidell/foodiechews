@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-row bg-primary text-light text-center align-items-center m-0">
+  <div class="d-flex flex-row bg-primary fixed-bottom text-light text-center align-items-center m-0">
     <div class="col-4 py-1">
       <router-link :to="{name: 'SearchPage', params: {id: state.account.id}}">
         <img src="../assets/img/search.png"
