@@ -11,11 +11,11 @@
       <div class="row pl-3">
         <div class="col-md-12 col-12 mt-3">
           <div class="row py-1">
-            <div class="col-auto">
+            <div class="col-auto m-1 pt-1">
               <h5>Categories: </h5>
             </div>
-            <div class="col-auto card bg-bootSec mx-1 mb-1" v-for="c in categories" :key="c.title">
-              <h6 class="text-light">
+            <div class="col-auto card bg-bootSec mx-1 mb-1 pt-1" v-for="c in categories" :key="c.title">
+              <h6 class="text-light pt-1">
                 {{ c.title }}
               </h6>
             </div>
@@ -27,8 +27,8 @@
             <div class="col-auto">
               <h5>Delivery Choice: </h5>
             </div>
-            <div class="col-auto card bg-bootSec" v-for="d in delivery" :key="d">
-              <h6 class="text-light">
+            <div class="col-auto card bg-bootSec m-1" v-for="d in delivery" :key="d">
+              <h6 class="text-light m-1">
                 {{ fixUnderscores(d) }}
               </h6>
             </div>
