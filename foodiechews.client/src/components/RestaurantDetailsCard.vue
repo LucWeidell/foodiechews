@@ -11,11 +11,11 @@
       <div class="row pl-3">
         <div class="col-md-12 col-12 mt-3">
           <div class="row py-1">
-            <div class="col-auto">
+            <div class="col-auto m-1 pt-1">
               <h5>Categories: </h5>
             </div>
-            <div class="col-auto card bg-bootSec mx-1 mb-1" v-for="c in categories" :key="c.title">
-              <h6 class="text-light">
+            <div class="col-auto card bg-bootSec mx-1 mb-1 pt-1" v-for="c in categories" :key="c.title">
+              <h6 class="text-light pt-1">
                 {{ c.title }}
               </h6>
             </div>
@@ -27,8 +27,8 @@
             <div class="col-auto">
               <h5>Delivery Choice: </h5>
             </div>
-            <div class="col-auto card bg-bootSec" v-for="d in delivery" :key="d">
-              <h6 class="text-light">
+            <div class="col-auto card bg-bootSec m-1" v-for="d in delivery" :key="d">
+              <h6 class="text-light m-1">
                 {{ fixUnderscores(d) }}
               </h6>
             </div>
@@ -38,7 +38,7 @@
               <h5>Website: </h5>
             </div>
             <div class="col-auto">
-              <a class="text-blue" :href="restaurant.url">{{ restaurant.name }} Site</a>
+              <a class="text-blue" :href="restaurant.url"><b><i>{{ restaurant.name }} Site</i></b></a>
             </div>
           </div>
         </div>
@@ -51,12 +51,14 @@
     <div class="col-md-10 col-9 mt-3 d-flex justify-content-center">
       <p>{{ fixLayout(restaurant).open }} - {{ fixLayout(restaurant).close }}</p>
     </div>
-    <span v-if="yelpId === 'random' ">
-      <BRGbuttons />
-    </span>
-    <span v-else>
-      <MyInfoCard />
-    </span>
+    <div class="col-md-12 py-2">
+      <div v-if="yelpId === 'random' " class="row">
+        <BRGbuttons />
+      </div>
+      <span v-else>
+        <MyInfoCard />
+      </span>
+    </div>
   </div>
 </template>
 
