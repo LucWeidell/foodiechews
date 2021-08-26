@@ -1,6 +1,7 @@
 import { AppState } from '../AppState'
 import { api } from './AxiosService'
 import Pop from '../utils/Notifier'
+import { logger } from '../utils/Logger'
 
 class YelpRestaurantsService {
   /**
@@ -11,8 +12,12 @@ class YelpRestaurantsService {
     AppState.loading = true
     let res = {}
     try {
-      const locCity = query.city.replace(' ', '')
-      const locState = query.state.replace(' ', '')
+      let locCity = ''
+      let locState = ''
+      if (query.city && query.state) {
+        locCity = query.city.replace(' ', '')
+        locState = query.state.replace(' ', '')
+      }
       switch (action) {
         case 'random':
         // console.log(id, query)
@@ -62,6 +67,16 @@ class YelpRestaurantsService {
       AppState.activeLocation = { city: cityDev, state: stateDev }
     } catch (error) {
       Pop.toast(error, 'error')
+    }
+  }
+
+  async setMyCache() {
+    try {
+      logger.log('im attemplting this')
+      const res = await api.delete('/api/yelpRestaurants')
+      logger.log(res)
+    } catch (error) {
+      Pop.toast('Failed to set the cache:' + error, 'error')
     }
   }
 }
