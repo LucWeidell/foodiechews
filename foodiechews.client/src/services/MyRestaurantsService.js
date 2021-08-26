@@ -7,7 +7,10 @@ class MyRestaurantsService {
       const myRestaurant = {
         yelpId: rawRestaurant.id,
         name: rawRestaurant.name,
-        restCity: rawRestaurant.location.city,
+        location: {
+          city: rawRestaurant.location.city,
+          state: rawRestaurant.location.state
+        },
         tag: tags[0]
       }
       console.log('my rest:', myRestaurant)
