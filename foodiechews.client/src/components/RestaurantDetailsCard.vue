@@ -38,7 +38,7 @@
               <h5> 🌐Website: </h5>
             </div>
             <div class="col-auto">
-              <a class="text-blue" :href="restaurant.url"><b><i>{{ restaurant.name }} Site</i></b></a>
+              <a class="text-blue" :href="restaurant.url" target="_blank"><b><i>{{ restaurant.name }} Site</i></b></a>
             </div>
           </div>
         </div>
