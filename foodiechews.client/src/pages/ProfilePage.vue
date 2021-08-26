@@ -20,6 +20,7 @@
         </div>
       </div>
     </div>
+    <LocationCard v-for="l in locations" :key="l._id" :location="l" />
   </div>
 
   <!-- Modal -->
@@ -94,6 +95,7 @@ export default {
     })
     return {
       state,
+      locations: computed(() => AppState.account.location),
       async editAccount(rawAccount) {
         await accountService.editAccount(rawAccount)
       }
