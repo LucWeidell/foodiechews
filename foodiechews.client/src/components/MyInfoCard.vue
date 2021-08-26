@@ -1,12 +1,16 @@
 <template>
-  <h1>{{ state.myRestaurant.tag === 'none' ? '' : '*' }}</h1>
-  <div class="div" v-if="visits.length === 0">
-    <em>No Review Yet</em>
-  </div>
-  <div v-else>
-    <p v-for="v in visits" :key="v.id">
-      {{ v.review }}
-    </p>
+  <div class="card">
+    <h1>
+      <span :class="state.myRestaurant.tag === 'none' ? '' : 'mdi mdi-star' "></span>
+      <div class="div" v-if="visits.length === 0">
+        <em>No Review Yet</em>
+      </div>
+      <div v-else>
+        <p v-for="v in visits" :key="v.id">
+          {{ v.review }}
+        </p>
+      </div>
+    </h1>
   </div>
 </template>
 

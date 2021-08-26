@@ -51,12 +51,14 @@
     <div class="col-md-10 col-9 mt-3 d-flex justify-content-center">
       <p>{{ fixLayout(restaurant).open }} - {{ fixLayout(restaurant).close }}</p>
     </div>
-    <span v-if="yelpId === 'random' ">
-      <BRGbuttons />
-    </span>
-    <span v-else>
-      <MyInfoCard />
-    </span>
+    <div class="col-md-12 py-2">
+      <div v-if="yelpId === 'random' " class="row">
+        <BRGbuttons />
+      </div>
+      <span v-else>
+        <MyInfoCard />
+      </span>
+    </div>
   </div>
 </template>
 
