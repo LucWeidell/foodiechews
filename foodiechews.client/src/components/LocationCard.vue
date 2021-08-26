@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-center my-3">
-    <div class="card bg-secondary col-md-8 col-10">
+    <div class="card bg-secondary col-md-6 col-10">
       <div class="card-header">
         <div class="row justify-content-between">
           <div class="col-md-6 col-6">
@@ -16,8 +16,10 @@
           <RestaurantShortCard v-for="r in restaurants" :key="r.id" :restaurant="r" />
         </div>
       </div>
-      <div class="class-footer bg-secondary border-primary text-secondary text-center">
-        <br>
+      <div class="class-footer bg-secondary border-primary text-dark text-center">
+        <p class="pb-3 hoverable">
+          See More...
+        </p>
       </div>
     </div>
   </div>
@@ -34,13 +36,19 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const state = reactive({
     })
     return {
       state,
-      restaurants: computed(() => AppState.myRestaurants)
+      restaurants: computed(() => AppState.myRestaurants.filter(r => r.location.city === props.location.city && r.location.state === props.location.state))
     }
   }
 }
 </script>
+
+<style>
+.hoverable {
+  cursor: pointer;
+}
+</style>
