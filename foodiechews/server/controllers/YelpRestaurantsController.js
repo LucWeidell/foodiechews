@@ -76,9 +76,9 @@ export class YelpRestaurantsController extends BaseController {
       if (req.query.categories) {
         searchTerms.categories = req.query.categories
       }
-      if (req.query.price) {
-        searchTerms.price = req.query.price
-      }
+      // if (req.query.price) {
+      //   searchTerms.price = req.query.price
+      // }
       const restaurant = await searchCache('search' + (convertToQuery(searchTerms)))
       res.send(restaurant)
     } catch (error) {
