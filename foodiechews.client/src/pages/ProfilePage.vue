@@ -14,7 +14,7 @@
           </p>
         </div>
         <div class="pb-2">
-          <button type="button" class="btn-sm btn-secondary" data-toggle="modal" data-target="#exampleModal">
+          <button type="button" class="btn-sm btn-secondary" data-toggle="modal" data-target="#editModal">
             Edit
           </button>
         </div>
@@ -25,10 +25,10 @@
 
   <!-- Modal -->
   <div class="modal fade"
-       id="exampleModal"
+       id="editModal"
        tabindex="-1"
        role="dialog"
-       aria-labelledby="exampleModalLabel"
+       aria-labelledby="editModal"
        aria-hidden="true"
   >
     <div class="modal-dialog" role="document">
@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { accountService } from '../services/AccountService'
@@ -98,6 +99,7 @@ export default {
       locations: computed(() => AppState.account.location),
       async editAccount(rawAccount) {
         await accountService.editAccount(rawAccount)
+        $('#editModal').modal('hide')
       }
     }
   }
