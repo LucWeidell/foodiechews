@@ -35,7 +35,7 @@
           </div>
           <div v-if="restaurant.url" class="row py-1">
             <div class="col-auto">
-              <h5>Website: </h5>
+              <h5> 🌐Website: </h5>
             </div>
             <div class="col-auto">
               <a class="text-blue" :href="restaurant.url"><b><i>{{ restaurant.name }} Site</i></b></a>
@@ -125,7 +125,7 @@ export default {
 
 <style lang="scss" scoped>
   .bg-bootSec {
-    background-color: rgb(194, 117, 2)
+    background-color: rgb(146, 145, 143)
   }
 
 </style>
