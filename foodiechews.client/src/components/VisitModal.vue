@@ -73,11 +73,8 @@ export default {
       state,
       submitVisit() {
         console.log('modal logs', state.newVisit)
-        // eslint-disable-next-line no-undef
         $('#staticBackdrop').modal('hide')
-        // eslint-disable-next-line no-undef
         $('body').removeClass('modal-open')
-        // eslint-disable-next-line no-undef
         $('.modal-backdrop').remove()
       },
       async addToMyRestaurants() {
@@ -94,11 +91,8 @@ export default {
           }
           await visitsService.addNew(rawVisit)
           console.log('modal logs', state.newVisit)
-          // eslint-disable-next-line no-undef
           $('#staticBackdrop').modal('hide')
-          // eslint-disable-next-line no-undef
           $('body').removeClass('modal-open')
-          // eslint-disable-next-line no-undef
           $('.modal-backdrop').remove()
         } catch (error) {
           Pop.toast(error, 'I dunno what happened.')

@@ -1,4 +1,4 @@
-export const PriceList = ['$', '$$', '$$$', '$$$$', '$$$$$']
+export const PriceList = ['$', '$$', '$$$', '$$$$']
 
 export const CategoriesList = ['Food',
   'Afghan',
