@@ -22,6 +22,16 @@ class MyRestaurantsService {
       Pop.toast(error, 'error')
     }
   }
+
+  async changeFavorite(id, favorite) {
+    const tagStr = !favorite ? 'favorite' : 'none'
+    try {
+      const res = await api.put('api/myRestaurants/' + id, { tag: tagStr })
+      return res.data
+    } catch (error) {
+      Pop.toast(error, 'error')
+    }
+  }
 }
 
 export const myRestaurantsService = new MyRestaurantsService()
