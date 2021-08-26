@@ -16,8 +16,10 @@
           <RestaurantShortCard v-for="r in restaurants" :key="r.id" :restaurant="r" />
         </div>
       </div>
-      <div class="class-footer bg-secondary border-primary text-secondary text-center">
-        <br>
+      <div class="class-footer bg-secondary border-primary text-dark text-center">
+        <p class="pb-3 hoverable">
+          See More...
+        </p>
       </div>
     </div>
   </div>
@@ -44,3 +46,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.hoverable {
+  cursor: pointer;
+}
+</style>
