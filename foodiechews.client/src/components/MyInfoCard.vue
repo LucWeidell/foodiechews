@@ -41,6 +41,7 @@ export default {
     return {
       state,
       visits: computed(() => AppState.visits),
+      // NOTE: In the server model, MyRestaurants have a "tag" property with an Enum string as either "none" or "favorite." This function effectively translates this into a boolean for the sake of the current functionality, but is meant to "scale up" to allow more tags down the line.
       async changeFavorite() {
         const updatedRest = await myRestaurantsService.changeFavorite(route.params.yelpId, state.favorite)
         state.myRestaurant = updatedRest
