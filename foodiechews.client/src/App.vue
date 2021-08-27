@@ -1,12 +1,14 @@
 <template>
   <header>
-    <NavbarMobileTop />
+    <NavbarDesktopTop />
+    <!-- <NavbarMobileTop /> -->
   </header>
   <main class="my-5 py-2">
     <router-view />
   </main>
   <footer>
-    <NavbarMobileBottom />
+    <NavbarDesktopBottom />
+    <!-- <NavbarMobileBottom /> -->
   </footer>
 </template>
 
