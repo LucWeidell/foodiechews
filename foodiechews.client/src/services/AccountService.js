@@ -61,7 +61,7 @@ class AccountService {
     )
     if (loc.city === activeLoc.city && loc.state === activeLoc.state) {
       logger.log('In the if:', AppState.account.location)
-      // NOTE funny too learn this: had activeLoc get re-assigned but that didnt work
+      // NOTE funny too learn this: had activeLoc get re-assigned but that didn't work
       // Had to call AppState.account.activeLocation to make this work
       AppState.account.activeLocation = AppState.account.location[0]
       AppState.lastActive = AppState.account.activeLocation
@@ -79,7 +79,6 @@ class AccountService {
   async getAllMyRestaurants() {
     try {
       const res = await api.get('api/profiles/' + AppState.account.id + '/myRestaurants')
-      console.log(res.data)
       AppState.myRestaurants = res.data
     } catch (error) {
       logger.log(error)

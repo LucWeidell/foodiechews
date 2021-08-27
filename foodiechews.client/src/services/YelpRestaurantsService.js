@@ -78,7 +78,6 @@ class YelpRestaurantsService {
 
   async setMyCache() {
     try {
-      logger.log('im attemplting this')
       const res = await api.delete('/api/yelpRestaurants')
       logger.log(res)
     } catch (error) {
