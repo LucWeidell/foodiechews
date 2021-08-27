@@ -1,17 +1,17 @@
 <template>
   <div class="d-flex flex-row bg-primary fixed-bottom text-light text-center align-items-center m-0">
     <div class="text-center col-2">
-      <router-link :to="{ url: 'https://www.yelp.com/' }" class="nav-link text-light align-items-center">
+      <router-link :to="{ url: 'https://www.yelp.com/' }" class="nav-link text-light align-items-center" title="Yelp Website">
         Powered By:
         <img src="../assets/img/yelp-dark.png" class="mb-2" alt="yelp-logo">
       </router-link>
     </div>
-    <div class="nav-item">
-      <router-link :to="{ name: 'About' }" class="nav-link">
+    <div class="nav-item" title="About">
+      <router-link :to="{ name: 'About' }" class="nav-link  text-light">
         About
       </router-link>
     </div>
-    <div class="col-4 py-1">
+    <div class="col-4 py-1" title="Home">
       <router-link :to="{name: 'FeedPage', params: {id: state.account.id}}">
         <img src="../assets/img/Home.png"
              class="pb-1"
