@@ -1,5 +1,6 @@
 <template>
-  <div class="SearchPage container-fluid" id="bg-img">
+  <LoadingSpinner v-if="loading" />
+  <div class="SearchPage container-fluid" id="bg-img" v-else>
     <div v-if="!state.searchingStarted" class="row justify-content-around py-3">
       <div class="col-sm-12">
         <h5 class="m-3 text-center text-primary">
@@ -99,7 +100,9 @@ export default {
       prices: PriceList,
       healthies: HealthList,
       categories: CategoriesList,
+      loading: computed(() => AppState.loading),
       async filterSearch() {
+        AppState.loading = true
         try {
           let stringAllCat = ''
           let stringPrice = ''
@@ -127,6 +130,7 @@ export default {
         } catch (error) {
           Pop.toast('Please Retry there is no results for these filters', 'error')
         }
+        AppState.loading = false
       }
     }
   }

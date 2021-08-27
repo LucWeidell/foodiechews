@@ -1,6 +1,14 @@
 <template>
-  <div class="lds-ring">
-    <div></div><div></div><div></div><div></div>
+  <div class="container-fluid">
+    <div class="row justify-content-center align-items-center" style="min-height: 80vh">
+      <div class="col-6 text-center">
+        <div class="lds-ring">
+          <div></div><div></div><div></div><div></div>
+        </div>
+        <h2>Loading results...</h2>
+        <small>Powered By Yelp</small>
+      </div>
+    </div>
   </div>
 </template>
 
