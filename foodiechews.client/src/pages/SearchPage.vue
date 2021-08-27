@@ -3,7 +3,7 @@
   <div class="SearchPage container-fluid" id="bg-img" v-else>
     <div v-if="!state.searchingStarted" class="row justify-content-around py-3">
       <div class="col-sm-12">
-        <h5 class="m-3 text-center text-primary">
+        <h5 class="m-3 text-center text-light">
           Filter Your Search:
         </h5>
       </div>
@@ -142,7 +142,7 @@ export default {
     background-color: rgb(204, 204, 204)
   }
   #bg-img{
-  background-image: url('../assets/img/eatsSign.png');
+  background-image: url('../assets/img/diner2.jpeg');
   background-position: center;
   background-size: cover;
 }
