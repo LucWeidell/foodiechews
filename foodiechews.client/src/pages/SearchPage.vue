@@ -58,9 +58,9 @@
     </div>
     <div v-else class="row justify-content-around my-4">
       <div class="col-11">
-        <div class="row" style="justify-content: center;">
+        <div class="row m-2 mb-1 p-2 pb-2" style="justify-content: center;">
           <h5 class="text-center text-light">
-            Search Options:
+            Search Results:
           </h5>
           <RestaurantSearchShort v-for="r in state.restaurants" :key="r._id" :restaurant="r" />
         </div>
