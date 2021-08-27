@@ -51,8 +51,8 @@
     <div class="col-md-10 col-9 mt-3 d-flex justify-content-center">
       <p>{{ fixLayout(restaurant).open }} - {{ fixLayout(restaurant).close }}</p>
     </div>
-    <div class="col-md-6 py-2">
-      <div v-if="!isInMyRest" class="row">
+    <div class="col-lg-6 py-2">
+      <div v-if="!isInMyRest" class="row justify-content-between">
         <BRGbuttons />
       </div>
       <span v-else>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { logger } from '../utils/Logger'
 import { ratingsUtil } from '../utils/RatingsUtil'
@@ -83,7 +83,7 @@ export default {
     const route = useRoute()
     let isInMyRest = false
 
-    onMounted(() => {
+    watchEffect(() => {
       if (AppState.myRestaurants.find(r => r.yelpId === props.restaurant.id)) {
         isInMyRest = true
       }
