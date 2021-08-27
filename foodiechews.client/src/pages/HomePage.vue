@@ -1,12 +1,13 @@
 <template>
   <div class="container-fluid" id="bg-img">
     <div class="row justify-content-center mt-5">
-      <div class="col-9 col-md-6 card-transparent-white text-dark text-shadow-light mt-5">
-        <h2 class="text-center">
+      <div class="col-9 col-md-6 card-transparent-white text-dark text-shadow-light mt-5 rounded">
+        <h2 class="text-center pt-1">
           About Us
         </h2>
         <p class="pt-3 text-center">
-          ♪ When you're craving something new but don't know what to do... FoodieChews! ♪
+          <b><i>
+            ♪ When you're craving something new but don't know what to do... FoodieChews! ♪ </i></b>
         </p>
         <h2 class="text-center pt-3">
           How To Use
@@ -35,7 +36,7 @@
 import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { AuthService } from '../services/AuthService'
-import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
+// import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import getLocation from '../utils/LocationGetter'
 export default {
   name: 'Home',
