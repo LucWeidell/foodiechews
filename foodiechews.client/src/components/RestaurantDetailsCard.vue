@@ -37,7 +37,7 @@
           <div v-if="restaurant.url" class="row py-1">
             <div class="col-auto">
               <h5>
-                <a class=" text-blue" :href="restaurant.url" target="_blank" :title="restaurant.name + ' Yelp Page'"><span class="d-flex align-items-end"><b><i>{{ '  ' + restaurant.name }}</i></b><img src="src/assets/yelp/yelp_logos/Logo/Light bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"></span></a>
+                <a class=" text-blue d-flex align-items-end" :href="restaurant.url" target="_blank" :title="restaurant.name + ' Yelp Page'"><img src="src/assets/yelp/yelp_logos/Logo/Light bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"><small class=""><b>{{ restaurant.name }}</b></small></a>
               </h5>
             </div>
           </div>
@@ -147,7 +147,7 @@ export default {
     border: 5px white solid;
   }
   .yelp{
-    max-height: 5vh;
-    max-width: 5vh;
+    max-height: 8vh;
+    max-width: 8vh;
   }
 </style>

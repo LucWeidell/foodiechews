@@ -121,7 +121,7 @@ export default {
             logger.log('response value:', response)
             if (response) {
               Pop.toast('Updated City', 'success')
-            } else { Pop.toast('Not a valid city', 'error') }
+            } else { Pop.toast('Not a valid city (Settings)', 'error') }
           }
         } catch (error) {
           Pop.toast(error, 'error')

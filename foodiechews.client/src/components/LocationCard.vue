@@ -1,5 +1,6 @@
 <template>
-  <div class="row justify-content-center my-3">
+  <!-- Only renders if this location has visited restaurants -->
+  <div class="row justify-content-center my-3" v-if="allRestaurants.length !== 0">
     <div class="card bg-secondary col-md-6 col-10">
       <div class="card-header p-1">
         <div class="row justify-content-center">
@@ -14,7 +15,7 @@
         </div>
       </div>
       <div class="class card-footer p-1 bg-secondary border-primary text-dark text-center">
-        <p class="hoverable" @click="state.seeMore = !state.seeMore">
+        <p class="hoverable" @click="state.seeMore = !state.seeMore" v-if="allRestaurants > sixRestaurants">
           {{ state.seeMore ? 'Hide' : 'See More...' }}
         </p>
       </div>
