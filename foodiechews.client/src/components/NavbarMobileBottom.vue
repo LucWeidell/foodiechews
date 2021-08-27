@@ -11,7 +11,7 @@
     </div>
     <div class="col-4 py-1 border-right border-left border-dark">
       <router-link :to="{name: 'RestaurantsDetails', params: {id: state.account.id, yelpId: 'random'}}">
-        <img src="../assets/img/random.png"
+        <img src="../assets/img/randomRed.png"
              class="p-0 action"
              alt="Random Button"
              width="50"

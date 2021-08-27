@@ -33,14 +33,16 @@
         </button>
       </div>
     </div>
-    <div v-else class="col-11">
-      <h5>Search Options:</h5>
-      <div class="row">
-        <RestaurantSearchShort v-for="r in state.restaurants" :key="r._id" :restaurant="r" />
+    <div v-else class="row justify-content-around mt-3">
+      <div class="col-11">
+        <h5>Search Options:</h5>
+        <div class="row">
+          <RestaurantSearchShort v-for="r in state.restaurants" :key="r._id" :restaurant="r" />
+        </div>
+        <button type="button" class="btn btn-success" @click="filterSearch">
+          Search
+        </button>
       </div>
-      <button type="button" class="btn btn-success" @click="filterSearch">
-        Search
-      </button>
     </div>
   </div>
 </template>
