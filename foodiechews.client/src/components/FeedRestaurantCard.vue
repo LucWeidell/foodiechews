@@ -1,10 +1,10 @@
 <template>
   <div class="row justify-content-center">
-    <div class="col-md-9 col-10">
+    <div class="col-md-11 col-11">
       <b>
         ◾
         <router-link :to="{name: 'RestaurantsDetails', params: {id: state.account.id, yelpId: myrest.yelpId }}">
-          {{ myrest.name }}<span v-if="state.account.showRestaurants === true"> - {{ myrest.location.city }}</span>, {{ myrest.location.state }}
+          {{ myrest.name }}
         </router-link>
       </b>
     </div>

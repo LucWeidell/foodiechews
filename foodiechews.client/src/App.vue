@@ -1,17 +1,17 @@
 <template>
   <header>
-    <NavbarMobileTop />
+    <NavbarDesktopTop />
   </header>
   <main class="my-5 py-2">
     <router-view />
   </main>
   <footer>
-    <NavbarMobileBottom />
+    <NavbarDesktopBottom />
   </footer>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from './AppState'
 export default {
   name: 'App',
