@@ -1,9 +1,9 @@
 <template>
   <div class="d-flex flex-row bg-primary fixed-bottom text-light text-center align-items-center m-0">
     <div class="text-center col-2">
-      <router-link :to="{ url: 'https://www.yelp.com/' }" class="nav-link">
+      <router-link :to="{ url: 'https://www.yelp.com/' }" class="nav-link text-light align-items-center">
         Powered By:
-        <img src="../assets/img/yelp-dark.png" alt="yelp-logo">
+        <img src="../assets/img/yelp-dark.png" class="mb-2" alt="yelp-logo">
       </router-link>
     </div>
     <div class="nav-item">
@@ -66,7 +66,6 @@ a:hover {
 }
 
 img{
-  border-radius: 50%;
   max-height:100px;
   max-width:100px;
 }
