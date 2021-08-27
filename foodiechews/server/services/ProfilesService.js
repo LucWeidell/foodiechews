@@ -16,6 +16,14 @@ class ProfilesService {
     return profile
   }
 
+  async getAll(query) {
+    const profiles = await dbContext.Account.find(query)
+    if (!profiles) {
+      throw new BadRequest('Could not final Profiles.')
+    }
+    return profiles
+  }
+
   //  TODO I think all edits for profile go through account
   // async edit(body) {
   //   let profile = await this.getById(body.id)
