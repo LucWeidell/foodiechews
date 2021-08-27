@@ -19,12 +19,12 @@ import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 export default {
-  props: {
-    profile: {
-      type: Object,
-      required: true
-    }
-  },
+  // props: {
+  //   profile: {
+  //     type: Object,
+  //     required: true
+  //   }
+  // },
   setup() {
     const state = reactive({
       // TODO: Set to false on deploy
