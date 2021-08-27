@@ -6,18 +6,18 @@
         <img src="../assets/img/yelp-dark.png" class="mb-2" alt="yelp-logo">
       </router-link>
     </div>
-    <div class="nav-item" title="About">
-      <router-link :to="{ name: 'About' }" class="nav-link  text-light">
-        About
-      </router-link>
-    </div>
-    <div class="col-4 py-1" title="Home">
+    <div class="col-6 py-1 push-left" title="Home">
       <router-link :to="{name: 'FeedPage', params: {id: state.account.id}}">
         <img src="../assets/img/Home.png"
              class="pb-1"
              alt="Home Button"
              width="50"
         >
+      </router-link>
+    </div>
+    <div class="col-3 nav-item" title="About">
+      <router-link :to="{ name: 'About' }" class="nav-link text-light">
+        About
       </router-link>
     </div>
   </div>
@@ -68,5 +68,15 @@ a:hover {
 img{
   max-height:100px;
   max-width:100px;
+}
+.main-nav {
+    display: flex;
+}
+
+.push-left {
+    margin-left: auto;
+}
+.push-right{
+  margin-right: auto;
 }
 </style>
