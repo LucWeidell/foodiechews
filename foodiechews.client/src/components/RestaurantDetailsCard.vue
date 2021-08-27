@@ -105,7 +105,11 @@ export default {
       } else {
         hour = time.toString()[0]
       }
-      return `${hour}:${minutes} ${timeOfDay}`
+      let newTime = `${hour}:${minutes} ${timeOfDay}`
+      if (newTime === '0:00 AM') {
+        newTime = 'Midnight'
+      }
+      return newTime
     }
     return {
       isInMyRest,
@@ -124,14 +128,22 @@ export default {
         const result = strToFix.replace('_', ' ')
         return result
       },
-      getToday() {
+      /**
+       * Converts today's date as a number to match Yelp's format (0 is Monday)
+       */
+      getTodayYelp() {
         const d = new Date()
-        const today = d.getDay()
+        let today = d.getDay()
+        if (today === 0) {
+          today = 6
+        } else {
+          today -= 1
+        }
         return today
       },
       fixLayout(restaurant) {
-        // NOTE: Yelp always provides times in 24-hour format as a number
-        const todaysHours = restaurant.hours[0].open.find(d => d.day === this.getToday())
+        // NOTE: Yelp always provides times in 24-hour format as a number. 0 is Monday, 6 is Sunday
+        const todaysHours = restaurant.hours[0].open.find(d => d.day === this.getTodayYelp())
         if (!todaysHours) {
           return { open: 'Not Open', close: 'Not Open' }
         }

@@ -1,6 +1,6 @@
 <template>
   <nav class="NavBarDesktop navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
-    <div class=" col-2 hoverable">
+    <div class=" col-3 hoverable">
       <div v-if="state.account.activeLocation">
         <div class="btn-group">
           <button type="button"
@@ -23,7 +23,7 @@
     </div>
 
     <button
-      class="navbar-toggler col-2"
+      class="navbar-toggler"
       type="button"
       data-toggle="collapse"
       data-target="#navbarText"
@@ -33,7 +33,7 @@
     >
       <span class="navbar-toggler-icon justify-content-center" />
     </button>
-    <div class="col-1 py-1 border-right border-left border-dark justify-content-center">
+    <div class="col-1 py-1 border-right border-left border-dark push-left">
       <router-link :to="{name: 'RestaurantsDetails', params: {id: state.account.id, yelpId: 'random'}}">
         <img src="../assets/img/randomRed.png"
              class="p-0 action"
@@ -51,7 +51,7 @@
             </router-link>
           </li>
         </ul> -->
-    <div class="col-1 py-1">
+    <!-- <div class="col-1 py-1 push-left">
       <div class="py-1">
         <router-link :to="{name: 'SearchPage', params: {id: state.account.id}}">
           <img src="../assets/img/search.png"
@@ -62,8 +62,8 @@
           >
         </router-link>
       </div>
-    </div>
-    <span class="navbar-text hoverable">
+    </div> -->
+    <span class="col-2 navbar-text hoverable push-left">
       <button
         class="btn btn-outline-light text-uppercase"
         @click="login"
@@ -89,11 +89,6 @@
           :class="{ show: state.dropOpen }"
           @click="state.dropOpen = false"
         >
-          <router-link :to="{ name: 'Account' }">
-            <div class="list-group-item list-group-item-action hoverable" title="Account">
-              Account
-            </div>
-          </router-link>
           <router-link :to="{ name: 'Settings' }">
             <div class="list-group-item list-group-item-action hoverable" title="Settings">
               Settings
@@ -169,5 +164,16 @@ img{
   border-radius: 50%;
   max-height: 50px;
   max-width:50px;
+}
+
+.main-nav {
+    display: flex;
+}
+
+.push-left {
+    margin-left: auto;
+}
+.push-right{
+  margin-right: auto;
 }
 </style>
