@@ -1,11 +1,11 @@
 <template>
   <!-- Only renders if this location has visited restaurants -->
-  <div class="row justify-content-center my-3" v-if="allRestaurants.length !== 0">
+  <div class="row justify-content-center my-3">
     <div class="card bg-secondary col-md-6 col-10">
       <div class="card-header p-1">
         <div class="row justify-content-center mt-1">
           <div class="col-md-6 col-6 text-center">
-            <h5>{{ location.city }}, {{ location.state }} </h5>
+            <h5>{{ location.location.city }}, {{ location.location.state }}</h5>
           </div>
         </div>
       </div>
@@ -40,8 +40,8 @@ export default {
     })
     return {
       state,
-      sixRestaurants: computed(() => AppState.myRestaurants.filter(r => r.location.city === props.location.city && r.location.state === props.location.state).slice(0, 6)),
-      allRestaurants: computed(() => AppState.myRestaurants.filter(r => r.location.city === props.location.city && r.location.state === props.location.state))
+      sixRestaurants: computed(() => AppState.profileDetails.filter(r => r.location.city === props.location.location.city && r.location.state === props.location.location.state).slice(0, 6)),
+      allRestaurants: computed(() => AppState.profileDetails.filter(r => r.location.city === props.location.location.city && r.location.state === props.location.location.state))
     }
   }
 }

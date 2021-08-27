@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <LocationCard v-for="l in locations" :key="l._id" :location="l" />
+    <LocationCard v-for="l in locations" :key="l.id" :location="l" />
   </div>
 
   <!-- Modal -->
@@ -84,19 +84,40 @@
 
 <script>
 import $ from 'jquery'
-import { computed, reactive } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { accountService } from '../services/AccountService'
+import { profileService } from '../services/ProfileService'
+import { useRoute } from 'vue-router'
+import { logger } from '../utils/Logger'
 
 export default {
   name: 'Profile',
   setup() {
+    function getAll(myRest) {
+      const all = myRest
+      const places = []
+      for (let i = 0; i < all.length; i++) {
+        const foundItem = all[i]
+        if (!places.find(l => (l.location.city === foundItem.location.city && l.location.state === foundItem.location.state))) {
+          places.push(foundItem)
+          // logger.log('Pushed FoundItem : ', foundItem)
+        }
+        AppState.allRest = places
+      }
+    }
+    const route = useRoute()
+    onMounted(async() => {
+      await profileService.getRestByProfileId(route.params.id)
+      logger.log('Words', AppState.profileDetails)
+      getAll(AppState.profileDetails)
+    })
     const state = reactive({
       account: computed(() => AppState.account)
     })
     return {
       state,
-      locations: computed(() => AppState.account.location),
+      locations: computed(() => AppState.allRest),
       async editAccount(rawAccount) {
         await accountService.editAccount(rawAccount)
         $('#editModal').modal('hide')
