@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="row justify-content-around py-3">
+    <div class="row justify-content-around py-4">
       <div class="col-sm-12">
         <h5>
           Account Settings:

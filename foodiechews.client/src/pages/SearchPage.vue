@@ -1,7 +1,7 @@
 <template>
   <LoadingSpinner v-if="loading" />
   <div class="SearchPage container-fluid" id="bg-img" v-else>
-    <div v-if="!state.searchingStarted" class="row justify-content-around py-3">
+    <div v-if="!state.searchingStarted" class="row justify-content-around py-4">
       <div class="col-sm-12">
         <h5 class="m-3 text-center text-light">
           Filter Your Search:
@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="row justify-content-around mt-3">
+    <div v-else class="row justify-content-around my-4">
       <div class="col-11">
         <h5>Search Options:</h5>
         <div class="row">

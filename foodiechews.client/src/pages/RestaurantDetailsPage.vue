@@ -1,6 +1,6 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <div class="container-fluid mt-3" id="bg-img" v-else>
+  <div class="container-fluid mt-4" id="bg-img" v-else>
     <RestaurantDetailsCard :restaurant="restaurant" v-if="restaurant.location" />
   </div>
 </template>
