@@ -144,7 +144,7 @@ a:hover {
 
 img{
   border-radius: 50%;
-  max-height: 35px;
-  max-width:35px;
+  max-height: 45px;
+  max-width: 45px;
 }
 </style>

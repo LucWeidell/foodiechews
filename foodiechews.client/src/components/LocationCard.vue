@@ -3,7 +3,7 @@
   <div class="row justify-content-center my-3" v-if="allRestaurants.length !== 0">
     <div class="card bg-secondary col-md-6 col-10">
       <div class="card-header p-1">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-1">
           <div class="col-md-6 col-6 text-center">
             <h5>{{ location.city }}, {{ location.state }} </h5>
           </div>

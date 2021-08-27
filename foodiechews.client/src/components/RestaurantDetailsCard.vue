@@ -88,6 +88,29 @@ export default {
         isInMyRest = true
       }
     })
+    function formatTime(time) {
+      let timeOfDay = ''
+      if (time < 1200) {
+        timeOfDay = 'AM'
+      } else {
+        timeOfDay = 'PM'
+      }
+      if (time > 1299) {
+        time -= 1200
+      }
+      const minutes = time.toString().substr(-2)
+      let hour = ''
+      if (time > 999) {
+        hour = time.toString().substr(0, 2)
+      } else {
+        hour = time.toString()[0]
+      }
+      let newTime = `${hour}:${minutes} ${timeOfDay}`
+      if (newTime === '0:00 AM') {
+        newTime = 'Midnight'
+      }
+      return newTime
+    }
     return {
       isInMyRest,
       yelpId: computed(() => route.params.yelpId),
@@ -105,31 +128,27 @@ export default {
         const result = strToFix.replace('_', ' ')
         return result
       },
-      getToday() {
+      /**
+       * Converts today's date as a number to match Yelp's format (0 is Monday)
+       */
+      getTodayYelp() {
         const d = new Date()
-        const today = d.getDay()
+        let today = d.getDay()
+        if (today === 0) {
+          today = 6
+        } else {
+          today -= 1
+        }
         return today
       },
       fixLayout(restaurant) {
-        let open = restaurant.hours[0].open[this.getToday()].start
-        if (open < 1200) {
-          open = open + ' AM'
-        } else {
-          open = open - 1200 + ' PM'
-          // TODO: Fix time formatting
+        // NOTE: Yelp always provides times in 24-hour format as a number. 0 is Monday, 6 is Sunday
+        const todaysHours = restaurant.hours[0].open.find(d => d.day === this.getTodayYelp())
+        if (!todaysHours) {
+          return { open: 'Not Open', close: 'Not Open' }
         }
-        let close = restaurant.hours[0].open[this.getToday()].end
-        if (close > 1200) {
-          close = close - 1200 + ' PM'
-        } else {
-          let stringDate = close + ''
-          if (stringDate === '0000') {
-            stringDate = 'Midnight'
-            close = stringDate
-          } else {
-            close = close + ' AM'
-          }
-        }
+        const open = formatTime(todaysHours.start)
+        const close = formatTime(todaysHours.end)
         return { open, close }
       }
     }

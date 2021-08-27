@@ -1,13 +1,6 @@
 <template>
-  <div class="container-fluid" v-if="loading">
-    <div class="row justify-content-center align-items-center" style="min-height: 80vh">
-      <div class="col-6 text-center">
-        <LoadingSpinner />
-        <h2>Powered By Yelp...</h2>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid mt-3" id="bg-img" v-else>
+  <LoadingSpinner v-if="loading" />
+  <div class="container-fluid mt-4" id="bg-img" v-else>
     <RestaurantDetailsCard :restaurant="restaurant" v-if="restaurant.location" />
   </div>
 </template>

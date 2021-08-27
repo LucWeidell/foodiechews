@@ -6,7 +6,7 @@
       </h5>
       <CityCard v-for="c in cityRestaurants" :key="c.id" :cityrestaurant="c" />
     </div>
-    <div class="col-md-5 col-10 bg-light mt-md-3 mt-4" v-else @click="getSix(myRests)">
+    <div class="col-md-5 col-10 bg-light mt-md-3 mt-4 shadow" v-else @click="getSix(myRests)">
       <h5 class="my-2 text-center">
         {{ account.name }} <i class="mdi mdi-arrow-right-drop-circle"></i>
       </h5>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { computed, reactive } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 export default {
@@ -31,6 +31,9 @@ export default {
       dropOpen: false,
       closedClass: '',
       openClass: ''
+    })
+    onMounted(() => {
+      AppState.myRestaurants.reverse()
     })
     function getSix(myRest) {
       AppState.sixRests = myRest

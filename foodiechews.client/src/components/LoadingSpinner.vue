@@ -1,6 +1,14 @@
 <template>
-  <div class="lds-ring">
-    <div></div><div></div><div></div><div></div>
+  <div class="container-fluid">
+    <div class="row justify-content-center align-items-center" style="min-height: 80vh">
+      <div class="col-6 text-center">
+        <div class="lds-ring">
+          <div></div><div></div><div></div><div></div>
+        </div>
+        <h2>Loading results...</h2>
+        <small>Powered By <img src="src/assets/yelp/yelp_logos/Logo/Light bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"></small>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,4 +48,8 @@
     transform: rotate(360deg);
   }
 }
+.yelp{
+    max-height: 8vh;
+    max-width: 8vh;
+  }
 </style>
