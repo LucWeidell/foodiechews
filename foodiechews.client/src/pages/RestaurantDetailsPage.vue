@@ -10,16 +10,17 @@
     </div>
   </div>
   <div class="container-fluid mt-3" id="bg-img" v-else>
-    <RestaurantDetailsCard :restaurant="restaurant" />
+    <RestaurantDetailsCard :restaurant="restaurant" v-if="restaurant.location" />
   </div>
 </template>
 
 <script>
-import { computed, onBeforeMount, watchEffect } from '@vue/runtime-core'
+import { computed, onBeforeMount, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
+import getLocation from '../utils/LocationGetter'
 
 export default {
   setup() {
@@ -28,7 +29,10 @@ export default {
       logger.log('I set this true first')
       AppState.loading = true
     })
-    watchEffect(async() => {
+    onMounted(async() => {
+      if (!AppState.activeLocation.city) {
+        await getLocation()
+      }
       if (AppState.account.id) {
         if (route.params.yelpId) {
           await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
@@ -40,6 +44,13 @@ export default {
       }
     }
     )
+    watchEffect(async() => {
+      if (AppState.activeLocation.city) {
+        if (route.params.yelpId) {
+          await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
+        }
+      }
+    })
     return {
       restaurant: computed(() => AppState.activeRestaurant),
       account: computed(() => AppState.account),

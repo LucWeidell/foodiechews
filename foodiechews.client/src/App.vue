@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from './AppState'
 export default {
   name: 'App',

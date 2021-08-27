@@ -36,23 +36,12 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { AuthService } from '../services/AuthService'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
+import getLocation from '../utils/LocationGetter'
 export default {
   name: 'Home',
   setup() {
-    function getLocation() {
-      if (Object.keys(AppState.activeLocation).length === 0) {
-        navigator.geolocation.getCurrentPosition((loc) => {
-          const coords = {
-            lat: loc.coords.latitude,
-            long: loc.coords.longitude
-          }
-          yelpRestaurantsService.getByCoordinates(coords)
-          AppState.activeLocation = coords
-        })
-      }
-    }
     onMounted(async() => {
-      getLocation()
+      await getLocation()
     })
     return {
       user: computed(() => AppState.user),
