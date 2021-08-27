@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-center">
     <div class="col-md-11 col-11">
-      <h4>
+      <h4 class="pt-1">
         {{ cityrestaurant.location.city }}
       </h4>
       <p v-if="state.account.showRestaurants === true">
