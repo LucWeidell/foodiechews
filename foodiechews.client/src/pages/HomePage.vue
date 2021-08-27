@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" id="bg-img">
-    <div class="row justify-content-center mt-5">
-      <div class="col-9 col-md-6 card-transparent-white text-dark text-shadow-light">
+    <div class="row justify-content-center mt-4">
+      <div class="col-9 col-md-6 card-transparent-white text-dark text-shadow-light mt-5">
         <h2 class="text-center">
           About Us
         </h2>

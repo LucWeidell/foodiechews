@@ -13,5 +13,9 @@ export const AppState = reactive({
   activeLocation: {},
   searchRestsList: [],
   lastActive: {},
-  loading: false
+  loading: false,
+  locations: {},
+  sixRests: {},
+  allProfiles: {},
+  profileDetails: {}
 })
