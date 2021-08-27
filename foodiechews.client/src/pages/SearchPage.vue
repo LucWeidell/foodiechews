@@ -3,7 +3,7 @@
   <div class="SearchPage container-fluid" id="bg-img" v-else>
     <div v-if="!state.searchingStarted" class="row justify-content-around py-4">
       <div class="col-sm-12">
-        <h5 class="m-3 text-center text-primary">
+        <h5 class="m-3 text-center text-light">
           Filter Your Search:
         </h5>
       </div>
@@ -20,11 +20,6 @@
             </label>
           </div>
         </div>
-
-        <!-- <div v-for="(price, index) in prices" :key="index" class="form-inline form-check">
-          <input type="checkbox" :name="price.length" :id="price.length" class="form-check-input" v-model="state.priceSet[price]">
-          <label :for="price.length" class="form-check-label">{{ price }}</label>
-        </div> -->
       </div>
       <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 rounded">
         <h6 class="pt-4">
@@ -63,13 +58,17 @@
     </div>
     <div v-else class="row justify-content-around my-4">
       <div class="col-11">
-        <h5>Search Options:</h5>
-        <div class="row">
+        <div class="row m-2 mb-1 p-2 pb-2" style="justify-content: center;">
+          <h5 class="text-center text-light">
+            Search Results:
+          </h5>
           <RestaurantSearchShort v-for="r in state.restaurants" :key="r._id" :restaurant="r" />
         </div>
-        <button type="button" class="btn btn-success" @click="filterSearch">
-          Search
-        </button>
+        <div class="row" style="justify-content: center;">
+          <button type="button" class="btn btn-secondary shadow" style="text-shadow: 1px 1px blue justify-content: center;" @click="filterSearch">
+            <i>Search</i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -142,7 +141,7 @@ export default {
     background-color: rgb(204, 204, 204)
   }
   #bg-img{
-  background-image: url('../assets/img/eatsSign.png');
+  background-image: url('../assets/img/diner2.jpeg');
   background-position: center;
   background-size: cover;
 }
