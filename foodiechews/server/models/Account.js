@@ -10,7 +10,7 @@ const locationSchema = new Schema({
 { timestamps: true, toJSON: { virtuals: true } })
 
 const pendingRestaurantSchema = new Schema({
-  yelpIp: { type: String },
+  yelpId: { type: String },
   exists: { type: Boolean }
 })
 

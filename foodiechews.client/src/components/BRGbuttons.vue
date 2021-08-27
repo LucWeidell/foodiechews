@@ -36,6 +36,7 @@ import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import Pop from '../utils/Notifier'
+import { accountService } from '../services/AccountService'
 
 export default {
   setup() {
@@ -65,8 +66,18 @@ export default {
           Pop.toast('BRG comp failed to get yelpRest: ' + error, 'error')
         }
       },
-      going() {
-        console.log('going button')
+      async going() {
+        const rawAccount = {
+          pendingRestaurant: {
+            yelpId: AppState.activeRestaurant.id,
+            exists: true
+          }
+        }
+        try {
+          accountService.editAccount(rawAccount)
+        } catch (error) {
+          Pop.toast(error + "That didn't work :(", 'error')
+        }
       }
     }
   }
