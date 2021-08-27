@@ -6,31 +6,31 @@
           Filter Your Search:
         </h5>
       </div>
-      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 mt-1 rounded">
+      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 mt-1 rounded pb-2">
         <h6 class="pt-2">
           <b>Whats Your Budget?</b>
         </h6>
-        <small><i>Note - you can only choose one of these options</i></small>
-        <div v-for="(price, index) in prices" :key="index" class="form-group form-check">
+        <small><i>Note - choose only one of the options</i></small>
+        <div v-for="(price, index) in prices" :key="index" class="form-inline form-check">
           <input type="checkbox" :name="price.length" :id="price.length" class="form-check-input" v-model="state.priceSet[price]">
           <label :for="price.length" class="form-check-label">{{ price }}</label>
         </div>
       </div>
-      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 rounded">
+      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 rounded pb-2">
         <h6 class="pt-2">
           <b>Dietary Requirement?</b>
         </h6>
-        <div v-for="(type, index) in healthies" :key="index" class="form-group form-check">
+        <div v-for="(type, index) in healthies" :key="index" class="form-inline form-check">
           <input type="checkbox" :name="type" :id="type" class="form-check-input" v-model="state.categoriesSelect[type]">
           <label :for="type" class="form-check-label">{{ type }}</label>
         </div>
       </div>
-      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 rounded">
+      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 rounded pb-2">
         <h6 class="pt-2">
           <b>Craving Something Specific?</b>
         </h6>
-        <small><i>Note - you can only choose one of these options</i></small>
-        <div v-for="(type, index) in categories" :key="index" class="form-group form-check">
+        <small><i>Note - choose only one of the options</i></small>
+        <div v-for="(type, index) in categories" :key="index" class="form-inline form-check">
           <input type="checkbox" :name="type" :id="type" class="form-check-input" v-model="state.categoriesSelect[type]">
           <label :for="type" class="form-check-label">{{ type }}</label>
         </div>
