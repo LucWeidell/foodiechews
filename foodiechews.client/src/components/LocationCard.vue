@@ -10,12 +10,12 @@
       </div>
       <div class="card-body p-2 bg-secondary">
         <div class="row justify-content-center">
-          <RestaurantShortCard v-for="r in restaurants" :key="r.id" :restaurant="r" />
+          <RestaurantShortCard v-for="r in state.seeMore ? allRestaurants : sixRestaurants" :key="r.id" :restaurant="r" />
         </div>
       </div>
       <div class="class card-footer p-1 bg-secondary border-primary text-dark text-center">
-        <p class="hoverable">
-          See More...
+        <p class="hoverable" @click="state.seeMore = !state.seeMore">
+          {{ state.seeMore ? 'Hide' : 'See More...' }}
         </p>
       </div>
     </div>
@@ -35,10 +35,12 @@ export default {
   },
   setup(props) {
     const state = reactive({
+      seeMore: false
     })
     return {
       state,
-      restaurants: computed(() => AppState.myRestaurants.filter(r => r.location.city === props.location.city && r.location.state === props.location.state))
+      sixRestaurants: computed(() => AppState.myRestaurants.filter(r => r.location.city === props.location.city && r.location.state === props.location.state).slice(0, 6)),
+      allRestaurants: computed(() => AppState.myRestaurants.filter(r => r.location.city === props.location.city && r.location.state === props.location.state))
     }
   }
 }
