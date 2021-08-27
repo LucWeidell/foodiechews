@@ -1,25 +1,17 @@
 <template>
-  <div class="container-fluid" v-if="loading">
-    <div class="row justify-content-center align-items-center" style="min-height: 80vh">
-      <div class="col-6 text-center">
-        <div class="lds-ring">
-          <div></div><div></div><div></div><div></div>
-        </div>
-        <h2>Powered By Yelp...</h2>
-      </div>
-    </div>
-  </div>
+  <LoadingSpinner v-if="loading" />
   <div class="container-fluid mt-3" id="bg-img" v-else>
-    <RestaurantDetailsCard :restaurant="restaurant" />
+    <RestaurantDetailsCard :restaurant="restaurant" v-if="restaurant.location" />
   </div>
 </template>
 
 <script>
-import { computed, onBeforeMount, watchEffect } from '@vue/runtime-core'
+import { computed, onBeforeMount, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
+import getLocation from '../utils/LocationGetter'
 
 export default {
   setup() {
@@ -28,7 +20,10 @@ export default {
       logger.log('I set this true first')
       AppState.loading = true
     })
-    watchEffect(async() => {
+    onMounted(async() => {
+      if (!AppState.activeLocation.city) {
+        await getLocation()
+      }
       if (AppState.account.id) {
         if (route.params.yelpId) {
           await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
@@ -40,6 +35,13 @@ export default {
       }
     }
     )
+    watchEffect(async() => {
+      if (AppState.activeLocation.city) {
+        if (route.params.yelpId) {
+          await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
+        }
+      }
+    })
     return {
       restaurant: computed(() => AppState.activeRestaurant),
       account: computed(() => AppState.account),
@@ -50,40 +52,5 @@ export default {
 </script>
 
 <style scoped>
-.lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border: 8px solid #fff;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
-}
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 </style>

@@ -1,12 +1,12 @@
 <template>
   <div class="row justify-content-center">
     <div class="col-md-11 col-11">
-      <h4>
-        {{ cityrestaurant.location.city }}
-      </h4>
-      <p v-if="state.account.showRestaurants === true">
-        <FeedRestaurantCard v-for="m in myRests" :key="m.id" :myrest="m" />
-      </p>
+      <b>
+        ◾
+        <router-link :to="{name: 'RestaurantsDetails', params: {id: state.account.id, yelpId: myrest.yelpId }}">
+          {{ myrest.name }}
+        </router-link>
+      </b>
     </div>
   </div>
 </template>
@@ -17,18 +17,17 @@ import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 export default {
   props: {
-    cityrestaurant: {
+    myrest: {
       type: Object,
       required: true
     }
   },
-  setup(props) {
+  setup() {
     const state = reactive({
       account: computed(() => AppState.account)
     })
     return {
-      state,
-      myRests: computed(() => AppState.sixRests.filter(r => r.location.city === props.cityrestaurant.location.city && r.location.state === props.cityrestaurant.location.state))
+      state
     }
   }
 }
