@@ -1,12 +1,12 @@
 <template>
-  <div class="SearchPage container-fluid">
+  <div class="SearchPage container-fluid" id="bg-img">
     <div v-if="!state.searchingStarted" class="row justify-content-around py-3">
       <div class="col-sm-12">
-        <h5 class="m-3 text-center">
+        <h5 class="m-3 text-center text-white">
           Filter Your Search:
         </h5>
       </div>
-      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 mt-1">
+      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 mt-1 rounded">
         <h6 class="pt-2">
           <b>Whats Your Budget?</b>
         </h6>
@@ -16,7 +16,7 @@
           <label :for="price.length" class="form-check-label">{{ price }}</label>
         </div>
       </div>
-      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2">
+      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 rounded">
         <h6 class="pt-2">
           <b>Dietary Requirement?</b>
         </h6>
@@ -25,7 +25,7 @@
           <label :for="type" class="form-check-label">{{ type }}</label>
         </div>
       </div>
-      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2">
+      <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 rounded">
         <h6 class="pt-2">
           <b>Craving Something Specific?</b>
         </h6>
@@ -36,8 +36,8 @@
         </div>
       </div>
       <div class="col-4">
-        <button type="button" class="btn btn-primary shadow" @click="filterSearch">
-          Search
+        <button type="button" class="btn btn-light shadow" style="text-shadow: 1px 1px blue" @click="filterSearch">
+          <i>Search</i>
         </button>
       </div>
     </div>
@@ -118,4 +118,9 @@ export default {
   .bg-bootSec {
     background-color: rgb(204, 204, 204)
   }
+  #bg-img{
+  background-image: url('../assets/img/eatsSign.png');
+  background-position: center;
+  background-size: cover;
+}
 </style>
