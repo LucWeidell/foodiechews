@@ -8,7 +8,7 @@ class AccountService {
     try {
       const res = await api.get('/account')
       AppState.account = res.data
-      logger.log(res.data.activeLocation)
+      logger.log('active location:', res.data.activeLocation)
       if (res.data.activeLocation) {
         Object.assign(AppState.lastActive, res.data.activeLocation)
       } else {

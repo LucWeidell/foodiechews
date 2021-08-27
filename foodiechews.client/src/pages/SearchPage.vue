@@ -33,7 +33,15 @@
         </button>
       </div>
     </div>
-    <RestaurantDetailsCard v-else :restaurant="state.restaurant" />
+    <div v-else class="col-11">
+      <h5>Search Options:</h5>
+      <div class="row">
+        <RestaurantSearchShort v-for="r in state.restaurants" :key="r._id" :restaurant="r" />
+      </div>
+      <button type="button" class="btn btn-success" @click="filterSearch">
+        Search
+      </button>
+    </div>
   </div>
 </template>
 
@@ -54,7 +62,7 @@ export default {
     const state = reactive({
       priceSet: {},
       categoriesSelect: {},
-      restaurant: computed(() => AppState.activeRestaurant),
+      restaurants: computed(() => AppState.searchRestsList),
       searchingStarted: false
     })
     return {

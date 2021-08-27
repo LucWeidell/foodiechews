@@ -52,7 +52,7 @@
       <p>{{ fixLayout(restaurant).open }} - {{ fixLayout(restaurant).close }}</p>
     </div>
     <div class="col-md-6 py-2">
-      <div v-if="yelpId === 'random' " class="row">
+      <div v-if="!isInMyRest" class="row">
         <BRGbuttons />
       </div>
       <span v-else>
@@ -63,10 +63,11 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { logger } from '../utils/Logger'
 import { ratingsUtil } from '../utils/RatingsUtil'
+import { AppState } from '../AppState'
 
 export default {
   name: 'RestaurantDetailsCard',
@@ -80,7 +81,15 @@ export default {
     logger.log(props)
     logger.log(props.restaurant)
     const route = useRoute()
+    let isInMyRest = false
+
+    onMounted(() => {
+      if (AppState.myRestaurants.find(r => r.yelpId === props.restaurant.id)) {
+        isInMyRest = true
+      }
+    })
     return {
+      isInMyRest,
       yelpId: computed(() => route.params.yelpId),
       address: computed(() => props.restaurant.location.display_address[0] + ' ' + props.restaurant.location.display_address[1]),
       categories: computed(() => props.restaurant.categories),

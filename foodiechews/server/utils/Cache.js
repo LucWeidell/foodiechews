@@ -1,4 +1,5 @@
 import { yelpApi } from '../services/AxiosService'
+import { myRestaurantsService } from '../services/MyRestaurantsService'
 import { logger } from './Logger'
 
 /** This is the cache in replacement for MongoDb YelpRestaurants
@@ -10,9 +11,16 @@ import { logger } from './Logger'
   */
 const cache = {}
 
-export async function searchCache(strQuery) {
+let myRests = []
+
+export async function searchCache(strQuery, hasLimitAlready) {
   let randNum = 0
-  strQuery += '&limit=1'
+  if (!hasLimitAlready) {
+    strQuery += '&limit=1'
+  } else {
+    strQuery += '&limit=10'
+  }
+
   logger.log('Search string:', strQuery)
   logger.log('the first condition', cache[strQuery])
   const now = new Date()
@@ -34,9 +42,17 @@ export async function searchCache(strQuery) {
     randNum = randomNumSelect(res.total)
   }
   strQuery += ('&offset=' + randNum)
-  const resWithOffset = await getFromYelpApi(strQuery)
-  logger.log('Res search w/ Off:', resWithOffset)
-  return await IdCheckCache(resWithOffset.businesses[0].id)
+  if (hasLimitAlready) {
+    const resWithOffset = await getFromYelpApi(strQuery)
+    const toReturn = validateSearch(resWithOffset.businesses)
+    if (toReturn.length === 0) {
+      searchCache(strQuery, hasLimitAlready)
+    }
+    return toReturn
+  } else {
+    const resWithOffset = await getFromYelpApi(strQuery)
+    return await IdCheckCache(resWithOffset.businesses[0].id)
+  }
 }
 
 export async function IdCheckCache(strQuery) {
@@ -72,6 +88,28 @@ function randomNumSelect(outOf) {
     return result - 1
   }
   return result
+}
+
+/**
+ * Helper to populate the myRests on an account: also updates when one is created
+ * @param {String} accountId - The id for an account
+ */
+export async function setMyCache(accountId) {
+  logger.log('MY FKR ACCOUNT:', accountId)
+  const myCacheToMake = await myRestaurantsService.getAll({ accountId: accountId })
+  logger.log('thank you:', myCacheToMake)
+  myRests = myCacheToMake
+}
+
+function validateSearch(resArray) {
+  const output = [...resArray]
+  for (let i = 0; i < resArray.length; i++) {
+    const foundIt = myRests.find(r => r.id === resArray[i].id)
+    if (foundIt) {
+      output.splice(i, 1)
+    }
+  }
+  return output
 }
 
 async function getFromYelpApi(strQuery) {

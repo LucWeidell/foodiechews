@@ -3,7 +3,7 @@ import BaseController from '../utils/BaseController'
 import { logger } from '../utils/Logger'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { convertToQuery } from '../utils/Query'
-import { IdCheckCache, searchCache } from '../utils/Cache'
+import { IdCheckCache, searchCache, setMyCache } from '../utils/Cache'
 
 export class YelpRestaurantsController extends BaseController {
   constructor() {
@@ -12,6 +12,7 @@ export class YelpRestaurantsController extends BaseController {
       // .get('', this.getAll)
       .get('/random', this.getRandom)
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .delete('', this.giveCacheId)
       .get('/search', this.getSearch)
       .get('/:id', this.getById)
   }
@@ -58,7 +59,7 @@ export class YelpRestaurantsController extends BaseController {
           searchTerms.open_now = req.query.open_now
         }
       }
-      const restaurant = await searchCache('search' + (convertToQuery(searchTerms)))
+      const restaurant = await searchCache('search' + (convertToQuery(searchTerms)), false)
       res.send(restaurant)
     } catch (error) {
       logger.log('fail')
@@ -76,10 +77,8 @@ export class YelpRestaurantsController extends BaseController {
       if (req.query.categories) {
         searchTerms.categories = req.query.categories
       }
-      // if (req.query.price) {
-      //   searchTerms.price = req.query.price
-      // }
-      const restaurant = await searchCache('search' + (convertToQuery(searchTerms)))
+
+      const restaurant = await searchCache('search' + (convertToQuery(searchTerms)), true)
       res.send(restaurant)
     } catch (error) {
       logger.log('fail')
@@ -87,39 +86,12 @@ export class YelpRestaurantsController extends BaseController {
     }
   }
 
-  // async getSearch(req, res, next) {
-  //   logger.log('search touched')
-  //   try {
-  //     const account = await accountService.getById(req.userInfo.id)
-  //     const activeLocation = account._doc.activeLocation
-  //     req.query.location = activeLocation.city + activeLocation.state
-  //     req.query.term = 'restaurants'
-  //     req.query.limit = 1
-  //     // logger.log(req.query.location)
-  //     const restaurants = await yelpRestaurantsService.getAll(req.query)
-  //     const randomPage = Math.floor(Math.random() * restaurants.total)
-  //     req.query.offset = randomPage
-  //     const yelpRestaurant = await yelpRestaurantsService.getAll(req.query)
-  //     res.send(yelpRestaurant)
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
-
-  // NOTE create has no purpose:
-  // The service has a create if getById fails to find: should never call from client
-  /**
-       * Adds a data to a client by request
-       * @param {import('express').Request} req
-       * @param {import('express').Response} res
-       * @param {import('express').NextFunction} next
-       */
-  // async create(req, res, next) {
-  //   try {
-  //     const yelpRestaurant = await yelpRestaurantsService.create(req.body)
-  //     res.send(yelpRestaurant)
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
+  async giveCacheId(req, res, next) {
+    try {
+      setMyCache(req.user.id)
+      res.send({ message: 'Set Cache' })
+    } catch (error) {
+      logger.log('Failed to populate my cache: ', error)
+    }
+  }
 }

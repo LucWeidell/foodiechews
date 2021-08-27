@@ -10,6 +10,7 @@ class YelpRestaurantsService {
  */
   async getByYelpId(action, query) {
     AppState.loading = true
+    let searchFlag = false
     let res = {}
     try {
       let locCity = ''
@@ -41,6 +42,7 @@ class YelpRestaurantsService {
               res = await api.get(`/api/yelpRestaurants/search?location=${locCity + locState}&open_now=${AppState.account.showOnlyOpen}`)
               // console.log('the res:', res.data)
             }
+            searchFlag = true
             break
             // NOTE had default as false before but we can identify /:id as an id for a string compare
             // REVIEW could check the length of the string: but switches may not support
@@ -48,7 +50,11 @@ class YelpRestaurantsService {
             res = await api.get(`/api/yelpRestaurants/${action}`)
             break
         }
-        AppState.activeRestaurant = res.data
+        if (searchFlag) {
+          AppState.searchRestsList = res.data
+        } else {
+          AppState.activeRestaurant = res.data
+        }
       }
       AppState.loading = false
       return res.data

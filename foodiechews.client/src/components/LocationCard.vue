@@ -1,20 +1,20 @@
 <template>
   <div class="row justify-content-center my-3">
     <div class="card bg-secondary col-md-6 col-10">
-      <div class="card-header">
+      <div class="card-header p-1">
         <div class="row justify-content-center">
           <div class="col-md-6 col-6 text-center">
-            <h5>{{ location.city }}</h5>
+            <h5>{{ location.city }}, {{ location.state }} </h5>
           </div>
         </div>
       </div>
-      <div class="card-body bg-secondary">
+      <div class="card-body p-2 bg-secondary">
         <div class="row justify-content-center">
           <RestaurantShortCard v-for="r in restaurants" :key="r.id" :restaurant="r" />
         </div>
       </div>
-      <div class="class-footer bg-secondary border-primary text-dark text-center">
-        <p class="pb-3 hoverable">
+      <div class="class card-footer p-1 bg-secondary border-primary text-dark text-center">
+        <p class="hoverable">
           See More...
         </p>
       </div>

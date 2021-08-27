@@ -11,6 +11,7 @@ export const AppState = reactive({
   // NOTE This activeLocation is for non-logged in users:
   // For logged in: refer to the activeLocation on the account
   activeLocation: {},
+  searchRestsList: [],
   lastActive: {},
   loading: false
 })
