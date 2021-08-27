@@ -6,7 +6,7 @@
           <div></div><div></div><div></div><div></div>
         </div>
         <h2>Loading results...</h2>
-        <small>Powered By Yelp</small>
+        <small>Powered By <img src="src/assets/yelp/yelp_logos/Logo/Light bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"></small>
       </div>
     </div>
   </div>
@@ -48,4 +48,8 @@
     transform: rotate(360deg);
   }
 }
+.yelp{
+    max-height: 8vh;
+    max-width: 8vh;
+  }
 </style>

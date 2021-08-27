@@ -88,6 +88,25 @@ export default {
         isInMyRest = true
       }
     })
+    function formatTime(time) {
+      let timeOfDay = ''
+      if (time < 1200) {
+        timeOfDay = 'AM'
+      } else {
+        timeOfDay = 'PM'
+      }
+      if (time > 1299) {
+        time -= 1200
+      }
+      const minutes = time.toString().substr(-2)
+      let hour = ''
+      if (time > 999) {
+        hour = time.toString().substr(0, 2)
+      } else {
+        hour = time.toString()[0]
+      }
+      return `${hour}:${minutes} ${timeOfDay}`
+    }
     return {
       isInMyRest,
       yelpId: computed(() => route.params.yelpId),
@@ -111,25 +130,13 @@ export default {
         return today
       },
       fixLayout(restaurant) {
-        let open = restaurant.hours[0].open[this.getToday()].start
-        if (open < 1200) {
-          open = open + ' AM'
-        } else {
-          open = open - 1200 + ' PM'
-          // TODO: Fix time formatting
+        // NOTE: Yelp always provides times in 24-hour format as a number
+        const todaysHours = restaurant.hours[0].open.find(d => d.day === this.getToday())
+        if (!todaysHours) {
+          return { open: 'Not Open', close: 'Not Open' }
         }
-        let close = restaurant.hours[0].open[this.getToday()].end
-        if (close > 1200) {
-          close = close - 1200 + ' PM'
-        } else {
-          let stringDate = close + ''
-          if (stringDate === '0000') {
-            stringDate = 'Midnight'
-            close = stringDate
-          } else {
-            close = close + ' AM'
-          }
-        }
+        const open = formatTime(todaysHours.start)
+        const close = formatTime(todaysHours.end)
         return { open, close }
       }
     }
