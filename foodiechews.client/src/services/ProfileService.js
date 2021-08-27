@@ -1,6 +1,6 @@
-const { AppState } = require('../AppState')
-const { logger } = require('../utils/Logger')
-const { api } = require('./AxiosService')
+import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
+import { api } from './AxiosService'
 
 class ProfileService {
   async getAllProfiles() {
