@@ -5,13 +5,9 @@
         {{ account.name }} |  10 / 200 <i class="mdi mdi-arrow-down-drop-circle"></i>
       </h5>
       <h4>
-        CITY
       </h4>
-      <ul>
-        <li>RESTAURANT 1</li>
-        <li>RESTAURANT 2</li>
-        <li>RESTAURANT 3</li>
-      </ul>
+      <h5>Last 6</h5>
+      <RestaurantShortCard v-for="r in restaurants" :key="r.id" :restaurant="r" />
     </div>
     <div class="col-10 bg-light mt-md-3 mt-4" v-else>
       <h5 class="my-2 text-center">
@@ -34,6 +30,7 @@ export default {
     })
     return {
       state,
+      restaurants: computed(() => AppState.myRestaurants.reverse().slice(0, 6)),
       account: computed(() => AppState.account),
       dropDownToggle() {
         state.dropOpen = !state.dropOpen

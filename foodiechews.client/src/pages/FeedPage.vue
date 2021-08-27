@@ -27,7 +27,9 @@ export default {
     const state = reactive({
       account: computed(() => AppState.account)
     })
-    return { state }
+    return {
+      state
+    }
   }
 }
 </script>
