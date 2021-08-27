@@ -32,7 +32,7 @@
 
 <script>
 import { computed } from '@vue/runtime-core'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import Pop from '../utils/Notifier'
@@ -41,6 +41,7 @@ import { accountService } from '../services/AccountService'
 export default {
   setup() {
     const route = useRoute()
+    const router = useRouter()
     return {
       matchedRestaurant: computed(() => {
         const found = AppState.myRestaurants.find(rest =>
@@ -52,6 +53,9 @@ export default {
         return false
       }),
       async getRandom() {
+        if (route.params.yelpId !== 'random') {
+          router.push({ name: 'RestaurantsDetails', params: { id: AppState.account.id, yelpId: 'random' } })
+        }
         try {
           let restaurant = {}
           if (!AppState.account.id) {
