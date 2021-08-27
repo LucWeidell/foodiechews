@@ -4,7 +4,7 @@
       <h4>
         {{ cityrestaurant.location.city }}
       </h4>
-      <p>
+      <p v-if="state.account.showRestaurants === true">
         <FeedRestaurantCard v-for="m in myRests" :key="m.id" :myrest="m" />
       </p>
     </div>
