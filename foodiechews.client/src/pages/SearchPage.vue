@@ -20,11 +20,6 @@
             </label>
           </div>
         </div>
-
-        <!-- <div v-for="(price, index) in prices" :key="index" class="form-inline form-check">
-          <input type="checkbox" :name="price.length" :id="price.length" class="form-check-input" v-model="state.priceSet[price]">
-          <label :for="price.length" class="form-check-label">{{ price }}</label>
-        </div> -->
       </div>
       <div class="col-9 bg-bootSec text-dark shadow-sm mb-2 rounded">
         <h6 class="pt-4">
@@ -63,13 +58,17 @@
     </div>
     <div v-else class="row justify-content-around my-4">
       <div class="col-11">
-        <h5>Search Options:</h5>
-        <div class="row">
+        <div class="row" style="justify-content: center;">
+          <h5 class="text-center text-light">
+            Search Options:
+          </h5>
           <RestaurantSearchShort v-for="r in state.restaurants" :key="r._id" :restaurant="r" />
         </div>
-        <button type="button" class="btn btn-success" @click="filterSearch">
-          Search
-        </button>
+        <div class="row" style="justify-content: center;">
+          <button type="button" class="btn btn-secondary shadow" style="text-shadow: 1px 1px blue justify-content: center;" @click="filterSearch">
+            <i>Search</i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
