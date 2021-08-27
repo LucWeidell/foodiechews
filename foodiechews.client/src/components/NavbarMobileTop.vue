@@ -6,7 +6,7 @@
       </router-link>
     </div>
     <div class="text-center col-8 hoverable">
-      <div v-if="state.account.activeLocation">
+      <div v-if="state.lastActLoc">
         <div class="btn-group">
           <button type="button"
                   class="btn-secondary dropdown-toggle"
@@ -14,7 +14,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
           >
-            {{ state.account.activeLocation.city }}, {{ state.account.activeLocation.state }}
+            {{ state.lastActLoc.city }}, {{ state.lastActLoc.state }}
           </button>
           <div class="dropdown-menu">
             <UserCities v-for="l in state.account.location" :key="l" :loc="l" />
@@ -106,7 +106,8 @@ export default {
     const state = reactive({
       dropOpen: false,
       account: computed(() => AppState.account),
-      nonLoggedLoc: computed(() => AppState.activeLocation)
+      nonLoggedLoc: computed(() => AppState.activeLocation),
+      lastActLoc: computed(() => AppState.lastActive)
     })
     return {
       state,

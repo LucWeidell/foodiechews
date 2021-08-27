@@ -11,7 +11,7 @@ export class ProfilesController extends BaseController {
     super('api/profiles')
     this.router
       // FIXME look at get All for Accounts
-      // .get('', this.getAll)
+      .get('', this.getAll)
       .get('/:id', this.getById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id/visits', this.getAllVisitsByProfileId)
@@ -24,15 +24,14 @@ export class ProfilesController extends BaseController {
        * @param {import('express').Response} res
        * @param {import('express').NextFunction} next
        */
-  //  FIXME we could need this just quick discussion on security
-  // async getAll(req, res, next) {
-  //   try {
-  //     const profile = await profilesService.getAll(req.query)
-  //     res.send(profile)
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
+  async getAll(req, res, next) {
+    try {
+      const profiles = await profilesService.getAll(req.query)
+      res.send(profiles)
+    } catch (error) {
+      next(error)
+    }
+  }
 
   /**
    * Sends all profile with Id to a client by request

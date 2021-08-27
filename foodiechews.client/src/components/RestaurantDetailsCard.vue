@@ -37,7 +37,7 @@
           <div v-if="restaurant.url" class="row py-1">
             <div class="col-auto">
               <h5>
-                <a class=" text-blue" :href="restaurant.url" target="_blank" :title="restaurant.name + ' Yelp Page'"><span class="d-flex align-items-end"><b><i>{{ '  ' + restaurant.name }}</i></b><img src="src/assets/yelp/yelp_logos/Logo/Light bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"></span></a>
+                <a class=" text-blue d-flex align-items-end" :href="restaurant.url" target="_blank" :title="restaurant.name + ' Yelp Page'"><img src="src/assets/yelp/yelp_logos/Logo/Light bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"><small class=""><b>{{ restaurant.name }}</b></small></a>
               </h5>
             </div>
           </div>
@@ -51,8 +51,8 @@
     <div class="col-md-10 col-9 mt-3 d-flex justify-content-center">
       <p>{{ fixLayout(restaurant).open }} - {{ fixLayout(restaurant).close }}</p>
     </div>
-    <div class="col-md-6 py-2">
-      <div v-if="!isInMyRest" class="row">
+    <div class="col-lg-6 py-2">
+      <div v-if="!isInMyRest" class="row justify-content-between">
         <BRGbuttons />
       </div>
       <span v-else>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { logger } from '../utils/Logger'
 import { ratingsUtil } from '../utils/RatingsUtil'
@@ -83,7 +83,7 @@ export default {
     const route = useRoute()
     let isInMyRest = false
 
-    onMounted(() => {
+    watchEffect(() => {
       if (AppState.myRestaurants.find(r => r.yelpId === props.restaurant.id)) {
         isInMyRest = true
       }
@@ -147,7 +147,7 @@ export default {
     border: 5px white solid;
   }
   .yelp{
-    max-height: 5vh;
-    max-width: 5vh;
+    max-height: 8vh;
+    max-width: 8vh;
   }
 </style>
