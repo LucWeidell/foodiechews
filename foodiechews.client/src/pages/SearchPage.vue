@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="row justify-content-around mt-3">
+    <div v-else class="row justify-content-around my-4">
       <div class="col-11">
         <h5>Search Options:</h5>
         <div class="row">
