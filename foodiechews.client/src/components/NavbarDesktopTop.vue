@@ -1,6 +1,6 @@
 <template>
-  <nav class="NavBarDesktop navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
-    <div class=" col-3 hoverable">
+  <nav class="NavBarDesktop navbar navbar-expand-lg navbar-dark fixed-top bg-primary row">
+    <div class="col-4 action">
       <div v-if="state.account.activeLocation">
         <div class="btn-group">
           <button type="button"
@@ -33,7 +33,7 @@
     >
       <span class="navbar-toggler-icon justify-content-center" />
     </button>
-    <div class="col-1 py-1 border-right border-left border-dark push-left">
+    <div class="col-4 text-center">
       <router-link :to="{name: 'RestaurantsDetails', params: {id: state.account.id, yelpId: 'random'}}">
         <img src="../assets/img/randomRed.png"
              class="p-0 action"
@@ -43,28 +43,7 @@
         >
       </router-link>
     </div>
-
-    <!-- <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <router-link :to="{ name: 'Profile', params: {id: accounts.id} }" class="nav-link">
-          My Profile
-        </router-link>
-      </li>
-    </ul> -->
-
-    <!-- <div class="col-1 py-1 push-left">
-      <div class="py-1">
-        <router-link :to="{name: 'SearchPage', params: {id: state.account.id}}">
-          <img src="../assets/img/search.png"
-               class="p-0 action"
-               title="Search"
-               alt="Search Button"
-               width="50"
-          >
-        </router-link>
-      </div>
-    </div> -->
-    <span class="col-2 navbar-text hoverable push-left">
+    <span class="col-4 text-right">
       <button
         class="btn btn-outline-light text-uppercase"
         @click="login"

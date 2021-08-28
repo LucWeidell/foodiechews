@@ -1,11 +1,7 @@
 <template>
   <header>
-    <div v-if="isMobile">
-      <NavbarMobileTop />
-    </div>
-    <div v-else>
-      <NavbarDesktopTop />
-    </div>
+    <NavbarMobileTop v-if="isMobile" />
+    <NavbarDesktopTop v-else />
   </header>
   <main class="my-5 py-2">
     <h1 class="text-dark">
@@ -14,12 +10,8 @@
     <router-view />
   </main>
   <footer>
-    <div v-if="isMobile">
-      <NavbarMobileBottom />
-    </div>
-    <div v-else>
-      <NavbarDesktopBottom />
-    </div>
+    <NavbarMobileBottom v-if="isMobile" />
+    <NavbarDesktopBottom v-else />
   </footer>
 </template>
 
