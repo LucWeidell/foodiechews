@@ -32,7 +32,7 @@ export async function searchCache(strQuery, hasLimitAlready) {
       randNum = randomNumSelect(foundSearch.totalRes)
     }
   } else {
-    const res = await getFromYelpApi(strQuery)
+    const res = await getFromYelpApi(strQuery, 0, hasLimitAlready)
     logger.log('Res search before Off:', res)
     cache[strQuery] = {
       results: res.businesses,
@@ -43,14 +43,14 @@ export async function searchCache(strQuery, hasLimitAlready) {
   }
   strQuery += ('&offset=' + randNum)
   if (hasLimitAlready) {
-    const resWithOffset = await getFromYelpApi(strQuery)
+    const resWithOffset = await getFromYelpApi(strQuery, randNum)
     const toReturn = validateSearch(resWithOffset.businesses)
     if (toReturn.length === 0) {
       searchCache(strQuery, hasLimitAlready)
     }
     return toReturn
   } else {
-    const resWithOffset = await getFromYelpApi(strQuery)
+    const resWithOffset = await getFromYelpApi(strQuery, randNum, hasLimitAlready)
     return await IdCheckCache(resWithOffset.businesses[0].id)
   }
 }
@@ -65,7 +65,7 @@ export async function IdCheckCache(strQuery) {
       return foundSearch.results[0]
     }
   }
-  const res = await getFromYelpApi(strQuery)
+  const res = await getFromYelpApi(strQuery, 0)
   logger.log('Res searchID return before Off:', res)
 
   cache[strQuery] = {
@@ -110,16 +110,14 @@ function validateSearch(resArray) {
   return output
 }
 
-async function getFromYelpApi(strQuery) {
+async function getFromYelpApi(strQuery, offset, hasLimit) {
   const token = process.env.YELP_API_KEY
   yelpApi.defaults.headers.authorization = `Bearer ${token}`
   logger.log('str to call get yelpAPI:', strQuery)
   const res = await yelpApi.get(strQuery)
-  const str = 'you can enter maximum 500 choices'
-  str.replace(/[^0-9]/g, '')
-  if (parseInt(str) >= res.data.total) {
+  if (offset > res.data.total) {
     cache[strQuery].ttl = 0
-    getFromYelpApi(strQuery)
+    searchCache(strQuery, hasLimit)
   }
   logger.log('res of yelpAPI call:', res.data)
   return res.data
