@@ -75,5 +75,11 @@ export default {
 .text-shadow-light{
   text-shadow: 0px 1px white;
 }
-
+@media only screen and (min-width: 770px) {
+  #bg-img {
+    background-image: url('https://images.unsplash.com/photo-1611143669185-af224c5e3252?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1190&q=80');
+    background-size: cover;
+    background-position: center;
+  }
+}
 </style>

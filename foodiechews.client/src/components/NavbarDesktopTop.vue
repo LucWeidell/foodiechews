@@ -44,13 +44,13 @@
       </router-link>
     </div>
 
-    <!-- <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link :to="{ name: 'Profile', params: {id: accounts.id} }" class="nav-link">
-              My Profile
-            </router-link>
-          </li>
-        </ul> -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <router-link :to="{ name: 'Profile', params: {id: accounts.id} }" class="nav-link">
+          My Profile
+        </router-link>
+      </li>
+    </ul>
     <!-- <div class="col-1 py-1 push-left">
       <div class="py-1">
         <router-link :to="{name: 'SearchPage', params: {id: state.account.id}}">
