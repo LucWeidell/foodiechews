@@ -21,27 +21,18 @@ export default {
       AppState.loading = true
     })
     onMounted(async() => {
-      if (!AppState.activeLocation.city) {
-        await getLocation()
-      }
+      // REVIEW: Non-users aren't working perfectly.
+      console.log('accountID', AppState.account.id)
       if (AppState.account.id) {
         if (route.params.yelpId) {
           await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
         }
       } else {
-        if (route.params.yelpId) {
-          await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
-        }
+        await getLocation()
+        await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
       }
     }
     )
-    watchEffect(async() => {
-      if (AppState.activeLocation.city) {
-        if (route.params.yelpId) {
-          await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
-        }
-      }
-    })
     return {
       restaurant: computed(() => AppState.activeRestaurant),
       account: computed(() => AppState.account),

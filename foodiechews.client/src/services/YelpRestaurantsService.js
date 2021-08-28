@@ -9,6 +9,7 @@ class YelpRestaurantsService {
  * @param {String} action - One of 'random', 'search', or a yelpID String
  */
   async getByYelpId(action, query) {
+    console.log('getyelpbyid', query.city)
     AppState.loading = true
     let searchFlag = false
     let res = {}
