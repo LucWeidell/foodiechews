@@ -19,6 +19,7 @@ import { reactive } from '@vue/reactivity'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { ratingsUtil } from '../utils/RatingsUtil'
+import { logger } from '../utils/Logger'
 
 export default {
   props: {
@@ -28,6 +29,7 @@ export default {
     }
   },
   setup(props) {
+    logger.log('my prop in Rest search: ', props.restaurant)
     const state = reactive({
       account: computed(() => AppState.account)
     })

@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-center mt-md-5 mt-2" @click="dropDownToggle">
+  <div class="row justify-content-center mt-md-1 mt-2" @click="dropDownToggle">
     <div class="col-md-5 col-10 bg-light mt-md-3 mt-4" v-if="state.dropOpen">
       <h5 class="my-2 text-center drop-border pb-2">
         {{ account.name }} <i class="mdi mdi-arrow-down-drop-circle"></i>
