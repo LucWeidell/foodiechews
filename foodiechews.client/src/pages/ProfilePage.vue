@@ -1,20 +1,29 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" id="gradient">
     <div class="row" id="cover-img">
       <img :src="state.account.picture || 'https://via.placeholder.com/150'" alt="Profile Pic" class="ml-3 rounded-circle profile-img">
     </div>
-    <div class="row mt-5">
-      <div class="card col-12 shadow">
+    <div class="row mt-5" style="justify-content: center">
+      <div class="card col-10 shadow">
         <div class="card-body py-2 px-1">
-          <h5 class="card-title my-2">
+          <h5 class="card-title my-2 text-primary" style="text-shadow: 1px 1px grey">
             {{ state.account.name }}
           </h5>
-          <p class="card-text">
+          <p>{{ state.account.email }}</p>
+          <p class="text-dark">
+            <b>Bio:</b>
             {{ state.account.bio }}
           </p>
         </div>
-        <div class="pb-2">
-          <button type="button" class="btn-sm btn-secondary" data-toggle="modal" data-target="#editModal">
+      </div>
+      <div class="col-10 d-flex" style="justify-content: space-between">
+        <div>
+          <i class="mdi mdi-48px mdi-facebook"></i>&nbsp;
+          <i class="mdi mdi-48px mdi-twitter"></i>&nbsp;
+          <i class="mdi mdi-48px mdi-instagram"></i>
+        </div>
+        <div class="p-2">
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal">
             Edit
           </button>
         </div>
@@ -56,11 +65,41 @@
               </div>
               <div class="form-group">
                 <label for="bio">Bio</label>
-                <input type="text" v-model="state.account.bio" class="form-control" id="bio" placeholder="Tell us About you...">
+                <input type="text"
+                       maxlength="150"
+                       v-model="state.account.bio"
+                       class="form-control"
+                       id="bio"
+                       placeholder="Tell us About you..."
+                >
               </div>
               <div class="form-group">
                 <label for="profileImg">Profile Picture</label>
                 <input type="text" v-model="state.account.picture" class="form-control" id="profileImg" placeholder="Your new look...">
+              </div>
+              <div class="form-group">
+                <label for="twitter">Twitter</label>
+                <input type="text"
+                       class="form-control"
+                       id="twitter"
+                       placeholder="https://www.twitter.com/Your Name Here"
+                >
+              </div>
+              <div class="form-group">
+                <label for="facebook">Facebook</label>
+                <input type="text"
+                       class="form-control"
+                       id="facebook"
+                       placeholder="https://www.facebook.com/Your Name Here"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Instagram">Instagram</label>
+                <input type="text"
+                       class="form-control"
+                       id="instagram"
+                       placeholder="https://www.instagram.com/Your Name Here"
+                >
               </div>
               <!-- <div class="form-group">
                 <label for="coverImg">Cover Picture</label>
@@ -144,4 +183,11 @@ export default {
   bottom: -7vh;
   z-index: 1;
 }
+#gradient{
+  background: #bdc3c7;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom,#bdc3c7, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom,#bdc3c7, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
 </style>
