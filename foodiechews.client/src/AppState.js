@@ -1,4 +1,15 @@
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+
+const isMobile = ref(false)
+const screenSize = ref(window.innerWidth)
+window.onresize = function() {
+  screenSize.value = window.innerWidth
+  if (screenSize.value < 764) {
+    isMobile.value = true
+  } else {
+    isMobile.value = false
+  }
+}
 
 // NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
@@ -18,5 +29,7 @@ export const AppState = reactive({
   sixRests: {},
   allRest: {},
   allProfiles: {},
-  profileDetails: {}
+  profileDetails: {},
+  screenSize,
+  isMobile
 })
