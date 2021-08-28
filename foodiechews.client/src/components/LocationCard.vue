@@ -1,20 +1,22 @@
 <template>
   <!-- Only renders if this location has visited restaurants -->
-  <div class="row justify-content-center my-3">
-    <div class="card bg-secondary col-md-6 col-10">
+  <div class="row justify-content-center my-5">
+    <div class="card bg-blueish col-md-6 col-10">
       <div class="card-header p-1">
-        <div class="row justify-content-center mt-1">
-          <div class="col-md-6 col-6 text-center">
-            <h5>{{ location.location.city }}, {{ location.location.state }}</h5>
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-6 text-center mt-2">
+            <h5 class="text-light">
+              {{ location.location.city }}, {{ location.location.state }}
+            </h5>
           </div>
         </div>
       </div>
-      <div class="card-body p-2 bg-secondary">
+      <div class="card-body p-2 bg-blueish">
         <div class="row justify-content-center">
           <RestaurantShortCard v-for="r in state.seeMore ? allRestaurants : sixRestaurants" :key="r.id" :restaurant="r" />
         </div>
       </div>
-      <div class="class card-footer p-1 bg-secondary border-primary text-dark text-center">
+      <div class="class card-footer p-1 bg-blueish border-primary text-light text-center">
         <p class="hoverable" @click="state.seeMore = !state.seeMore" v-if="allRestaurants > sixRestaurants">
           {{ state.seeMore ? 'Hide' : 'See More...' }}
         </p>
@@ -50,5 +52,8 @@ export default {
 <style>
 .hoverable {
   cursor: pointer;
+}
+.bg-blueish{
+  background-color: #6e1ef3;
 }
 </style>

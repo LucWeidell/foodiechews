@@ -3,7 +3,7 @@
     <div class="row justify-content-md-between">
       <div class="col-md-6 col-10">
         <router-link :to="{name: 'RestaurantsDetails', params: {id: state.account.id, yelpId: restaurant.yelpId }}">
-          <b>{{ restaurant.name }}</b>
+          <b class="text-dark">{{ restaurant.name }}</b>
         </router-link>
       </div>
       <div class="col-md-1 col-1 d-flex align-items-center">
