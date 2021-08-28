@@ -43,7 +43,15 @@
         >
       </router-link>
     </div>
-    <div class="col-1 py-1 push-left">
+
+    <!-- <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <router-link :to="{ name: 'Profile', params: {id: accounts.id} }" class="nav-link">
+              My Profile
+            </router-link>
+          </li>
+        </ul> -->
+    <!-- <div class="col-1 py-1 push-left">
       <div class="py-1">
         <router-link :to="{name: 'SearchPage', params: {id: state.account.id}}">
           <img src="../assets/img/search.png"
@@ -54,7 +62,7 @@
           >
         </router-link>
       </div>
-    </div>
+    </div> -->
     <span class="col-2 navbar-text hoverable push-left">
       <button
         class="btn btn-outline-light text-uppercase"
@@ -81,13 +89,6 @@
           :class="{ show: state.dropOpen }"
           @click="state.dropOpen = false"
         >
-
-          <router-link :to="{ name: 'Profile', params: {id: accounts.id} }">
-            <div class="list-group-item list-group-item-action hoverable" title="My Profile">
-              My Profile
-            </div>
-          </router-link>
-
           <router-link :to="{ name: 'Settings' }">
             <div class="list-group-item list-group-item-action hoverable" title="Settings">
               Settings
@@ -110,7 +111,6 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
-
 export default {
   name: 'NavbarDesktop',
   setup() {
@@ -122,6 +122,7 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
+      accounts: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },
@@ -132,7 +133,6 @@ export default {
   },
   components: {}
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -157,17 +157,14 @@ a:hover {
 .nav-item .nav-link.router-link-exact-active{
   color: var(--light);
 }
-
 img{
   border-radius: 50%;
   max-height: 50px;
   max-width:50px;
 }
-
 .main-nav {
     display: flex;
 }
-
 .push-left {
     margin-left: auto;
 }
