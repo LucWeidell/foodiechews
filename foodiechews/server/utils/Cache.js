@@ -95,9 +95,7 @@ function randomNumSelect(outOf) {
  * @param {String} accountId - The id for an account
  */
 export async function setMyCache(accountId) {
-  logger.log('MY FKR ACCOUNT:', accountId)
   const myCacheToMake = await myRestaurantsService.getAll({ accountId: accountId })
-  logger.log('thank you:', myCacheToMake)
   myRests = myCacheToMake
 }
 
@@ -117,6 +115,12 @@ async function getFromYelpApi(strQuery) {
   yelpApi.defaults.headers.authorization = `Bearer ${token}`
   logger.log('str to call get yelpAPI:', strQuery)
   const res = await yelpApi.get(strQuery)
+  const str = 'you can enter maximum 500 choices'
+  str.replace(/[^0-9]/g, '')
+  if (parseInt(str) >= res.data.total) {
+    cache[strQuery].ttl = 0
+    getFromYelpApi(strQuery)
+  }
   logger.log('res of yelpAPI call:', res.data)
   return res.data
 }
