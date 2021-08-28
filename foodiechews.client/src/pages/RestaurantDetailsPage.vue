@@ -12,6 +12,7 @@ import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import getLocation from '../utils/LocationGetter'
+import { accountService } from '../services/AccountService'
 
 export default {
   setup() {
@@ -22,8 +23,9 @@ export default {
     })
     onMounted(async() => {
       // REVIEW: Non-users aren't working perfectly.
+      await accountService.getAccount()
       console.log('accountID', AppState.account.id)
-      if (AppState.account.id) {
+      if (AppState.account.activeLocation) {
         if (route.params.yelpId) {
           await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
         }
