@@ -3,7 +3,7 @@
     <div class="row" id="cover-img">
       <img :src="state.account.picture || 'https://via.placeholder.com/150'" alt="Profile Pic" class="ml-3 rounded-circle profile-img">
     </div>
-    <div class="row mt-5" style="justify-content: center">
+    <div class="row mt-5 pt-2" style="justify-content: center">
       <div class="card col-10 shadow">
         <div class="card-body py-2 px-1">
           <h5 class="card-title my-2 text-primary" style="text-shadow: 1px 1px grey">
