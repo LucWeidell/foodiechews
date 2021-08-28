@@ -1,5 +1,4 @@
 <template>
-  <!-- Only renders if this location has visited restaurants -->
   <div class="row justify-content-center my-5">
     <div class="card bg-blueish col-md-6 col-10">
       <div class="card-header p-1">
@@ -12,7 +11,7 @@
         </div>
       </div>
       <div class="card-body p-2 bg-blueish">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" v-if="state.account.showRestaurants === true">
           <RestaurantShortCard v-for="r in state.seeMore ? allRestaurants : sixRestaurants" :key="r.id" :restaurant="r" />
         </div>
       </div>
@@ -38,7 +37,8 @@ export default {
   },
   setup(props) {
     const state = reactive({
-      seeMore: false
+      seeMore: false,
+      account: computed(() => AppState.account)
     })
     return {
       state,
