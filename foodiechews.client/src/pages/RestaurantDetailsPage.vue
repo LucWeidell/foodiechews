@@ -22,14 +22,13 @@ export default {
     })
     onMounted(async() => {
       // REVIEW: Non-users aren't working perfectly.
+      console.log('accountID', AppState.account.id)
       if (AppState.account.id) {
         if (route.params.yelpId) {
           await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
         }
       } else {
-        if (!AppState.activeLocation.city) {
-          await getLocation()
-        }
+        await getLocation()
         await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
       }
     }
