@@ -43,15 +43,7 @@
         >
       </router-link>
     </div>
-
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <router-link :to="{ name: 'Profile', params: {id: accounts.id} }" class="nav-link">
-          My Profile
-        </router-link>
-      </li>
-    </ul>
-    <!-- <div class="col-1 py-1 push-left">
+    <div class="col-1 py-1 push-left">
       <div class="py-1">
         <router-link :to="{name: 'SearchPage', params: {id: state.account.id}}">
           <img src="../assets/img/search.png"
@@ -62,7 +54,7 @@
           >
         </router-link>
       </div>
-    </div> -->
+    </div>
     <span class="col-2 navbar-text hoverable push-left">
       <button
         class="btn btn-outline-light text-uppercase"
@@ -123,7 +115,6 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
-      accounts: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },

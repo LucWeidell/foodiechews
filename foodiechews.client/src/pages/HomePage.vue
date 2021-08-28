@@ -41,9 +41,9 @@ import getLocation from '../utils/LocationGetter'
 export default {
   name: 'Home',
   setup() {
-    onMounted(async() => {
-      await getLocation()
-    })
+    // onMounted(async() => {
+    //   await getLocation()
+    // })
     return {
       user: computed(() => AppState.user),
       location: computed(() => AppState.activeLocation),

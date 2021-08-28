@@ -4,9 +4,6 @@
     <NavbarDesktopTop v-else />
   </header>
   <main class="my-5 py-2">
-    <h1 class="text-dark">
-      {{ screenSize }}
-    </h1>
     <router-view />
   </main>
   <footer>
