@@ -9,7 +9,7 @@ class YelpRestaurantsService {
  * @param {String} action - One of 'random', 'search', or a yelpID String
  */
   async getByYelpId(action, query) {
-    console.log('getyelpbyid', query.city)
+    console.log('getyelpbyid', query)
     AppState.loading = true
     let searchFlag = false
     let res = {}
@@ -72,6 +72,7 @@ class YelpRestaurantsService {
       const stateDev = res.data.location.state
       // TODO: Save location data as an object to the user's account and/or AppState.activeLocation
       AppState.activeLocation = { city: cityDev, state: stateDev }
+      return { city: cityDev, state: stateDev }
     } catch (error) {
       Pop.toast(error, 'error')
     }

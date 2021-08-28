@@ -30,8 +30,10 @@ export default {
           await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
         }
       } else {
+        console.log('else statement')
         await getLocation()
-        await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation)
+        // REVIEW: How to make this actually work like we want to lol
+        setTimeout(() => { yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation) }, 8000)
       }
     }
     )

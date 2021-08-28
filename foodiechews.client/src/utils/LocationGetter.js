@@ -8,8 +8,8 @@ export default function getLocation() {
         lat: loc.coords.latitude,
         long: loc.coords.longitude
       }
-      await yelpRestaurantsService.getByCoordinates(coords)
-      console.log('activeLocation after restservice:', AppState.activeLocation)
+      const res = await yelpRestaurantsService.getByCoordinates(coords)
+      return res
     })
   }
 }
