@@ -18,6 +18,9 @@ import { AppState } from './AppState'
 export default {
   name: 'App',
   setup() {
+    onMounted(async() => {
+      AppState.isMobile = true
+    })
     return {
       isMobile: computed(() => AppState.isMobile),
       appState: computed(() => AppState)
