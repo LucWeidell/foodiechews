@@ -5,10 +5,10 @@ import { api } from './AxiosService'
 // import { api } from './AxiosService'
 class VisitsService {
   async addNew(rawVisit) {
-    console.log('visit service raw visit', rawVisit)
+    logger.log('visit service raw visit', rawVisit)
     try {
       const res = await api.post('api/visits', rawVisit)
-      console.log(res.data)
+      logger.log(res.data)
       Pop.toast('success', 'success')
     } catch (error) {
       Pop.toast(error, 'error')
@@ -18,7 +18,7 @@ class VisitsService {
   async getVisitsByMyRestaurantId(id) {
     try {
       const res = await api.get('api/myRestaurants/' + id + '/visits')
-      console.log(res.data)
+      logger.log(res.data)
       AppState.visits = res.data
     } catch (error) {
       Pop.toast(error, 'error')

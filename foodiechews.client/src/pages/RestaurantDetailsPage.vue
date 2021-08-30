@@ -24,13 +24,13 @@ export default {
     onMounted(async() => {
       // REVIEW: Non-users aren't working perfectly.
       await accountService.getAccount()
-      console.log('accountID', AppState.account.id)
+      logger.log('accountID', AppState.account.id)
       if (AppState.account.activeLocation) {
         if (route.params.yelpId) {
           await yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.account.activeLocation)
         }
       } else {
-        console.log('else statement')
+        logger.log('else statement')
         await getLocation()
         // REVIEW: How to make this actually work like we want to lol
         setTimeout(() => { yelpRestaurantsService.getByYelpId(route.params.yelpId, AppState.activeLocation) }, 8000)

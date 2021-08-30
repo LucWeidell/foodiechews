@@ -72,7 +72,7 @@ export default {
     return {
       state,
       submitVisit() {
-        console.log('modal logs', state.newVisit)
+        logger.log('modal logs', state.newVisit)
         $('#staticBackdrop').modal('hide')
         $('body').removeClass('modal-open')
         $('.modal-backdrop').remove()
@@ -83,14 +83,14 @@ export default {
           if (state.newVisit.favorite) {
             tags.push('favorite')
           }
-          console.log(tags)
+          logger.log(tags)
           const myRestId = await myRestaurantsService.addNew(AppState.activeRestaurant, tags)
           const rawVisit = {
             myRestaurantId: myRestId,
             review: state.newVisit.review
           }
           await visitsService.addNew(rawVisit)
-          console.log('modal logs', state.newVisit)
+          logger.log('modal logs', state.newVisit)
           $('#staticBackdrop').modal('hide')
           $('body').removeClass('modal-open')
           $('.modal-backdrop').remove()

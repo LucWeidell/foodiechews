@@ -5,7 +5,7 @@ class RatingsUtil {
    * @returns {String} (image URL for Yelp Stars)
    */
   getStars(rating) {
-    console.log(rating)
+    logger.log(rating)
     let star = ''
     switch (rating) {
       case 1:
@@ -38,7 +38,7 @@ class RatingsUtil {
       default:
         star = 'src/assets/yelp/yelp_stars/regular/regular_0.png'
     }
-    console.log(star)
+    logger.log(star)
     return star
   }
 }

@@ -9,7 +9,7 @@ class YelpRestaurantsService {
  * @param {String} action - One of 'random', 'search', or a yelpID String
  */
   async getByYelpId(action, query) {
-    console.log('getyelpbyid', query)
+    logger.log('getyelpbyid', query)
     AppState.loading = true
     let searchFlag = false
     let res = {}
@@ -21,18 +21,18 @@ class YelpRestaurantsService {
         locState = query.state.replace(' ', '')
         switch (action) {
           case 'random':
-          // console.log(locCity + locState)
+          // logger.log(locCity + locState)
             if (!AppState.account.id) {
               res = await api.get(`/api/yelpRestaurants/random?location=${locCity + locState}&open_now=true`)
             } else {
               res = await api.get(`/api/yelpRestaurants/random?location=${locCity + locState}&open_now=${AppState.account.showOnlyOpen}`)
             }
-            // console.log('the res:', res.data)
+            // logger.log('the res:', res.data)
             AppState.activeRestaurant = res.data
             AppState.loading = false
             break
           case 'search':
-            // console.log(id, query)
+            // logger.log(id, query)
             if (query.price && query.categories) {
               res = await api.get(`/api/yelpRestaurants/search?categories=${query.categories}&price=${query.price}&location=${locCity + locState}&open_now=${AppState.account.showOnlyOpen}`)
             } else if (query.categories) {
@@ -41,7 +41,7 @@ class YelpRestaurantsService {
               res = await api.get(`/api/yelpRestaurants/search?price=${query.price}&location=${locCity + locState}&open_now=${AppState.account.showOnlyOpen}`)
             } else {
               res = await api.get(`/api/yelpRestaurants/search?location=${locCity + locState}&open_now=${AppState.account.showOnlyOpen}`)
-              // console.log('the res:', res.data)
+              // logger.log('the res:', res.data)
             }
             searchFlag = true
             break
@@ -67,7 +67,7 @@ class YelpRestaurantsService {
   async getByCoordinates(coords) {
     try {
       const res = await api.get(`/api/yelpRestaurants/random?latitude=${coords.lat}&longitude=${coords.long}`)
-      // console.log('get by coords result:', res.data)
+      // logger.log('get by coords result:', res.data)
       const cityDev = res.data.location.city
       const stateDev = res.data.location.state
       // TODO: Save location data as an object to the user's account and/or AppState.activeLocation
