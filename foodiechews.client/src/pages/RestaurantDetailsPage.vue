@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { computed, onBeforeMount, onMounted, watchEffect } from '@vue/runtime-core'
+import { computed, onBeforeMount, onMounted } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { yelpRestaurantsService } from '../services/YelpRestaurantsService'
 import { AppState } from '../AppState'
