@@ -1,24 +1,28 @@
 <template>
   <header>
-    <Navbar />
+    <NavbarMobileTop v-if="isMobile" />
+    <NavbarDesktopTop v-else />
   </header>
-  <main>
+  <main class="my-5 py-2">
     <router-view />
   </main>
   <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
-    </div>
+    <NavbarMobileBottom v-if="isMobile" />
+    <NavbarDesktopBottom v-else />
   </footer>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { AppState } from './AppState'
 export default {
   name: 'App',
   setup() {
+    onMounted(async() => {
+      AppState.isMobile = true
+    })
     return {
+      isMobile: computed(() => AppState.isMobile),
       appState: computed(() => AppState)
     }
   }
@@ -26,5 +30,7 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
-
+.action{
+  cursor: pointer;
+}
 </style>

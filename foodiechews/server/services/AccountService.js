@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { Forbidden, BadRequest } from '../utils/Errors'
 
 // Private Methods
 
@@ -43,6 +44,26 @@ function sanitizeBody(body) {
 }
 
 class AccountService {
+  async getById(id) {
+    const account = await dbContext.Account.findById(id)
+    if (!account) {
+      throw new BadRequest('Invalid Account/Profile ID')
+    }
+    return account
+  }
+
+  async edit(user, body) {
+    if (!user.id === body.id) {
+      throw new Forbidden('Not your account: This should not have been called')
+    }
+    const account = await dbContext.Account.findOneAndUpdate(
+      { _id: user.id },
+      body,
+      { runValidators: true, setDefaultsOnInsert: true, new: true }
+    )
+    return account
+  }
+
   /**
     * Returns a list user profiles from a query search of name or email likeness
     * limits to first 20 without offset
@@ -63,13 +84,7 @@ class AccountService {
       .exec()
   }
 
-  /**
-   * Returns a user profile from the email if one exists
-   * @param {string} email
-   */
-  async findProfile(email) {
-    return await dbContext.Account.findOne({ email })
-      .select('name email picture')
+  findProfile(email) {
   }
 
   /**
@@ -103,5 +118,15 @@ class AccountService {
     )
     return account
   }
+  //  */
+  // async updateAccount(user, body) {
+  //   const update = sanitizeBody(body)
+  //   const account = await dbContext.Account.findOneAndUpdate(
+  //     { _id: user.id },
+  //     { $set: update },
+  //     { runValidators: true, setDefaultsOnInsert: true, new: true }
+  //   )
+  //   return account
+  // }
 }
 export const accountService = new AccountService()

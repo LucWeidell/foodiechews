@@ -1,16 +1,32 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary justify-content-between">
+    <div class="text-center col-2">
+      <router-link :to="{ name: 'About' }" class="nav-link">
+        <img src="../assets/img/foodieLogo.png" alt="foodie-logo">
+      </router-link>
+    </div>
+    <div class="text-center col-8 hoverable">
+      <div v-if="state.lastActLoc">
+        <div class="btn-group">
+          <button type="button"
+                  class="btn-secondary dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+          >
+            {{ state.lastActLoc.city }}, {{ state.lastActLoc.state }}
+          </button>
+          <div class="dropdown-menu">
+            <UserCities v-for="l in state.account.location" :key="l" :loc="l" />
+          </div>
+        </div>
       </div>
-    </router-link>
+      <div v-else>
+        {{ state.nonLoggedLoc.city }}, {{ state.nonLoggedLoc.state }}
+      </div>
+    </div>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler col-2"
       type="button"
       data-toggle="collapse"
       data-target="#navbarText"
@@ -23,19 +39,19 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
-            Home
+          <router-link :to="{ name: 'About' }" class="nav-link">
+            About
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
-            About
+          <router-link :to="{ name: 'Profile', params: {id: accounts.id} }" class="nav-link">
+            My Profile
           </router-link>
         </li>
       </ul>
       <span class="navbar-text">
         <button
-          class="btn btn-outline-primary text-uppercase"
+          class="btn btn-outline-light text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -50,8 +66,6 @@
             <img
               :src="user.picture"
               alt="user photo"
-              height="40"
-              class="rounded"
             />
             <span class="mx-3">{{ user.name }}</span>
           </div>
@@ -60,9 +74,16 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Account' }">
+
+            <router-link :to="{ name: 'Profile', params: {id: accounts.id} }">
               <div class="list-group-item list-group-item-action hoverable">
-                Account
+                Profile
+              </div>
+            </router-link>
+
+            <router-link :to="{ name: 'Settings' }">
+              <div class="list-group-item list-group-item-action hoverable">
+                Settings
               </div>
             </router-link>
             <div
@@ -85,11 +106,15 @@ import { computed, reactive } from 'vue'
 export default {
   setup() {
     const state = reactive({
-      dropOpen: false
+      dropOpen: false,
+      account: computed(() => AppState.account),
+      nonLoggedLoc: computed(() => AppState.activeLocation),
+      lastActLoc: computed(() => AppState.lastActive)
     })
     return {
       state,
       user: computed(() => AppState.user),
+      accounts: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },
@@ -121,6 +146,12 @@ a:hover {
   text-transform: uppercase;
 }
 .nav-item .nav-link.router-link-exact-active{
-  color: var(--primary);
+  color: var(--light);
+}
+
+img{
+  border-radius: 50%;
+  max-height: 45px;
+  max-width: 45px;
 }
 </style>
