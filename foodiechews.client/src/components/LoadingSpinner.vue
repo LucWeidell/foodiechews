@@ -6,7 +6,7 @@
           <div></div><div></div><div></div><div></div>
         </div>
         <h2>Loading results...</h2>
-        <small>Powered By <img src="src/assets/img/yelp/yelp_logos/Logo/Light_bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"></small>
+        <small>Powered By <img src="../assets/img/yelp/yelp_logos/Logo/Light_bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"></small>
       </div>
     </div>
   </div>
