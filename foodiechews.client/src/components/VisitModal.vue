@@ -57,7 +57,7 @@ import $ from 'jquery'
 import { AppState } from '../AppState'
 import { myRestaurantsService } from '../services/MyRestaurantsService'
 import { visitsService } from '../services/VisitsService'
-
+import { logger } from '../utils/Logger'
 import Pop from '../utils/Notifier'
 
 export default {
