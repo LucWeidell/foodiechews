@@ -37,7 +37,7 @@
           <div v-if="restaurant.url" class="row py-1">
             <div class="col-auto">
               <h5>
-                <a class=" text-blue d-flex align-items-end" :href="restaurant.url" target="_blank" :title="restaurant.name + ' Yelp Page'"><img src="src/assets/yelp/yelp_logos/Logo/Light bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"><small class=""><b>{{ restaurant.name }}</b></small></a>
+                <a class=" text-blue d-flex align-items-end" :href="restaurant.url" target="_blank" :title="restaurant.name + ' Yelp Page'"><img src="../assets/yelp/yelp_logos/Logo/Light_bg/RGB/yelp_logo.svg" class="yelp" alt="yelp logo"><small class=""><b>{{ restaurant.name }}</b></small></a>
               </h5>
             </div>
           </div>
