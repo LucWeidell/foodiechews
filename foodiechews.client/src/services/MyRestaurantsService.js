@@ -1,6 +1,7 @@
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { api } from './AxiosService'
+import { logger } from '../utils/Logger'
 class MyRestaurantsService {
   async addNew(rawRestaurant, tags) {
     try {

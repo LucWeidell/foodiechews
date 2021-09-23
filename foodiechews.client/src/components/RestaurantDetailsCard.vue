@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { computed, onMounted, watchEffect } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { logger } from '../utils/Logger'
 import { ratingsUtil } from '../utils/RatingsUtil'

@@ -2,6 +2,7 @@
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { api } from './AxiosService'
+import { logger } from '../utils/Logger'
 // import { api } from './AxiosService'
 class VisitsService {
   async addNew(rawVisit) {
