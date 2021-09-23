@@ -1,0 +1,1 @@
+import{A as o,y as t}from"./index.176a967c.js";function a(){0===Object.keys(o.activeLocation).length&&navigator.geolocation.getCurrentPosition((async o=>{const a={lat:o.coords.latitude,long:o.coords.longitude};return await t.getByCoordinates(a)}))}export{a as g};
