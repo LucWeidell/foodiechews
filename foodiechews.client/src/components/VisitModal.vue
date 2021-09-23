@@ -59,6 +59,7 @@ import { myRestaurantsService } from '../services/MyRestaurantsService'
 import { visitsService } from '../services/VisitsService'
 
 import Pop from '../utils/Notifier'
+import { accountService } from '../services/AccountService'
 
 export default {
   setup() {
@@ -79,6 +80,14 @@ export default {
       },
       async addToMyRestaurants() {
         try {
+          if (Object.keys(AppState.account.pendingRestaurant) > 0) {
+            debugger
+            // TODO start here: why doesnt this work
+            if (AppState.account.pendingRestaurant.exists && AppState.account.pendingRestaurant.yelpId === AppState.activeRestaurant.id) {
+              AppState.account.pendingRestaurant.exists = false
+              await accountService.editAccount(AppState.account)
+            }
+          }
           const tags = []
           if (state.newVisit.favorite) {
             tags.push('favorite')

@@ -115,9 +115,12 @@ async function getFromYelpApi(strQuery, offset, hasLimit) {
   yelpApi.defaults.headers.authorization = `Bearer ${token}`
   logger.log('str to call get yelpAPI:', strQuery)
   const res = await yelpApi.get(strQuery)
-  if (offset > res.data.total) {
-    cache[strQuery].ttl = 0
-    searchCache(strQuery, hasLimit)
+  logger.log('CHeck bfore Total If:', res.data.total, 'This is offset', offset)
+  if (res.data.total) {
+    if (offset > res.data.total) {
+      cache[strQuery].ttl = 0
+      searchCache(strQuery, hasLimit)
+    }
   }
   logger.log('res of yelpAPI call:', res.data)
   return res.data

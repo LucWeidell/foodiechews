@@ -41,7 +41,9 @@ export default {
       const places = []
       for (let i = 0; i < 6; i++) {
         const foundItem = topSix[i]
-        if (!places.find(l => (l.location.city === foundItem.location.city && l.location.state === foundItem.location.state))) {
+        if (places.length === 0) {
+          places.push(foundItem)
+        } else if (!places.find(l => (l.location.city === foundItem.location.city && l.location.state === foundItem.location.state))) {
           places.push(foundItem)
           // logger.log('Pushed FoundItem : ', foundItem)
         }

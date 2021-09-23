@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" id="bg-img">
-    <div v-if="Object.keys(state.pendingRest).length != 0" class="row mt-md-5 mt-2 justify-content-center">
-      <div class="col-md-9">
+    <div v-if="Object.keys(state.pendingRest).length != 0" class="row mt-md-5 mt-4 justify-content-center">
+      <div v-if="state.account.pendingRestaurant.exists" class="col-md-9">
         <h4 class="text-light">
           Going to:
         </h4>
