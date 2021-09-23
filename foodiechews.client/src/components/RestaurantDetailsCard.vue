@@ -22,7 +22,7 @@
           </div>
           <h5>Address: {{ address }}</h5>
           <h5>Price: {{ restaurant.price }}</h5>
-          <h5>Rating: <span><img :src="rating" alt="Unable to retrieve rating." :title="restaurant.rating + ' Stars'"></span></h5>
+          <h5>Rating: <span><img :src="rating" :alt="restaurant.rating ? `${restaurant.rating} Stars` : 'Unable to retrieve rating.' " :title="restaurant.rating + ' Stars'"></span></h5>
           <!-- <h5>Rating: {{ restaurant.rating }}</h5> -->
           <div v-if="delivery.length > 0" class="row py-1">
             <div class="col-auto">
